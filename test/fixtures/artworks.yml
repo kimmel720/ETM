@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  artist: MyString
+  description: MyString
+  owner: MyString
+  accession_number: MyString
+  3d_model_path: MyString
+  picture_path: MyString
+
+two:
+  name: MyString
+  artist: MyString
+  description: MyString
+  owner: MyString
+  accession_number: MyString
+  3d_model_path: MyString
+  picture_path: MyString
