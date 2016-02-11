@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'map/index'
+
   resources :artworks
   resources :exhibitions
   resources :museums
