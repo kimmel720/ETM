@@ -15,5 +15,4 @@ Artwork.create(
     of the most celebrated sculptures in the world. H.W. Janson described it
     as \"the greatest masterpiece of Hellenistic sculpture. (Wikipedia)\"""",
   date_created: Date.new(-200, 1, 1),
-  artist: "Michelangelo"
 )
