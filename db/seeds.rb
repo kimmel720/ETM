@@ -14,5 +14,9 @@ Artwork.create(
     Since 1884, it has been prominently displayed at the Louvre and is one
     of the most celebrated sculptures in the world. H.W. Janson described it
     as \"the greatest masterpiece of Hellenistic sculpture. (Wikipedia)\"""",
+<<<<<<< HEAD
   date_created: Date.new(-200, 1, 1),
+=======
+  date_created: Date.new(-200, 1, 1)
+>>>>>>> 43f568f4528f77118bc12bad521d3135a4c0396c
 )
