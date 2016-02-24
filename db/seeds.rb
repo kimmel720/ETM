@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Artwork.create(
+  name: "Winged Victory of Samothrace",
+  img_path: "nike.jpg",
+  description:
+    """The Winged Victory of Samothrace, also called the Nike of Samothrace,
+    is a 2nd-century BC marble sculpture of the Greek goddess Nike (Victory).
+    Since 1884, it has been prominently displayed at the Louvre and is one
+    of the most celebrated sculptures in the world. H.W. Janson described it
+    as \"the greatest masterpiece of Hellenistic sculpture. (Wikipedia)\"""",
+  date_created: Date.new(-200, 1, 1),
+  artist: "Michelangelo"
+)

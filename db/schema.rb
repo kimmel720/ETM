@@ -11,18 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160211204018) do
+ActiveRecord::Schema.define(version: 20160224200132) do
 
   create_table "artworks", force: :cascade do |t|
+    t.string   "img_path"
+    t.text     "description"
+    t.date     "date_created"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "name"
-    t.string   "artist"
-    t.string   "description"
-    t.string   "owner"
-    t.string   "accession_number"
-    t.string   "three_d_model_path"
-    t.string   "picture_path"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
   end
 
   create_table "exhibitions", force: :cascade do |t|

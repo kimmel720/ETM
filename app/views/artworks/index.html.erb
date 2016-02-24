@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<% artwork = @artworks.first %>
+
+<h1><%= artwork.name %></h1>
+
+<%= image_tag(artwork.img_path) %>
+<h2><%= "Pythokritos of Rhodes " + artwork.date_created.to_s %></h2>
+<p><%= artwork.description %></p>
