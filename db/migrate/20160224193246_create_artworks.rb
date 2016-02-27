@@ -5,6 +5,7 @@ class CreateArtworks < ActiveRecord::Migration
       t.string :img_path
       t.text :description
       t.date :date_created
+      t.integer :artist_id, foreign_key: true
 
       t.timestamps null: false
     end

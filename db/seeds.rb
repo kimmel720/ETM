@@ -5,7 +5,19 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Artwork.create(
+Exhibition.delete_all
+Museum.delete_all
+Artwork.delete_all
+m = Museum.create(
+  name: "The Rose"
+)
+
+e = Exhibition.create(
+  name: "Current Collection",
+  museum_id: m.id
+)
+
+a = Artwork.create(
   name: "Winged Victory of Samothrace",
   img_path: "nike.jpg",
   description:

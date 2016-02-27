@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Exhibitions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @exhibitions.each do |exhibition| %>
+      <tr>
+        <h3><%= exhibition.name %></h3>
+        <td><%= link_to 'Show', exhibition %></td>
+        <td><%= link_to 'Edit', edit_exhibition_path(exhibition) %></td>
+        <td><%= link_to 'Destroy', exhibition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Exhibition', new_exhibition_path %>

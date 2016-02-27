@@ -10,6 +10,7 @@ class ArtworksController < ApplicationController
   # GET /artworks/1
   # GET /artworks/1.json
   def show
+    @artwork = Artwork.find params[:id]
   end
 
   # GET /artworks/new

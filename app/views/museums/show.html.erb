@@ -1,0 +1,5 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @museum.name %></h1>
+<%= link_to 'Show', '/museums/' + @museum.id.to_s + '/exhibitions' %>
+<%= link_to 'Edit', edit_museum_path(@museum) %> |
+<%= link_to 'Back', museums_path %>

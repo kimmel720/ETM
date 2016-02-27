@@ -1,15 +1,22 @@
 Rails.application.routes.draw do
-  resources :artworks
-  get 'map/index'
 
-  resources :artworks
   resources :exhibitions
   resources :museums
+  get 'map/index'
+  resources :artists
+  resources :museums do
+    resources :exhibitions do
+      resources :artworks
+      resources :floor_plans do
+        resources :panoramas
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'artworks#index'
+  root 'museums#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
