@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  artwork_id: 
-  exhibition_id: 
-
-two:
-  artwork_id: 
-  exhibition_id: 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225203414) do
+ActiveRecord::Schema.define(version: 20160228223735) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -20,23 +20,15 @@ ActiveRecord::Schema.define(version: 20160225203414) do
   end
 
   create_table "artworks", force: :cascade do |t|
-    t.string   "img_path"
     t.text     "description"
     t.date     "date_created"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.string   "name"
+    t.integer  "accession_no"
   end
 
-  create_table "artworks_exhibitions", force: :cascade do |t|
-    t.integer  "artwork_id_id"
-    t.integer  "exhibition_id_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "artworks_exhibitions", ["artwork_id_id"], name: "index_artworks_exhibitions_on_artwork_id_id"
-  add_index "artworks_exhibitions", ["exhibition_id_id"], name: "index_artworks_exhibitions_on_exhibition_id_id"
+  add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"
 
   create_table "exhibitions", force: :cascade do |t|
     t.string   "name"
@@ -46,13 +38,7 @@ ActiveRecord::Schema.define(version: 20160225203414) do
     t.integer  "museum_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-  end
-
-  create_table "floor_plans", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "exhibition_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "curators"
   end
 
   create_table "museums", force: :cascade do |t|
@@ -62,13 +48,13 @@ ActiveRecord::Schema.define(version: 20160225203414) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "website"
   end
 
-  create_table "panoramas", force: :cascade do |t|
+  create_table "rooms", force: :cascade do |t|
     t.string   "name"
-    t.integer  "exhibition_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
