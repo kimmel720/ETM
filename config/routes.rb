@@ -1,14 +1,19 @@
 Rails.application.routes.draw do
 
-  resources :exhibitions
-  resources :museums
-  get 'map/index'
-  resources :artists
+  resources :rooms
+  # could pull artworks out and redirect instead of nesting
+  # this would make sense if we are seperating art as a resource
+  # from exhibition
+  # resources :artworks
+
   resources :museums do
     resources :exhibitions do
       resources :artworks
       resources :floor_plans do
-        resources :panoramas
+        resources :artworks
+        resources :panoramas do
+          resources :artworks
+        end
       end
     end
   end
