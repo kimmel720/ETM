@@ -1,27 +1,26 @@
 Rails.application.routes.draw do
+  root 'museums#index'
 
-  resources :rooms
+
   # could pull artworks out and redirect instead of nesting
   # this would make sense if we are seperating art as a resource
   # from exhibition
   # resources :artworks
 
   resources :museums do
-    resources :exhibitions do
-      resources :artworks
-      resources :floor_plans do
-        resources :artworks
-        resources :panoramas do
-          resources :artworks
-        end
+    resources :exhibitions, except: [:index] do
+      resources :rooms, except: [:index] do
+        resources :artworks, except: [:index]
+
+        # will need to add route for panoramas
       end
     end
   end
+
+
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'museums#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
