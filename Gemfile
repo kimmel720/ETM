@@ -6,6 +6,7 @@ gem 'sqlite3', group: :development
 gem 'pg', group: :production
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
+gem 'rails_admin'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
