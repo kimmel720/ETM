@@ -9,6 +9,8 @@ gem "refile-mini_magick"
 gem 'rails_admin'
 
 
+# To use ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use SCSS for stylesheets
