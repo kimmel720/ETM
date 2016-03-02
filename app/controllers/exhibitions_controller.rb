@@ -1,5 +1,6 @@
 class ExhibitionsController < ApplicationController
   before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:show]
 
   # GET /exhibitions
   # GET /exhibitions.json

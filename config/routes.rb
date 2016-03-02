@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'admin/index'
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
   resources :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'museums#index'

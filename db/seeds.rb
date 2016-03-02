@@ -14,12 +14,10 @@ m = Museum.create(
 
 e = Exhibition.create(
   name: "Current Collection",
-  museum_id: m.id
 )
 
 a = Artwork.create(
   name: "Winged Victory of Samothrace",
-  img_path: "nike.jpg",
   description:
     """The Winged Victory of Samothrace, also called the Nike of Samothrace,
     is a 2nd-century BC marble sculpture of the Greek goddess Nike (Victory).

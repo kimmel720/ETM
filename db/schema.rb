@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301200355) do
+ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -20,25 +20,33 @@ ActiveRecord::Schema.define(version: 20160301200355) do
   end
 
   create_table "artworks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "img_path"
     t.text     "description"
     t.date     "date_created"
+    t.integer  "accession_no"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.string   "name"
-    t.integer  "accession_no"
   end
 
   add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"
+
+  create_table "artworks_rooms", id: false, force: :cascade do |t|
+    t.integer "artwork_id"
+    t.integer "room_id"
+  end
+
+  add_index "artworks_rooms", ["artwork_id"], name: "index_artworks_rooms_on_artwork_id"
+  add_index "artworks_rooms", ["room_id"], name: "index_artworks_rooms_on_room_id"
 
   create_table "exhibitions", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "description"
-    t.integer  "museum_id"
+    t.string   "curator"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "curators"
   end
 
   create_table "museums", force: :cascade do |t|
@@ -46,9 +54,9 @@ ActiveRecord::Schema.define(version: 20160301200355) do
     t.integer  "latitude"
     t.integer  "longitude"
     t.string   "description"
+    t.string   "website"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "website"
   end
 
   create_table "rooms", force: :cascade do |t|

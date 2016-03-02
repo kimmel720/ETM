@@ -1,6 +1,8 @@
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :authorize, only: [:show]
+
   # GET /artworks
   # GET /artworks.json
   def index

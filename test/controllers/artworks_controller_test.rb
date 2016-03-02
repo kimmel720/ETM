@@ -18,7 +18,7 @@ class ArtworksControllerTest < ActionController::TestCase
 
   test "should create artwork" do
     assert_difference('Artwork.count') do
-      post :create, artwork: { date_created: @artwork.date_created, description: @artwork.description, img_path: @artwork.img_path }
+      post :create, artwork: { date_created: @artwork.date_created, description: @artwork.description }
     end
 
     assert_redirected_to artwork_path(assigns(:artwork))
@@ -35,7 +35,7 @@ class ArtworksControllerTest < ActionController::TestCase
   end
 
   test "should update artwork" do
-    patch :update, id: @artwork, artwork: { date_created: @artwork.date_created, description: @artwork.description, img_path: @artwork.img_path }
+    patch :update, id: @artwork, artwork: { date_created: @artwork.date_created, description: @artwork.description }
     assert_redirected_to artwork_path(assigns(:artwork))
   end
 
