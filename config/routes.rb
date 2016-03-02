@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
 
+  get "/login" => redirect("sessions/new")
+
   resources :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'museums#index'
