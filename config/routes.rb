@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  get 'admin/index'
+
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    delete 'logout' => :destroy
+  end
+
+  get 'admin' => 'admin#index'
 
   get 'sessions/new'
 
@@ -8,6 +15,8 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   get "/login" => redirect("sessions/new")
+
+
 
   resources :users
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
