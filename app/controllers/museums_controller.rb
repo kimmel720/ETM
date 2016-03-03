@@ -6,6 +6,10 @@ class MuseumsController < ApplicationController
   # GET /museums.json
   def index
     @museums = Museum.all
+    @hash = Gmaps4rails.build_markers(@museums) do |museum, marker|
+      marker.lat musuem.latitude
+      marker.lng museum.longitude
+    end
   end
 
   # GET /museums/1
