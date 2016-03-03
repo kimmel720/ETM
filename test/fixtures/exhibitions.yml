@@ -5,11 +5,9 @@ one:
   start_date: 2016-02-11
   end_date: 2016-02-11
   description: MyString
-  museum_id: 1
 
 two:
   name: MyString
   start_date: 2016-02-11
   end_date: 2016-02-11
   description: MyString
-  museum_id: 1

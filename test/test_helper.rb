@@ -19,9 +19,9 @@ class ActiveSupport::TestCase
     login_as :one if defined? session
   end
 
-  extend MiniTest::Spec::DSL
-
-  register_spec_type self do |desc|
-    desc < ActiveRecord::Base if desc.is_a? Class
-  end
+  # extend MiniTest::Spec::DSL
+  #
+  # register_spec_type self do |desc|
+  #   desc < ActiveRecord::Base if desc.is_a? Class
+  # end
 end
