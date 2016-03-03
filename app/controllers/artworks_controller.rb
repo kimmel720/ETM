@@ -1,4 +1,4 @@
-class ArtworksController < ApplicationController
+class ArtworksController < FrontEndController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
   skip_before_action :authorize, only: [:show]
