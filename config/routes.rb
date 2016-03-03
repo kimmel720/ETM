@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # admin page is broken right now 
+  # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   controller :sessions do
@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   get 'sessions/create'
   get 'sessions/destroy'
+
+  get "/login" => redirect("sessions/new")
+
+
 
   resources :users
   root 'museums#index'
