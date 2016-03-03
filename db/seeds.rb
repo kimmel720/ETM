@@ -9,11 +9,14 @@ Exhibition.delete_all
 Museum.delete_all
 Artwork.delete_all
 m = Museum.create(
-  name: "The Rose"
+  name: "The Rose",
+  address: "waltham, MA",
+  latitude: 42.376485,
+  longitude: -71.235611
 )
 
 e = Exhibition.create(
-  name: "Current Collection",
+  name: "Current Collection"
 )
 
 a = Artwork.create(

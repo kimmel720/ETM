@@ -7,7 +7,7 @@ class MuseumsController < ApplicationController
   def index
     @museums = Museum.all
     @hash = Gmaps4rails.build_markers(@museums) do |museum, marker|
-      marker.lat musuem.latitude
+      marker.lat museum.latitude
       marker.lng museum.longitude
     end
   end
@@ -75,6 +75,6 @@ class MuseumsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def museum_params
-      params.require(:museum).permit(:img_path, :description, :date_created)
+      params.require(:museum).permit(:img_path, :description, :date_created, :name, :longitude, :latitude, :address)
     end
 end
