@@ -18,5 +18,5 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     redirect_to store_url, notice: "Logged out"
   end
-  
+
 end
