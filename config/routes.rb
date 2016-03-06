@@ -8,13 +8,10 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-
   get 'sessions/create'
   get 'sessions/destroy'
 
   get "/login" => redirect("sessions/new")
-
-
 
   resources :users
   root 'museums#index'
