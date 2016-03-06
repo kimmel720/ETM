@@ -63,5 +63,15 @@ class InitializeDatabase < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    create_table :artists_artworks do |t|
+      t.integer :artist_id
+      t.integer :artwork_id
+    end
+    add_foreign_key :artists_artworks, :artists
+    add_foreign_key :artists_artworks, :artworks
+
+    add_index :artists_artworks, :artist_id
+    add_index :artists_artworks, :artwork_id
   end
 end
