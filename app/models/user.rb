@@ -3,6 +3,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   # admin ownership
-  has_many :museums
-  has_many :exhibitions, through: :museums
+  has_one :museum
+  has_many :exhibitions, through: :museum
 end
