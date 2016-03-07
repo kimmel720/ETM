@@ -3,6 +3,7 @@ class InitializeDatabase < ActiveRecord::Migration
     create_table :users do |t|
       t.string :name
       t.string :password_digest
+      t.boolean :admin
 
       t.timestamps null: false
     end
@@ -16,6 +17,15 @@ class InitializeDatabase < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    create_table :museums_users do |t|
+      t.integer :museum_id
+      t.integer :user_id
+    end
+    add_foreign_key :museums_users, :museum
+    add_foreign_key :museums_users, :users
+    add_index :museums_users, :museum_id
+    add_index :museums_users, :user_id
 
     create_table :exhibitions do |t|
       t.string :name

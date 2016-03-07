@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "artists_artworks", force: :cascade do |t|
+    t.integer "artist_id"
+    t.integer "artwork_id"
+  end
+
+  add_index "artists_artworks", ["artist_id"], name: "index_artists_artworks_on_artist_id"
+  add_index "artists_artworks", ["artwork_id"], name: "index_artists_artworks_on_artwork_id"
+
   create_table "artworks", force: :cascade do |t|
     t.string   "name"
     t.string   "img_path"
@@ -68,6 +76,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "password_digest"
+    t.boolean  "admin"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
