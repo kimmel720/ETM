@@ -1,4 +1,4 @@
-  class UsersController < ApplicationController
+class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:show, :index, :new, :create]
 
@@ -30,6 +30,7 @@
   # POST /users
   # POST /users.json
   def create
+    user_params[:admin] ||= false
     @user = User.new(user_params)
 
     respond_to do |format|
