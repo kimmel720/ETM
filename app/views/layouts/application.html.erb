@@ -62,9 +62,11 @@
           <!--- display only if admin is logged in -->
           <% if User.find_by(id: session[:user_id], admin: true) %>
             <% user = User.find(session[:user_id]) %>
-            <% museum_id = user.museum.id %>
-            <li><%= link_to 'New Museum', new_museum_path %></li>
-            <li><%= link_to 'New Exhibition', new_museum_exhibition_path(museum_id) %></li>
+            <% if user.museum %>
+              <li><%= link_to 'New Exhibition', new_museum_exhibition_path(user.museum.id) %></li>
+            <% else %>
+              <li><%= link_to 'New Museum', new_museum_path %></li>
+            <% end %>
           <% end %>
 
           <!--- display only if user is logged in -->
