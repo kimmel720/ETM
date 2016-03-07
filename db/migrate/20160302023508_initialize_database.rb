@@ -1,6 +1,8 @@
 class InitializeDatabase < ActiveRecord::Migration
   def change
     create_table :users do |t|
+      # t.has_one :museum
+      # t.has_many :exhibitions
       t.string :name
       t.string :password_digest
       t.boolean :admin
