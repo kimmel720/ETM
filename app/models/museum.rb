@@ -1,5 +1,5 @@
 class Museum < ActiveRecord::Base
-  # join table used to authenticate  
-  has_and_belongs_to_many :users
+  belongs_to :user
+  
   has_many :exhibitions
 end

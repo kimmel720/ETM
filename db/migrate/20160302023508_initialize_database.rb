@@ -9,6 +9,7 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     create_table :museums do |t|
+      t.belongs_to :user, index:true
       t.string :name
       t.integer :latitude
       t.integer :longitude
@@ -18,27 +19,20 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :museums_users do |t|
-      t.integer :museum_id
-      t.integer :user_id
-    end
-    add_foreign_key :museums_users, :museum
-    add_foreign_key :museums_users, :users
-    add_index :museums_users, :museum_id
-    add_index :museums_users, :user_id
-
     create_table :exhibitions do |t|
+      t.belongs_to :museum, index:true
+      t.belongs_to :user, index:true
       t.string :name
       t.date :start_date
       t.date :end_date
       t.string :description
       t.string :curator
-      # t.integer :museum_id, foreign_key: true # belongs_to does this automagically?
 
       t.timestamps null: false
     end
 
     create_table :rooms do |t|
+      t.belongs_to :exhibition
       t.string :name
 
       t.timestamps null: false
@@ -58,7 +52,7 @@ class InitializeDatabase < ActiveRecord::Migration
     add_index :artworks, :accession_no
 
     # pass id: false because table does not represent a model
-    create_table :artworks_rooms, id: false do |t|
+    create_table :artworks_rooms, id:false do |t|
       t.integer :artwork_id
       t.integer :room_id
     end
@@ -74,7 +68,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :artists_artworks do |t|
+    create_table :artists_artworks, id:false do |t|
       t.integer :artist_id
       t.integer :artwork_id
     end

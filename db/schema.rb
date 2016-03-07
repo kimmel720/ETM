@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "artists_artworks", force: :cascade do |t|
+  create_table "artists_artworks", id: false, force: :cascade do |t|
     t.integer "artist_id"
     t.integer "artwork_id"
   end
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   add_index "artworks_rooms", ["room_id"], name: "index_artworks_rooms_on_room_id"
 
   create_table "exhibitions", force: :cascade do |t|
+    t.integer  "museum_id"
+    t.integer  "user_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
@@ -57,7 +59,11 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "exhibitions", ["museum_id"], name: "index_exhibitions_on_museum_id"
+  add_index "exhibitions", ["user_id"], name: "index_exhibitions_on_user_id"
+
   create_table "museums", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.integer  "latitude"
     t.integer  "longitude"
@@ -67,10 +73,13 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "museums", ["user_id"], name: "index_museums_on_user_id"
+
   create_table "rooms", force: :cascade do |t|
+    t.integer  "exhibition_id"
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "users", force: :cascade do |t|
