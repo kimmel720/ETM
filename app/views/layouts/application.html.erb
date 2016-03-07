@@ -41,7 +41,7 @@
         <a class="navbar-brand" rel="home" href="#" title="Exhibition Time Machine">
           <img style="max-width:40px; margin-top: -10px; margin-left: +50px; margin-right: +80px;"
                src="http://people.brandeis.edu/~ddimitr/Images/logoIII.png">
-          
+
 
       </a>
       </div>
@@ -49,7 +49,8 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+          <!--- TODO: add active tag-->
+          <li><a href="#">Home<span class="sr-only">(current)</span></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Museums <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -57,8 +58,19 @@
               <li><a href="research_tech.html">Exhibitions</a></li>
             </ul>
           </li>
-          <li><a href="printing.html">Artworks</a></li>
-          <li><a href="events.html">Learn More</a></li>
+
+          <!--- display only if admin is logged in -->
+          <% if User.find_by(id: session[:user_id], admin: true) %>
+            <% user = User.find(session[:user_id]) %>
+            <% museum_id = user.museum.id %>
+            <li><%= link_to 'New Museum', new_museum_path %></li>
+            <li><%= link_to 'New Exhibition', new_museum_exhibition_path(museum_id) %></li>
+          <% end %>
+
+          <!--- display only if user is logged in -->
+          <% if session[:user_id] %>
+            <li><%= button_to 'Logout', logout_path, method: :delete %></li>
+          <% end %>
 
         </ul>
 
