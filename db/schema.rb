@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artworks", force: :cascade do |t|
     t.string   "name"
-    t.string   "img_path"
+    t.string   "img_url"
     t.text     "description"
     t.date     "date_created"
     t.integer  "accession_no"
@@ -67,10 +67,13 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.string   "name"
     t.integer  "latitude"
     t.integer  "longitude"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "country"
     t.string   "description"
     t.string   "website"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "museums", ["user_id"], name: "index_museums_on_user_id"

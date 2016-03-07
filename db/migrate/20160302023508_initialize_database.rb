@@ -15,6 +15,9 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string :name
       t.integer :latitude
       t.integer :longitude
+      t.string :street_address
+      t.string :city
+      t.string :country
       t.string :description
       t.string :website
 
@@ -42,7 +45,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     create_table :artworks do |t|
       t.string :name
-      t.string :img_path
+      t.string :img_url
       t.text :description
       t.date :date_created
       t.integer :accession_no
@@ -55,14 +58,9 @@ class InitializeDatabase < ActiveRecord::Migration
 
     # pass id: false because table does not represent a model
     create_table :artworks_rooms, id:false do |t|
-      t.integer :artwork_id
-      t.integer :room_id
+      t.belongs_to :artwork, index: true
+      t.belongs_to :room, index: true
     end
-    add_foreign_key :artworks_rooms, :artworks
-    add_foreign_key :artworks_rooms, :rooms
-
-    add_index :artworks_rooms, :artwork_id
-    add_index :artworks_rooms, :room_id
 
     create_table :artists do |t|
       t.string :name
@@ -71,13 +69,8 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     create_table :artists_artworks, id:false do |t|
-      t.integer :artist_id
-      t.integer :artwork_id
+      t.belongs_to :artist, index: true
+      t.belongs_to :artwork, index: true
     end
-    add_foreign_key :artists_artworks, :artists
-    add_foreign_key :artists_artworks, :artworks
-
-    add_index :artists_artworks, :artist_id
-    add_index :artists_artworks, :artwork_id
   end
 end
