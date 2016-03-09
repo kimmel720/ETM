@@ -7,9 +7,17 @@ class MuseumsController < ApplicationController
   def index
     @museums = Museum.all
     @hash = Gmaps4rails.build_markers(@museums) do |museum, marker|
-      marker.lat museum.latitude
-      marker.lng museum.longitude
+      marker.json({
+        :lat => museum.latitude,
+        :lng => museum.longitude,
+        :name => museum.name,
+        :infowindow => museum.description
+      })
     end
+  end
+
+  def gmap4rails_title
+    "something"
   end
 
   # GET /museums/1

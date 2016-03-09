@@ -12,7 +12,23 @@ m = Museum.create(
   name: "The Rose",
   address: "waltham, MA",
   latitude: 42.376485,
-  longitude: -71.235611
+  longitude: -71.235611,
+  description: """The Rose Art Museum is dedicated to ..."""
+)
+Museum.create(
+  name: "The Fine Arts Museums of San Francisco",
+  address: "San Francisco, CA",
+  latitude: 37.774929,
+  longitude: -122.419416,
+  description: """This is a museum in California"""
+)
+
+Museum.create(
+  name: "Isabella Stewart Gardner Museum",
+  address: "Boston, MA",
+  latitude: 42.360082,
+  longitude: -71.058880,
+  description: """After her death in ... Isabella..."""
 )
 
 e = Exhibition.create(
