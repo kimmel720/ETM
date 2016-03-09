@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303211956) do
+ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -65,13 +65,15 @@ ActiveRecord::Schema.define(version: 20160303211956) do
   create_table "museums", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
-    t.float    "latitude"
-    t.float    "longitude"
+    t.integer  "latitude"
+    t.integer  "longitude"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "country"
     t.string   "description"
     t.string   "website"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "address"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   add_index "museums", ["user_id"], name: "index_museums_on_user_id"
