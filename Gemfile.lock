@@ -214,8 +214,9 @@ DEPENDENCIES
   bcrypt (~> 3.1.2)
   byebug
   coffee-rails (~> 4.1.0)
-  gmaps4rails
   faker
+  geocoder
+  gmaps4rails
   jbuilder (~> 2.0)
   jquery-rails
   minitest-spec-rails
