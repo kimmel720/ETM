@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # admin page is broken right now
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   controller :sessions do
     get 'login' => :new
@@ -6,22 +8,13 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
-  get 'admin' => 'admin#index'
-
-  get 'sessions/new'
-
   get 'sessions/create'
-
   get 'sessions/destroy'
 
   get "/login" => redirect("sessions/new")
 
-
-
   resources :users
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'museums#index'
-
 
   # could pull artworks out and redirect instead of nesting
   # this would make sense if we are seperating art as a resource
@@ -33,7 +26,7 @@ Rails.application.routes.draw do
       resources :rooms, except: [:index] do
         resources :artworks, except: [:index]
 
-        # will need to add route for panoramas
+        # may need to add route for panoramas
       end
     end
   end

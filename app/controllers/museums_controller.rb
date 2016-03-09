@@ -1,4 +1,4 @@
-class MuseumsController < ApplicationController
+class MuseumsController < FrontEndController
   before_action :set_museum, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:show, :index]
 

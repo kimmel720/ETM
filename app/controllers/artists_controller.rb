@@ -1,4 +1,4 @@
-class ArtistsController < ApplicationController
+class ArtistsController < FrontEndController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
 
   # GET /artists

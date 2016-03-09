@@ -1,4 +1,4 @@
-class RoomsController < ApplicationController
+class RoomsController < FrontEndController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
   skip_before_action :authorize, only: [:show]
 
