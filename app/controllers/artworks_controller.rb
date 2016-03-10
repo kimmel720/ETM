@@ -72,6 +72,6 @@ class ArtworksController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:img_path, :description, :date_created)
+      params.require(:artwork).permit(:img, :description, :date_created)
     end
 end
