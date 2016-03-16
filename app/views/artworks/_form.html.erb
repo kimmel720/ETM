@@ -12,8 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :img_path %><br>
-    <%= f.text_field :img_path %>
+    <%= # f.label :img_path %><br>
+    <%= # f.text_field :img_path %>
+    <%= form_for @artwork do |form| %>
+  <%= form.attachment_field :img %>
+<% end %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
