@@ -10,8 +10,7 @@ class MuseumsController < FrontEndController
       marker.json({
         :lat => museum.latitude,
         :lng => museum.longitude,
-        :name => museum.name,
-        :infowindow => museum.description
+        :custom_infowindow => "<p class='infobox'><h2>" + museum.name + "</h2>" +  museum.description + "</p>"
       })
     end
   end
