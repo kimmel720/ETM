@@ -51,7 +51,11 @@ user = User.create(
       (0..5).each do
         a = Artwork.create(
           name: Faker::Book.title,
+<<<<<<< HEAD
           # img_url: Faker::Placeholdit.image,
+=======
+          image_id: 0,  # should put default image maybe using faker somewhere else
+>>>>>>> 41ff618528023476b7eb57115f7fa5df05b8ffb3
           description: Faker::Hacker.say_something_smart,
           date_created: Faker::Date.between(1000.years.ago, Date.today),
           accession_no: Faker::Code.isbn,
