@@ -10,8 +10,27 @@
       </ul>
     </div>
   <% end %>
+  <fieldset>
+  <legend>Enter User Details</legend>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, size: 40 %>
+    </div>
+    <div class="field">
+      <%= f.label :longitude, 'Longitude' %><br>
+      <%= f.text_field :longitude, size: 40 %>
+    </div>
+    <div>
+      <%= f.label :latitude, 'Latitude' %><br>
+      <%= f.text_field :latitude, size: 40 %>
+    </div>
+    <div>
+      <%= f.label :address, 'Address' %><br>
+      <%= f.text_field :address, size: 40 %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </fieldset>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

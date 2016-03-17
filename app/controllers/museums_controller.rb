@@ -6,6 +6,17 @@ class MuseumsController < FrontEndController
   # GET /museums.json
   def index
     @museums = Museum.all
+    @hash = Gmaps4rails.build_markers(@museums) do |museum, marker|
+      marker.json({
+        :lat => museum.latitude,
+        :lng => museum.longitude,
+        :custom_infowindow => "<p class='infobox'><h2>" + museum.name + "</h2>" +  museum.description + "</p>"
+      })
+    end
+  end
+
+  def gmap4rails_title
+    "something"
   end
 
   # GET /museums/1
@@ -71,6 +82,6 @@ class MuseumsController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def museum_params
-      params.require(:museum).permit(:img_path, :description, :date_created)
+      params.require(:museum).permit(:img_path, :description, :date_created, :name, :longitude, :latitude, :address)
     end
 end
