@@ -30,9 +30,7 @@
       <tbody>
         <% @exhibitions.each do |exhibition| %>
         <tr>
-          <td><%= exhibition.name %></td>
-          <td><%= link_to 'Show', museum_exhibition_url(@museum.id, exhibition.id) %></td>
-
+          <td><%= link_to exhibition.name, museum_exhibition_url(@museum.id, exhibition.id), :class => "btn btn-default"%></td>
         </tr>
         <% end %>
       </tbody>

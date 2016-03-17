@@ -12,6 +12,8 @@ class ExhibitionsController < FrontEndController
   # GET /exhibitions/1.json
   def show
     @exhibition = Exhibition.find params[:id]
+    @museum = @exhibition.museum
+    @room = @exhibition.rooms.first
   end
 
   # GET /exhibitions/new

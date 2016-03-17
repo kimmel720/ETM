@@ -40,7 +40,8 @@ r_exhibition = Exhibition.create(
   curator: Faker::Name
 )
 r_rose = Room.create(
-  name: Faker::Name.name + " Room"
+  name: Faker::Name.name + " Room",
+  exhibition_id: r_exhibition.id
 )
 artist_rose = Artist.create(
   name: Faker::Name.name
@@ -86,7 +87,8 @@ r_rose.artworks << a_rose
     )
     (0..2).each do
       r = Room.create(
-        name: Faker::Name.name + " Room"
+        name: Faker::Name.name + " Room",
+        exhibition_id: e.id
       )
       (0..5).each do
         artwork = Artwork.create(
