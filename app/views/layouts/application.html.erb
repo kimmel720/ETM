@@ -38,7 +38,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" rel="home" href="#" title="Exhibition Time Machine">
+        <a class="navbar-brand" rel="home" href="/" title="Exhibition Time Machine">
           <img style="max-width:40px; margin-top: -10px; margin-left: +50px; margin-right: +80px;"
                src="http://people.brandeis.edu/~ddimitr/Images/logoIII.png">
 
@@ -50,14 +50,16 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <!--- TODO: add active tag-->
-          <li><a href="#">Home<span class="sr-only">(current)</span></a></li>
-          <li class="dropdown">
+          <!-- <li><a href="#">Home<span class="sr-only">(current)</span></a></li> -->
+          <li><a href="/">Museums<span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Artists<span class="sr-only">(current)</span></a></li>
+          <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Museums <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a href="research_art.html">Floor Plan</a></li>
               <li><a href="research_tech.html">Exhibitions</a></li>
             </ul>
-          </li>
+          </li> -->
 
           <!--- display only if admin is logged in -->
           <% if User.find_by(id: session[:user_id], admin: true) %>

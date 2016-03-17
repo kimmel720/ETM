@@ -1,7 +1,42 @@
 <p id="notice"><%= notice %></p>
-<h1><%= @museum.name %></h1>
-<h3><%= @museum.longitude %></h3>
-<h3><%= @museum.latitude %></h3>
-<%= link_to 'Show', '/museums/' + @museum.id.to_s + '/exhibitions' %>
-<%= link_to 'Edit', edit_museum_path(@museum) %> |
-<%= link_to 'Back', museums_path %>
+<div id="main-container" class="container">
+  <div class="row">
+    <%= link_to 'Back', museums_path %>
+    <%= link_to 'Edit', edit_museum_path(@museum) %>
+  </div>
+  <div class="row">
+    <h1><%= @museum.name %></h1>
+    <a href="<%=@museum.website %>">Official Website</a>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      PLACEHODER FOR PICTURES
+    </div>
+    <div class="col-xs-9">
+      <p>
+        <%= @museum.description %>
+      </p>
+      <h4>Longitude: <%= @museum.longitude %></h4>
+      <h4>Latitude: <%= @museum.latitude %></h4>
+    </div>
+  </div>
+  <div class="row">
+    <table class=table>
+      <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @exhibitions.each do |exhibition| %>
+        <tr>
+          <td><%= exhibition.name %></td>
+          <td><%= link_to 'Show', museum_exhibition_url(@museum.id, exhibition.id) %></td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

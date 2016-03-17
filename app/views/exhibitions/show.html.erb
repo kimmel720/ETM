@@ -1,5 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @exhibition.name %></h1>
-<%= link_to 'Edit', edit_exhibition_path(@exhibition) %> |
-<%= link_to 'Back', exhibitions_path %>
+<div id="main-container" class="container">
+  <div class="row">
+    <%= link_to 'Edit', edit_museum_exhibition_path(@exhibition.museum_id, @exhibition.id) %> |
+    <%= link_to 'Back', museum_path(@exhibition.museum_id) %>
+  </div>
+  <div class="row">
+    <h1><%= @exhibition.name %></h1>
+  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      PLACEHOLDER FOR PICTURES
+    </div>
+    <div class="col-xs-9">
+      <h4>Start Date: <%= @exhibition.start_date %></h4>
+      <h4>End Date: <%= @exhibition.end_date %></h4>
+      <p><%= @exhibition.description %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <h3>ENTER EXHIBITION</h3>
+    </div>
+    <div class="col-xs-6">
+      <h3>FLOOR PLAN</h3>
+    </div>
+  </div>
+</div>
