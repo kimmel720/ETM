@@ -12,11 +12,13 @@
 
   <tbody>
     <% @rooms.each do |room| %>
+      <% @museum = room.museum %>
+      <% @exhibition = room.exhibition %>
       <tr>
         <td><%= room.name %></td>
-        <td><%= link_to 'Show', room %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', museum_exhibition_room_path(@museum, @exhibition, room) %></td>
+        <td><%= link_to 'Edit', edit_museum_exhibition_room_path(@museum, @exhibition, room) %></td>
+        <td><%= link_to 'Destroy', museum_exhibition_room_path(@museum, @exhibition, room), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Room', new_room_path %>
+<%= link_to 'New Room', new_museum_exhibition_room_path %>
