@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get "/login" => redirect("sessions/new")
-
   resources :users
   root 'museums#index'
 
@@ -22,10 +20,9 @@ Rails.application.routes.draw do
   # resources :artworks
 
   resources :museums do
-    resources :exhibitions, except: [:index] do
-      resources :rooms, except: [:index] do
-        resources :artworks, except: [:index]
-
+    resources :exhibitions do
+      resources :rooms do
+        resources :artworks
         # may need to add route for panoramas
       end
     end
