@@ -1,8 +1,6 @@
 class InitializeDatabase < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      # t.has_one :museum
-      # t.has_many :exhibitions
       t.string :name
       t.string :password_digest
       t.boolean :admin
@@ -37,7 +35,8 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     create_table :rooms do |t|
-      t.belongs_to :exhibition
+      t.belongs_to :exhibition, index: true
+      t.belongs_to :museum, index: true
       t.string :name
 
       t.timestamps null: false

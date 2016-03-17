@@ -80,10 +80,14 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "exhibition_id"
+    t.integer  "museum_id"
     t.string   "name"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "rooms", ["exhibition_id"], name: "index_rooms_on_exhibition_id"
+  add_index "rooms", ["museum_id"], name: "index_rooms_on_museum_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

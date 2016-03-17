@@ -45,7 +45,9 @@ user = User.create(
 
     (0..2).each do
       r = Room.create(
-        name: Faker::Name.name + " Room"
+        name: Faker::Name.name + " Room",
+        museum: m,
+        exhibition: e
       )
 
       (0..5).each do
