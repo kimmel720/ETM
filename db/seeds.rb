@@ -19,6 +19,45 @@ user = User.create(
   admin: false
 )
 
+rose = Museum.create(
+  user: admin,
+  name: "The Rose Art Museum",
+  latitude: 42.366284,
+  longitude: -71.258734,
+  street_address: "415 South St",
+  city: "waltham",
+  country: "United States",
+  description: "The Rose Art Museum is Brandeis University BLAHBLAHBLA",
+  website: "http://www.brandeis.edu/rose/"
+)
+r_exhibition = Exhibition.create(
+  user: admin,
+  museum: rose,
+  name: Faker::Name.name + " Collection",
+  start_date: Faker::Date.between(20.years.ago, 10.years.ago),
+  end_date: Faker::Date.between(10.years.ago, Date.today),
+  description: Faker::Lorem.paragraph,
+  curator: Faker::Name
+)
+r_rose = Room.create(
+  name: Faker::Name.name + " Room"
+)
+artist_rose = Artist.create(
+  name: Faker::Name.name
+)
+a_rose = Artwork.create(
+  name: Faker::Book.title,
+  # img_url: Faker::Placeholdit.image,
+  description: Faker::Hacker.say_something_smart,
+  date_created: Faker::Date.between(1000.years.ago, Date.today),
+  accession_no: Faker::Code.isbn,
+  rooms: [r_rose],
+  artists: [artist_rose]
+)
+r_rose.artworks << a_rose
+
+
+
 (0..2).each do
   m = Museum.create(
     user: admin,
@@ -42,22 +81,24 @@ user = User.create(
       description: Faker::Lorem.paragraph,
       curator: Faker::Name
     )
-
+    a = Artist.create(
+      name: Faker::Name.name
+    )
     (0..2).each do
       r = Room.create(
         name: Faker::Name.name + " Room"
       )
-
       (0..5).each do
-        a = Artwork.create(
+        artwork = Artwork.create(
           name: Faker::Book.title,
           # img_url: Faker::Placeholdit.image,
           description: Faker::Hacker.say_something_smart,
           date_created: Faker::Date.between(1000.years.ago, Date.today),
           accession_no: Faker::Code.isbn,
-          rooms: [r]
+          rooms: [r],
+          artists: [a]
         )
-        r.artworks << a
+        r.artworks << artwork
       end
     end
   end

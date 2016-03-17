@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div id="main-container" class="container">
   <div class="row">
-    <%= link_to 'Back', museums_path %>
-    <%= link_to 'Edit', edit_museum_path(@museum) %>
+    <a><%= link_to "Museums", museums_path %> > <%= link_to @museum.name, "" %></a>
   </div>
   <div class="row">
     <h1><%= @museum.name %></h1>

@@ -13,6 +13,13 @@
       <div id="map"></div>
     </div>
   </div>
+  <div class="row">
+    <h3 id="map_desc">
+      To explore exhibitions around the world,
+      click on the participating museums on the map above
+      or chose one from the list below
+    </h3>
+  </div>
 
 <table class=table>
   <thead>
@@ -24,7 +31,7 @@
   <tbody>
     <% @museums.each do |museum| %>
     <tr>
-      <td><%= museum.name %></td>
+      <td><%= link_to museum.name, museum %></td>
       <td><%= link_to 'Show', museum %></td>
       <td><%= link_to 'Edit', edit_museum_path(museum) %></td>
       <td><%= link_to 'Destroy', museum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
