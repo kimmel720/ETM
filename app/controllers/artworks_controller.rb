@@ -1,6 +1,5 @@
 class ArtworksController < FrontEndController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
-
   skip_before_action :authorize, only: [:show]
 
   # GET /artworks
@@ -12,7 +11,6 @@ class ArtworksController < FrontEndController
   # GET /artworks/1
   # GET /artworks/1.json
   def show
-    @artwork = Artwork.find params[:id]
   end
 
   # GET /artworks/new
@@ -68,6 +66,7 @@ class ArtworksController < FrontEndController
     # Use callbacks to share common setup or constraints between actions.
     def set_artwork
       @artwork = Artwork.find(params[:id])
+      @artists = @artwork.artists
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
