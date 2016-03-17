@@ -22,7 +22,6 @@ class MuseumsController < FrontEndController
   # GET /museums/1
   # GET /museums/1.json
   def show
-    @museum = Museum.find params[:id]
   end
 
   # GET /museums/new
@@ -78,6 +77,7 @@ class MuseumsController < FrontEndController
     # Use callbacks to share common setup or constraints between actions.
     def set_museum
       @museum = Museum.find(params[:id])
+      @exhibitions = @museum.exhibitions
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
