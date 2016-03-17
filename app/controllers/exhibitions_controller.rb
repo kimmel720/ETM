@@ -14,6 +14,10 @@ class ExhibitionsController < FrontEndController
     @exhibition = Exhibition.find params[:id]
     @museum = @exhibition.museum
     @room = @exhibition.rooms.first
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
+    ]
   end
 
   # GET /exhibitions/new

@@ -11,6 +11,14 @@ class RoomsController < FrontEndController
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @room = Room.find params[:id]
+    @exhibition = @room.exhibition
+    @museum = @exhibition.museum
+    @crumbs =[
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
+      [@room.name, museum_exhibition_room_path(@museum,@exhibition,@room)]
+    ]
   end
 
   # GET /rooms/new

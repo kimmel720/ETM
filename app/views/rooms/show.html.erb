@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<div id="main-container" class="container">
+  <div class="row">
+    <h1><%= @room.name %></h1>
+  </div>

@@ -10,7 +10,9 @@ class MuseumsController < FrontEndController
       marker.json({
         :lat => museum.latitude,
         :lng => museum.longitude,
-        :custom_infowindow => "<p class='infobox'><h2>" + museum.name + "</h2>" +  museum.description + "</p>"
+        :custom_infowindow => "<p class='infobox'><h2>" + museum.name + "</h2>" \
+        +  museum.description\
+        + "<a href='/museums/#{museum.id.to_s}'>Visit Museum </a></p>"
       })
     end
   end
@@ -24,6 +26,7 @@ class MuseumsController < FrontEndController
   def show
     @museum = Museum.find params[:id]
     @exhibitions = @museum.exhibitions
+    @crumbs = [[@museum.name, museum_path(@museum)]]
   end
 
   # GET /museums/new
