@@ -7,6 +7,7 @@ gem 'pg', group: :production
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem 'rails_admin'
+gem 'refile-s3'
 
 
 # To use ActiveModel has_secure_password
