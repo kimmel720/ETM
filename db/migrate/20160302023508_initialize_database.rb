@@ -10,6 +10,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     create_table :museums do |t|
       t.belongs_to :user, index:true
+      t.string :image_id
       t.string :name
       t.integer :latitude
       t.integer :longitude
@@ -26,6 +27,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.belongs_to :museum, index:true
       t.belongs_to :user, index:true
       t.string :floor_plan_id
+      t.string :image_id
       t.string :name
       t.date :start_date
       t.date :end_date
@@ -36,6 +38,7 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     create_table :panoramas do |t|
+      t.belongs_to :exhibition, index:true
       t.string :image_id
       t.integer :artwork_coordinates
 

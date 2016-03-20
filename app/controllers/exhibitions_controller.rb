@@ -1,6 +1,6 @@
 class ExhibitionsController < FrontEndController
-  before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show, :index]
+  before_action :set_exhibition, only: [:show, :edit, :update, :destroy, :floor_plan, :panorama, :resources]
+  skip_before_action :authorize, only: [:show, :index, :floor_plan, :panorama, :resources]
 
   # GET /exhibitions
   # GET /exhibitions.json
@@ -12,7 +12,6 @@ class ExhibitionsController < FrontEndController
   # GET /exhibitions/1
   # GET /exhibitions/1.json
   def show
-    @exhibition = Exhibition.find params[:id]
     @museum = @exhibition.museum
     @crumbs = [
       [@museum.name, museum_path(@museum)],
@@ -73,6 +72,11 @@ class ExhibitionsController < FrontEndController
   end
 
   def resources
+  end
+
+  def panorama
+    @panoramas = @exhibition.panoramas
+    @panorama = params[:panorama_id] ? @panoramas.find(params[:panorama_id]) : @panoramas.first
   end
 
   private
