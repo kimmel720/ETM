@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.integer  "accession_no"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    t.string   "img_id"
+=======
+>>>>>>> 41ff618528023476b7eb57115f7fa5df05b8ffb3
+>>>>>>> 411af7fa8aac5d123dc1fc2714d6326eab35aa41
   end
 
   add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"
