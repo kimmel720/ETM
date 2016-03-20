@@ -21,14 +21,13 @@ Rails.application.routes.draw do
 
   resources :museums do
     resources :exhibitions do
-      resources :rooms do
-        resources :artworks
-        # may need to add route for panoramas
+      resources :artworks
       end
     end
   end
   resources :artists
-
+  get 'exhibitions/:id/#floor_plan'
+  get 'exhibitions'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

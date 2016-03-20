@@ -27,7 +27,8 @@
       <tbody>
         <% @exhibitions.each do |exhibition| %>
         <tr>
-          <td><%= link_to exhibition.name, museum_exhibitions_path(@museum, exhibition), :class => "btn btn-default"%></td>
+          <td><%= link_to exhibition.name, museum_exhibition_path(@museum, exhibition),
+                  :class => "btn btn-default"%></td>
         </tr>
         <% end %>
       </tbody>
