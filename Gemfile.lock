@@ -37,21 +37,12 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.3)
-<<<<<<< HEAD
     aws-sdk (2.2.27)
       aws-sdk-resources (= 2.2.27)
     aws-sdk-core (2.2.27)
       jmespath (~> 1.0)
     aws-sdk-resources (2.2.27)
       aws-sdk-core (= 2.2.27)
-=======
-    aws-sdk (2.2.22)
-      aws-sdk-resources (= 2.2.22)
-    aws-sdk-core (2.2.22)
-      jmespath (~> 1.0)
-    aws-sdk-resources (2.2.22)
-      aws-sdk-core (= 2.2.22)
->>>>>>> 411af7fa8aac5d123dc1fc2714d6326eab35aa41
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
