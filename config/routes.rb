@@ -21,12 +21,16 @@ Rails.application.routes.draw do
 
   resources :museums do
     resources :exhibitions do
+      member do
+        get 'floor_plan'
+        get 'resources'
+        get 'panorama'
+      end
       resources :artworks
-
     end
   end
   resources :artists
-  get 'exhibitions/floor_plan'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

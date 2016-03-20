@@ -2,7 +2,6 @@ class Artwork < ActiveRecord::Base
   validates :name, presence: true
   attachment :image
 
-  has_and_belongs_to_many :rooms
-
+  belongs_to :exhibition
   has_and_belongs_to_many :artists
 end

@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.integer  "museum_id"
     t.integer  "user_id"
     t.string   "floor_plan_id"
+    t.string   "image_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
@@ -59,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "museums", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "image_id"
     t.string   "name"
     t.integer  "latitude"
     t.integer  "longitude"
@@ -74,11 +76,14 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   add_index "museums", ["user_id"], name: "index_museums_on_user_id"
 
   create_table "panoramas", force: :cascade do |t|
+    t.integer  "exhibition_id"
     t.string   "image_id"
     t.integer  "artwork_coordinates"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
+
+  add_index "panoramas", ["exhibition_id"], name: "index_panoramas_on_exhibition_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

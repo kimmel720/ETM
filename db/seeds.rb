@@ -1,7 +1,6 @@
 User.delete_all
 Museum.delete_all
 Exhibition.delete_all
-Room.delete_all
 Artwork.delete_all
 Artist.delete_all
 
@@ -19,80 +18,97 @@ user = User.create(
   admin: false
 )
 
-rose = Museum.create(
+farber = Museum.create(
   user: admin,
-  name: "The Rose Art Museum",
+  name: "Farber Mezzanine",
   latitude: 42.366284,
   longitude: -71.258734,
   street_address: "415 South St",
-  city: "waltham",
+  city: "Waltham",
   country: "United States",
   description: "The Rose Art Museum is Brandeis University BLAHBLAHBLA",
   website: "http://www.brandeis.edu/rose/"
 )
-r_exhibition = Exhibition.create(
+farber.image = File.open("app/assets/images/Farber/goldfarb.png")
+farber.save
+
+e1 = Exhibition.create(
   user: admin,
-  museum: rose,
-  name: Faker::Name.name + " Collection",
-  start_date: Faker::Date.between(20.years.ago, 10.years.ago),
-  end_date: Faker::Date.between(10.years.ago, Date.today),
-  description: Faker::Lorem.paragraph,
-  curator: Faker::Name
+  museum: farber,
+  name: "Deis Impact Exhibit",
+  start_date: Date.new(2016, 1, 31),
+  end_date: Date.new(2016, 5, 22),
+  description:
+  "Technologies such as 3D printing can revolutionize access and inclusivity in today's world. For example, event organizer Daniela Dimitrova made a 3D replica of 'Square Reflections', a sculpture by Louise Nevelson, to make it more accessible for the visually impaired. While someone who is visually impaired can't touch the original sculpture, they can touch the 3D replica, making the art more accessible to all. In addition, the Brandeis Prostheses Club is working on making prostheses for children who need to use their muscles so they don't atrophy, but can't afford $10,000 - $50,000 for a regular prosthesis each time they grow. Furthermore, the Virtual Reality Club is using gaming technology to make 3D interactive virtual 'tours' of the Rose Art Museum, particularly for those who live in rural areas and can't afford to visit an art museum. These technologies, like any other tools, can be used for good or ill -- either taking piracy to a new level (as 3D printers can make it possible to do home manufacturing of any copyrighted item), or making prostheses, art and museum experiences more accessible for all.",
+  curator: "Daniela Dimitrova"
 )
-artist_rose = Artist.create(
+e1.image = File.open("app/assets/images/Farber/Lower Rose.png")
+e1.save
+
+fake_artist = Artist.create(
   name: Faker::Name.name
 )
-a_rose = Artwork.create(
-  name: Faker::Book.title,
-  # img_url: Faker::Placeholdit.image,
-  description: Faker::Hacker.say_something_smart,
+
+a1 = Artwork.create(
+  name: "Square Reflections",
+  exhibition: e1,
+  artists: [fake_artist],
+  description: "Painted 3D printed replica of a Louise Nevelson sculpture with wooden frame and acrylic mirrors. Square Reflections, 1964 Pace Gallery Made possible with the generous help of the Brandeis MakerLab staff, the members of the Deis3D and DeisVR clubs, as well as  David Stiefel, Jack Holloman, and Debra Sarlin.",
   date_created: Faker::Date.between(1000.years.ago, Date.today),
-  accession_no: Faker::Code.isbn,
-  rooms: [r_rose],
-  artists: [artist_rose]
+  accession_no: Faker::Code.isbn
 )
-r_rose.artworks << a_rose
+a1.image = File.open("app/assets/images/Farber/3D Printed Replica of Square Reflections.png")
+a1.save
 
+a2 = Artwork.create(
+  name: "Nevelson Sculpture Renders",
+  exhibition: e1,
+  artists: [fake_artist],
+  description: "Computer generated image of Louise Nevelson sculptures that were recreated by Daniela Dimitrova and Michael Makivic using 3D modeling. Left: Tropical Garden, 1957 Grey Art Gallery, NYU Right: Totality Dark, 1962",
+  date_created: Faker::Date.between(1000.years.ago, Date.today),
+  accession_no: Faker::Code.isbn
+)
+a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
+a2.save
 
-
-(0..2).each do
-  m = Museum.create(
-    user: admin,
-    name: Faker::Company.name + " Museum",
-    latitude: Faker::Address.latitude,
-    longitude: Faker::Address.longitude,
-    street_address: Faker::Address.street_address,
-    city: Faker::Address.city,
-    country: Faker::Address.country,
-    description: Faker::Lorem.paragraph,
-    website: Faker::Internet.url
-  )
-
-  (0..3).each do
-    e = Exhibition.create(
-      user: admin,
-      museum: m,
-      name: Faker::Name.name + " Collection",
-      start_date: Faker::Date.between(20.years.ago, 10.years.ago),
-      end_date: Faker::Date.between(10.years.ago, Date.today),
-      description: Faker::Lorem.paragraph,
-      curator: Faker::Name
-    )
-    a = Artist.create(
-      name: Faker::Name.name
-    )
-    (0..2).each do
-      (0..5).each do
-        artwork = Artwork.create(
-          name: Faker::Book.title,
-          image_id: 0,  # should put default image maybe using faker somewhere else
-          description: Faker::Hacker.say_something_smart,
-          date_created: Faker::Date.between(1000.years.ago, Date.today),
-          accession_no: Faker::Code.isbn,
-          artists: [a]
-        )
-        r.artworks << artwork
-      end
-    end
-  end
-end
+# (0..2).each do
+#   m = Museum.create(
+#     user: admin,
+#     name: Faker::Company.name + " Museum",
+#     latitude: Faker::Address.latitude,
+#     longitude: Faker::Address.longitude,
+#     street_address: Faker::Address.street_address,
+#     city: Faker::Address.city,
+#     country: Faker::Address.country,
+#     description: Faker::Lorem.paragraph,
+#     website: Faker::Internet.url
+#   )
+#
+#   (0..3).each do
+#     e = Exhibition.create(
+#       user: admin,
+#       museum: m,
+#       name: Faker::Name.name + " Collection",
+#       start_date: Faker::Date.between(20.years.ago, 10.years.ago),
+#       end_date: Faker::Date.between(10.years.ago, Date.today),
+#       description: Faker::Lorem.paragraph,
+#       curator: Faker::Name
+#     )
+#
+#     a = Artist.create(
+#       name: Faker::Name.name
+#     )
+#
+#     (0..5).each do
+#       artwork = Artwork.create(
+#         exhibition: e,
+#         name: Faker::Book.title,
+#         image_id: 0,  # should put default image maybe using faker somewhere else
+#         description: Faker::Hacker.say_something_smart,
+#         date_created: Faker::Date.between(1000.years.ago, Date.today),
+#         accession_no: Faker::Code.isbn,
+#         artists: [a]
+#       )
+#     end
+#   end
+# end
