@@ -4,8 +4,11 @@ source 'https://rubygems.org'
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
+
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
+gem "refile-s3"
+
 gem 'rails_admin'
 
 

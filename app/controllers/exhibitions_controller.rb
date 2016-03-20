@@ -1,10 +1,11 @@
 class ExhibitionsController < FrontEndController
   before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show]
+  skip_before_action :authorize, only: [:show, :index]
 
   # GET /exhibitions
   # GET /exhibitions.json
   def index
+    @museum = Museum.find params[:museum_id]
     @exhibitions = Exhibition.all
   end
 
@@ -73,10 +74,12 @@ class ExhibitionsController < FrontEndController
     # Use callbacks to share common setup or constraints between actions.
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
+      @museum = @exhibition.museum
+      @rooms = @exhibition.rooms
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exhibition_params
-      params.require(:exhibition).permit(:img_path, :description, :date_created)
+      params.require(:exhibition).permit(:img_path, :description, :date_created, :museum_id)
     end
 end

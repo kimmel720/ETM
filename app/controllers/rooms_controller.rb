@@ -1,6 +1,6 @@
 class RoomsController < FrontEndController
   before_action :set_room, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show]
+  skip_before_action :authorize, only: [:show, :index]
 
   # GET /rooms
   # GET /rooms.json
@@ -23,7 +23,6 @@ class RoomsController < FrontEndController
 
   # GET /rooms/new
   def new
-    @room = Room.new
   end
 
   # GET /rooms/1/edit
@@ -74,6 +73,9 @@ class RoomsController < FrontEndController
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
+      @museum = @room.museum
+      @exhibition = @room.exhibition
+      @artworks = @room.artworks
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
