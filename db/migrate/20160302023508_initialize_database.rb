@@ -25,6 +25,7 @@ class InitializeDatabase < ActiveRecord::Migration
     create_table :exhibitions do |t|
       t.belongs_to :museum, index:true
       t.belongs_to :user, index:true
+      t.string :floor_plan_id
       t.string :name
       t.date :start_date
       t.date :end_date
@@ -34,15 +35,8 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :rooms do |t|
-      t.belongs_to :exhibition, index: true
-      t.belongs_to :museum, index: true
-      t.string :name
-
-      t.timestamps null: false
-    end
-
     create_table :artworks do |t|
+      t.belongs_to :exhibition, index:true
       t.string :name
       t.string :image_id
       t.text :description
