@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310195343) do
+ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -28,35 +28,30 @@ ActiveRecord::Schema.define(version: 20160310195343) do
   add_index "artists_artworks", ["artwork_id"], name: "index_artists_artworks_on_artwork_id"
 
   create_table "artworks", force: :cascade do |t|
+    t.integer  "exhibition_id"
     t.string   "name"
+    t.string   "image_id"
     t.text     "description"
     t.date     "date_created"
     t.integer  "accession_no"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "img_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"
-
-  create_table "artworks_rooms", id: false, force: :cascade do |t|
-    t.integer "artwork_id"
-    t.integer "room_id"
-  end
-
-  add_index "artworks_rooms", ["artwork_id"], name: "index_artworks_rooms_on_artwork_id"
-  add_index "artworks_rooms", ["room_id"], name: "index_artworks_rooms_on_room_id"
+  add_index "artworks", ["exhibition_id"], name: "index_artworks_on_exhibition_id"
 
   create_table "exhibitions", force: :cascade do |t|
     t.integer  "museum_id"
     t.integer  "user_id"
+    t.string   "floor_plan_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "description"
     t.string   "curator"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "exhibitions", ["museum_id"], name: "index_exhibitions_on_museum_id"
@@ -78,11 +73,11 @@ ActiveRecord::Schema.define(version: 20160310195343) do
 
   add_index "museums", ["user_id"], name: "index_museums_on_user_id"
 
-  create_table "rooms", force: :cascade do |t|
-    t.integer  "exhibition_id"
-    t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+  create_table "panoramas", force: :cascade do |t|
+    t.string   "image_id"
+    t.integer  "artwork_coordinates"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
   create_table "users", force: :cascade do |t|
