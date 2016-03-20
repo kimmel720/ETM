@@ -22,12 +22,11 @@ Rails.application.routes.draw do
   resources :museums do
     resources :exhibitions do
       resources :artworks
-      end
+
     end
   end
   resources :artists
-  get 'exhibitions/:id/#floor_plan'
-  get 'exhibitions'
+  get 'exhibitions/floor_plan'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
