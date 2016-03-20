@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
 
-  get "/login" => redirect("sessions/new")
-
   resources :users
   root 'museums#index'
 
@@ -22,16 +20,14 @@ Rails.application.routes.draw do
   # resources :artworks
 
   resources :museums do
-    resources :exhibitions, except: [:index] do
-      resources :rooms, except: [:index] do
-        resources :artworks, except: [:index]
-
-        # may need to add route for panoramas
+    resources :exhibitions do
+      resources :artworks
       end
     end
   end
   resources :artists
-
+  get 'exhibitions/:id/#floor_plan'
+  get 'exhibitions'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

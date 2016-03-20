@@ -88,12 +88,13 @@ r_rose.artworks << a_rose
     (0..2).each do
       r = Room.create(
         name: Faker::Name.name + " Room",
-        exhibition_id: e.id
+        museum: m,
+        exhibition: e
       )
       (0..5).each do
         artwork = Artwork.create(
           name: Faker::Book.title,
-          # img_url: Faker::Placeholdit.image,
+          image_id: 0,  # should put default image maybe using faker somewhere else
           description: Faker::Hacker.say_something_smart,
           date_created: Faker::Date.between(1000.years.ago, Date.today),
           accession_no: Faker::Code.isbn,

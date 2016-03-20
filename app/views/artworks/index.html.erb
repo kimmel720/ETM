@@ -35,8 +35,7 @@
           <div class="col-md-4"></div>
       </div>
 
-<!--     <%= image_tag(artwork.img_path) %>  -->
-<%= image_tag attachment_url(@artwork, :img, :fill, 300, 300, format: "jpg") %>
+<%= image_tag attachment_url(@artwork, :image, :fill, 300, 300, format: "jpg") %>
 
       <div class="row">
           <div class="col-md-4"></div>
