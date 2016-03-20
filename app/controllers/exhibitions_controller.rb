@@ -14,7 +14,6 @@ class ExhibitionsController < FrontEndController
   def show
     @exhibition = Exhibition.find params[:id]
     @museum = @exhibition.museum
-    @room = @exhibition.rooms.first
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
@@ -81,7 +80,6 @@ class ExhibitionsController < FrontEndController
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
       @museum = @exhibition.museum
-      @rooms = @exhibition.rooms
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
