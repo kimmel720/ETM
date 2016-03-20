@@ -35,6 +35,13 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    create_table :panoramas do |t|
+      t.string :image_id
+      t.integer :artwork_coordinates
+
+      t.timestamps null: false
+    end
+
     create_table :artworks do |t|
       t.belongs_to :exhibition, index:true
       t.string :name
@@ -48,12 +55,6 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     add_index :artworks, :accession_no
-
-    # pass id: false because table does not represent a model
-    create_table :artworks_rooms, id:false do |t|
-      t.belongs_to :artwork, index: true
-      t.belongs_to :room, index: true
-    end
 
     create_table :artists do |t|
       t.string :name

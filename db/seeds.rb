@@ -39,10 +39,6 @@ r_exhibition = Exhibition.create(
   description: Faker::Lorem.paragraph,
   curator: Faker::Name
 )
-r_rose = Room.create(
-  name: Faker::Name.name + " Room",
-  exhibition_id: r_exhibition.id
-)
 artist_rose = Artist.create(
   name: Faker::Name.name
 )
@@ -86,11 +82,6 @@ r_rose.artworks << a_rose
       name: Faker::Name.name
     )
     (0..2).each do
-      r = Room.create(
-        name: Faker::Name.name + " Room",
-        museum: m,
-        exhibition: e
-      )
       (0..5).each do
         artwork = Artwork.create(
           name: Faker::Book.title,
@@ -98,7 +89,6 @@ r_rose.artworks << a_rose
           description: Faker::Hacker.say_something_smart,
           date_created: Faker::Date.between(1000.years.ago, Date.today),
           accession_no: Faker::Code.isbn,
-          rooms: [r],
           artists: [a]
         )
         r.artworks << artwork
