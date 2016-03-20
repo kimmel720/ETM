@@ -22,6 +22,7 @@ class MuseumsController < FrontEndController
   # GET /museums/1
   # GET /museums/1.json
   def show
+    @rooms = @museum.exhibitions
   end
 
   # GET /museums/new
