@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Img path:</strong>
-  <%= @artwork.img_path %>
+  <strong>Image</strong>
+  <%= image_tag attachment_url(@artwork, :image, :fill, 300, 300, format: "jpg") %>
 </p>
 
 <p>
@@ -15,5 +15,5 @@
   <%= @artwork.date_created %>
 </p>
 
-<%= link_to 'Edit', edit_artwork_path(@artwork) %> |
-<%= link_to 'Back', artworks_path %>
+<%= link_to 'Edit', edit_museum_exhibition_room_artwork_path(1, 1, 1, @artwork) %> |
+<%= link_to 'Back', museum_exhibition_room_artworks_path(1,1,1) %>
