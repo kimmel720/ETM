@@ -76,7 +76,12 @@ class ExhibitionsController < FrontEndController
 
   def panorama
     @panoramas = @exhibition.panoramas
-    @panorama = params[:panorama_id] ? @panoramas.find(params[:panorama_id]) : @panoramas.first
+    pid = params[:panorama_id]
+    if pid
+      @panorama = @panoramas.find(pid)
+    else
+      @panorama = @panoramas.first
+    end
   end
 
   private
