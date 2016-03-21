@@ -45,6 +45,13 @@ e1 = Exhibition.create(
 e1.image = File.open("app/assets/images/Farber/Lower Rose.png")
 e1.save
 
+p = Panorama.create(
+  exhibition: e1,
+  artwork_coordinates: {}
+)
+p.image = File.open("app/assets/images/Farber/panorama_test.png")
+p.save
+
 fake_artist = Artist.create(
   name: Faker::Name.name
 )
