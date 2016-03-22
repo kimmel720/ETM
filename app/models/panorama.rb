@@ -1,5 +1,8 @@
 class Panorama < ActiveRecord::Base
-  belongs_to :exhibition
-  serialize :artwork_coordinates, Hash
+  validates :exhibition_id, presence: true
+
   attachment :image
+  serialize :artwork_coordinates, Hash
+
+  belongs_to :exhibition
 end
