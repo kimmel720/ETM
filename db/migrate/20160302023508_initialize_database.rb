@@ -10,6 +10,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     create_table :museums do |t|
       t.belongs_to :user, index:true
+      t.string :image_id
       t.string :name
       t.integer :latitude
       t.integer :longitude
@@ -25,6 +26,8 @@ class InitializeDatabase < ActiveRecord::Migration
     create_table :exhibitions do |t|
       t.belongs_to :museum, index:true
       t.belongs_to :user, index:true
+      t.string :floor_plan_id
+      t.string :image_id
       t.string :name
       t.date :start_date
       t.date :end_date
@@ -34,15 +37,16 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :rooms do |t|
-      t.belongs_to :exhibition, index: true
-      t.belongs_to :museum, index: true
-      t.string :name
+    create_table :panoramas do |t|
+      t.belongs_to :exhibition, index:true
+      t.string :image_id
+      t.integer :artwork_coordinates
 
       t.timestamps null: false
     end
 
     create_table :artworks do |t|
+      t.belongs_to :exhibition, index:true
       t.string :name
       t.string :medium
       t.string :image_id
@@ -55,12 +59,6 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     add_index :artworks, :accession_no
-
-    # pass id: false because table does not represent a model
-    create_table :artworks_rooms, id:false do |t|
-      t.belongs_to :artwork, index: true
-      t.belongs_to :room, index: true
-    end
 
     create_table :artists do |t|
       t.string :name

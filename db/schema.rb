@@ -28,11 +28,13 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   add_index "artists_artworks", ["artwork_id"], name: "index_artists_artworks_on_artwork_id"
 
   create_table "artworks", force: :cascade do |t|
+    t.integer  "exhibition_id"
     t.string   "name"
     t.string   "image_id"
     t.text     "description"
     t.date     "date_created"
     t.integer  "accession_no"
+<<<<<<< HEAD
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
 <<<<<<< HEAD
@@ -42,28 +44,27 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 =======
 >>>>>>> 41ff618528023476b7eb57115f7fa5df05b8ffb3
 >>>>>>> 411af7fa8aac5d123dc1fc2714d6326eab35aa41
+=======
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+>>>>>>> 58690399a4dd812d10211a5ab4c3b4f0aef91a25
   end
 
   add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"
-
-  create_table "artworks_rooms", id: false, force: :cascade do |t|
-    t.integer "artwork_id"
-    t.integer "room_id"
-  end
-
-  add_index "artworks_rooms", ["artwork_id"], name: "index_artworks_rooms_on_artwork_id"
-  add_index "artworks_rooms", ["room_id"], name: "index_artworks_rooms_on_room_id"
+  add_index "artworks", ["exhibition_id"], name: "index_artworks_on_exhibition_id"
 
   create_table "exhibitions", force: :cascade do |t|
     t.integer  "museum_id"
     t.integer  "user_id"
+    t.string   "floor_plan_id"
+    t.string   "image_id"
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
     t.string   "description"
     t.string   "curator"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "exhibitions", ["museum_id"], name: "index_exhibitions_on_museum_id"
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "museums", force: :cascade do |t|
     t.integer  "user_id"
+    t.string   "image_id"
     t.string   "name"
     t.integer  "latitude"
     t.integer  "longitude"
@@ -85,16 +87,15 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   add_index "museums", ["user_id"], name: "index_museums_on_user_id"
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "panoramas", force: :cascade do |t|
     t.integer  "exhibition_id"
-    t.integer  "museum_id"
-    t.string   "name"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "image_id"
+    t.integer  "artwork_coordinates"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  add_index "rooms", ["exhibition_id"], name: "index_rooms_on_exhibition_id"
-  add_index "rooms", ["museum_id"], name: "index_rooms_on_museum_id"
+  add_index "panoramas", ["exhibition_id"], name: "index_panoramas_on_exhibition_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
