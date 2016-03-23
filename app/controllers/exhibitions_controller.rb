@@ -1,6 +1,6 @@
 class ExhibitionsController < FrontEndController
-  before_action :set_exhibition, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show, :index]
+  before_action :set_exhibition, only: [:show, :edit, :update, :destroy, :floor_plan, :panorama, :resources]
+  skip_before_action :authorize, only: [:show, :index, :floor_plan, :panorama, :resources]
 
   # GET /exhibitions
   # GET /exhibitions.json
@@ -12,6 +12,11 @@ class ExhibitionsController < FrontEndController
   # GET /exhibitions/1
   # GET /exhibitions/1.json
   def show
+    @museum = @exhibition.museum
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
+    ]
   end
 
   # GET /exhibitions/new
@@ -63,12 +68,27 @@ class ExhibitionsController < FrontEndController
     end
   end
 
+  def floor_plan
+  end
+
+  def resources
+  end
+
+  def panorama
+    @panoramas = @exhibition.panoramas
+    pid = params[:panorama_id]
+    if pid
+      @panorama = @panoramas.find(pid)
+    else
+      @panorama = @panoramas.first
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
       @museum = @exhibition.museum
-      @rooms = @exhibition.rooms
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

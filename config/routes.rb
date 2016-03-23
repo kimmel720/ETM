@@ -21,12 +21,15 @@ Rails.application.routes.draw do
 
   resources :museums do
     resources :exhibitions do
-      resources :rooms do
-        resources :artworks
-        # may need to add route for panoramas
+      member do
+        get 'floor_plan'
+        get 'resources'
+        get 'panorama'
       end
+      resources :artworks
     end
   end
+  resources :artists
 
 
 
