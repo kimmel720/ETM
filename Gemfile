@@ -10,6 +10,7 @@ gem "refile-mini_magick"
 gem "refile-s3"
 
 gem 'rails_admin'
+gem 'refile-s3'
 
 
 # To use ActiveModel has_secure_password

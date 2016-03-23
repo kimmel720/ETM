@@ -1,6 +1,6 @@
 class Artwork < ActiveRecord::Base
   validates :name, presence: true
-  attachment :image
+  attachment :img
 
   has_and_belongs_to_many :rooms
 
