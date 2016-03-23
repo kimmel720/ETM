@@ -44,6 +44,7 @@ class InitializeDatabase < ActiveRecord::Migration
 
     create_table :artworks do |t|
       t.string :name
+      t.string :medium
       t.string :image_id
       t.text :description
       t.date :date_created

@@ -53,6 +53,7 @@ user = User.create(
       (0..5).each do
         a = Artwork.create(
           name: Faker::Book.title,
+          medium: "Crayon"
           description: Faker::Hacker.say_something_smart,
           date_created: Faker::Date.between(1000.years.ago, Date.today),
           accession_no: Faker::Code.isbn,
