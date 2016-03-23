@@ -30,24 +30,13 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   create_table "artworks", force: :cascade do |t|
     t.integer  "exhibition_id"
     t.string   "name"
+    t.string   "medium"
     t.string   "image_id"
     t.text     "description"
     t.date     "date_created"
     t.integer  "accession_no"
-<<<<<<< HEAD
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    t.string   "img_id"
-=======
->>>>>>> 41ff618528023476b7eb57115f7fa5df05b8ffb3
->>>>>>> 411af7fa8aac5d123dc1fc2714d6326eab35aa41
-=======
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
->>>>>>> 58690399a4dd812d10211a5ab4c3b4f0aef91a25
   end
 
   add_index "artworks", ["accession_no"], name: "index_artworks_on_accession_no"

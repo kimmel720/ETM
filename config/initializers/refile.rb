@@ -6,5 +6,5 @@ aws = {
   region: "US-Standard",
   bucket: "etm-photo-lib"
 }
-Refile.cache = Refile::S3.new(prefix: "cache", **aws)
-Refile.store = Refile::S3.new(prefix: "store", **aws)
+# Refile.cache = Refile::S3.new(prefix: "cache", **aws)
+# Refile.store = Refile::S3.new(prefix: "store", **aws)
