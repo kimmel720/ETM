@@ -68,26 +68,6 @@ a1 = Artwork.create(
 a1.image = File.open("app/assets/images/Farber/3D Printed Replica of Square Reflections.png")
 a1.save
 
-<<<<<<< HEAD
-      (0..5).each do
-        a = Artwork.create(
-          name: Faker::Book.title,
-          medium: "Crayon"
-          # img_url: Faker::Placeholdit.image,
-          image_id: 0,  # should put default image maybe using faker somewhere else
-          description: Faker::Hacker.say_something_smart,
-          date_created: Faker::Date.between(1000.years.ago, Date.today),
-          accession_no: Faker::Code.isbn,
-          rooms: [r]
-        )
-        a.image = File.open("app/assets/images/nike.jpg", "rb")
-        a.save
-        r.artworks << a
-      end
-    end
-  end
-end
-=======
 a2 = Artwork.create(
   name: "Nevelson Sculpture Renders",
   exhibition: e1,
@@ -99,4 +79,3 @@ a2 = Artwork.create(
 )
 a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
 a2.save
->>>>>>> 58690399a4dd812d10211a5ab4c3b4f0aef91a25
