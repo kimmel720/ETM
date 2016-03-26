@@ -1,7 +1,51 @@
 // Place all the styles related to the Museums controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#title{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 #map {
   width: auto;
   height: 400px;
+}
+
+.museum{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 125px;
+  padding: 0px 0px 0px 0px;
+}
+
+.text-block-outer{
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.text-block-middle{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.text-block-inner{
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+}
+
+.museum-name{
+  white-space: normal;
+}
+.museum-link:hover, .museum-link:visited, .museum-link:link, .museum-link:active{
+    text-decoration: none;
+}
+
+.museum-link p, .museum-link h3 {
+    text-align: center;
+}
+
+p:last-child{
+  padding-bottom: 5px;
 }

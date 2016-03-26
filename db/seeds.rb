@@ -78,44 +78,44 @@ a2 = Artwork.create(
 a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
 a2.save
 
-# (0..2).each do
-#   m = Museum.create(
-#     user: admin,
-#     name: Faker::Company.name + " Museum",
-#     latitude: Faker::Address.latitude,
-#     longitude: Faker::Address.longitude,
-#     street_address: Faker::Address.street_address,
-#     city: Faker::Address.city,
-#     country: Faker::Address.country,
-#     description: Faker::Lorem.paragraph,
-#     website: Faker::Internet.url
-#   )
-#
-#   (0..3).each do
-#     e = Exhibition.create(
-#       user: admin,
-#       museum: m,
-#       name: Faker::Name.name + " Collection",
-#       start_date: Faker::Date.between(20.years.ago, 10.years.ago),
-#       end_date: Faker::Date.between(10.years.ago, Date.today),
-#       description: Faker::Lorem.paragraph,
-#       curator: Faker::Name
-#     )
-#
-#     a = Artist.create(
-#       name: Faker::Name.name
-#     )
-#
-#     (0..5).each do
-#       artwork = Artwork.create(
-#         exhibition: e,
-#         name: Faker::Book.title,
-#         image_id: 0,  # should put default image maybe using faker somewhere else
-#         description: Faker::Hacker.say_something_smart,
-#         date_created: Faker::Date.between(1000.years.ago, Date.today),
-#         accession_no: Faker::Code.isbn,
-#         artists: [a]
-#       )
-#     end
-#   end
-# end
+(0..2).each do
+  m = Museum.create(
+    user: admin,
+    name: Faker::Company.name + " Museum",
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude,
+    street_address: Faker::Address.street_address,
+    city: Faker::Address.city,
+    country: Faker::Address.country,
+    description: Faker::Lorem.paragraph,
+    website: Faker::Internet.url
+  )
+
+  (0..3).each do
+    e = Exhibition.create(
+      user: admin,
+      museum: m,
+      name: Faker::Name.name + " Collection",
+      start_date: Faker::Date.between(20.years.ago, 10.years.ago),
+      end_date: Faker::Date.between(10.years.ago, Date.today),
+      description: Faker::Lorem.paragraph,
+      curator: Faker::Name
+    )
+
+    a = Artist.create(
+      name: Faker::Name.name
+    )
+
+    (0..5).each do
+      artwork = Artwork.create(
+        exhibition: e,
+        name: Faker::Book.title,
+        image_id: 0,  # should put default image maybe using faker somewhere else
+        description: Faker::Hacker.say_something_smart,
+        date_created: Faker::Date.between(1000.years.ago, Date.today),
+        accession_no: Faker::Code.isbn,
+        artists: [a]
+      )
+    end
+  end
+end
