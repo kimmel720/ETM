@@ -1,0 +1,73 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*
+For Exhibition list: Have some explenation of what
+you should click on. Or a header,
+Also, Try having grid with photos above the buttons as
+part of the buttons
+Or: try having a table, with a picture on the
+left and title description on the right
+Also, make sure you designate current exhibitions
+from old ones
+
+OOHOHOHOHOOHO
+Some way of doing a timeline, vertically
+
+
+*/
+
+
+hr{
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 20px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.horizontal-center-wrapper{
+  text-align: center;
+}
+.horizontal-center{
+  display: inline-block;
+}
+
+.center-block-outer{
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.center-block-middle{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.center-block-inner{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title{
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+
+.button-link-name{
+  white-space: normal;
+  margin: 0px 0pc 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.grid-button{
+  margin-top: 11px;
+}
+
+.button-link{
+  border-radius: 4px;
+}
+
+.button-link:hover, .button-link:visited, .button-link:link, .button-link:active{
+    text-decoration: none;
+}

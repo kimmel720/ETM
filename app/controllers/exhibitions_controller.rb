@@ -12,7 +12,6 @@ class ExhibitionsController < FrontEndController
   # GET /exhibitions/1
   # GET /exhibitions/1.json
   def show
-    @museum = @exhibition.museum
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
@@ -82,6 +81,13 @@ class ExhibitionsController < FrontEndController
     else
       @panorama = @panoramas.first
     end
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
+      ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
+    ]
+    @artworks = @exhibition.artworks
+
   end
 
   private

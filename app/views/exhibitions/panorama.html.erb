@@ -1,6 +1,26 @@
+<p id="notice"><%= notice %></p>
 <div id="main-container" class="container">
   <div class="row">
-    <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png") %>
-    <%= @panorama.id %>
+    <h1 class="title"><%= @exhibition.name %></h1>
+    <br />
+  </div>
+  <div class="row">
+    <div class="col-xs-12 horizontal-center-wrapper">
+        <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png"), :class => "panorama horizontal-center" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+      <h2>Artworks:</h2>
+      <table class="table">
+        <% @artworks.each do |artwork| %>
+          <tr>
+            <td><%= artwork.name %> </td>
+            <td><%= link_to "show", museum_exhibition_artwork_path(@museum,@exhibition,artwork) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

@@ -5,8 +5,9 @@
 <!-- only if you need custom infoboxes -->
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js' type='text/javascript'></script>
 <div id="main-container" class="container">
-  <div class="row">
-    <h1 id=title> Welcome to ETM!</h1>
+  <div class="row horizontal-center-wrapper">
+    <h1 class="title horizontal-center"> Welcome to ETM!</h1>
+    <br />
   </div>
   <div class="row">
     <div>
@@ -21,14 +22,15 @@
     </h3>
   </div>
   <div class="row">
+    <hr />
     <% @museums.each do |museum| %>
     <div class="col-lg-4 col-md-6 col-sm-12">
-      <%= link_to museum, :class => "museum-link" do %>
-        <div class="museum btn btn-primary btn-block">
-          <div class="text-block-outer">
-            <div class="text-block-middle">
-              <div class="text-block-inner">
-                <h3 class="museum-name"><%= museum.name %></h3>
+      <%= link_to museum, :class => "button-link" do %>
+        <div class="museum btn btn-primary btn-block grid-button">
+          <div class="center-block-outer">
+            <div class="center-block-middle">
+              <div class="center-block-inner">
+                <h3 class="button-link-name"><%= museum.name %></h3>
                 <p id="address"><%= museum.street_address%></p>
               </div>
             </div>

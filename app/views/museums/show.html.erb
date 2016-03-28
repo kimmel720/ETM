@@ -1,37 +1,37 @@
 <p id="notice"><%= notice %></p>
 <div id="main-container" class="container">
   <div class="row">
-    <h1><%= @museum.name %></h1>
-    <a href="<%=@museum.website %>">Official Website</a>
+    <h1 class="title"><%= @museum.name %></h1>
+    <br />
+  </div>
+  <div class="row museum-info">
+    <div class="col-xs-4">
+      <div class="picture-frame">
+        PICTURE OF MUSEUM
+      </div>
+    </div>
+    <div class="col-xs-8">
+      <p><%= @museum.description %></p>
+      <p><%= @museum.street_address %></p>
+      <p><%= link_to "Official Website!", @museum.website %></p>
+    </div>
   </div>
   <div class="row">
-    <div class="col-xs-3">
-      PLACEHOLDER FOR PICTURES
-    </div>
-    <div class="col-xs-9">
-      <p>
-        <%= @museum.description %>
-      </p>
-      <h4>Longitude: <%= @museum.longitude %></h4>
-      <h4>Latitude: <%= @museum.latitude %></h4>
-    </div>
-  </div>
-  <div class="row">
-    <table class=table>
-      <thead>
-        <tr>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @exhibitions.each do |exhibition| %>
-        <tr>
-          <td><%= link_to exhibition.name, museum_exhibition_path(@museum, exhibition),
-                  :class => "btn btn-default"%></td>
-        </tr>
+    <hr />
+    <% @exhibitions.each do |exhibition| %>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+        <%= link_to museum_exhibition_path(@museum, exhibition), :class => "button-link" do %>
+          <div class="exhibition btn btn-primary btn-block grid-button">
+            <div class="center-block-outer">
+              <div class="center-block-middle">
+                <div class="center-block-inner">
+                  <h4 class="button-link-name"><%=exhibition.name %></h4>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
-      </tbody>
-    </table>
+      </div>
+    <% end %>
   </div>
 </div>
