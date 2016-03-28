@@ -1,6 +1,23 @@
 <div id="main-container" class="container">
   <div class="row">
-    <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png") %>
+    <%= image_tag attachment_url(@panorama, :image, :fill, 718, 391, format: "png") %>
     <%= @panorama.id %>
   </div>
 </div>
+
+
+<div class="container" id="content">
+
+         <%= javascript_include_tag "three" %>
+
+         <div id="Stats-output"></div>
+
+         <!-- Div which will hold the Output -->
+         <div id="WebGL-output"></div>
+
+
+         <%= javascript_include_tag "panorama" %>
+
+
+
+</div> <!-- End container -->
