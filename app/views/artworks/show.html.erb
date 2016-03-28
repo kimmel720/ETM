@@ -1,19 +1,20 @@
 <p id="notice"><%= notice %></p>
+<div id="main-container" class="container">
+  <div class="row">
+    <h1 class="title"><%= @artwork.name %></h1>
+  </div>
+  <p>
+    <strong>Img id:</strong>
+    <%= @artwork.image_id %>
+  </p>
 
-<p>
-  <strong>Img path:</strong>
-  <%= @artwork.img_path %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @artwork.description %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @artwork.description %>
-</p>
-
-<p>
-  <strong>Date created:</strong>
-  <%= @artwork.date_created %>
-</p>
-
-<%= link_to 'Edit', edit_artwork_path(@artwork) %> |
-<%= link_to 'Back', artworks_path %>
+  <p>
+    <strong>Date created:</strong>
+    <%= @artwork.date_created %>
+  </p>
+</div>

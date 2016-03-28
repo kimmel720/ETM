@@ -77,8 +77,8 @@ a2 = Artwork.create(
 )
 a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
 a2.save
-
-(0..2).each do
+id_counter = 0
+3.times do
   m = Museum.create(
     user: admin,
     name: Faker::Company.name + " Museum",
@@ -91,7 +91,7 @@ a2.save
     website: Faker::Internet.url
   )
 
-  (0..3).each do
+  4.times do
     e = Exhibition.create(
       user: admin,
       museum: m,
@@ -106,16 +106,17 @@ a2.save
       name: Faker::Name.name
     )
 
-    (0..5).each do
+    5.times do
       artwork = Artwork.create(
         exhibition: e,
         name: Faker::Book.title,
-        image_id: 0,  # should put default image maybe using faker somewhere else
+        image_id: id_counter,  # should put default image maybe using faker somewhere else
         description: Faker::Hacker.say_something_smart,
         date_created: Faker::Date.between(1000.years.ago, Date.today),
         accession_no: Faker::Code.isbn,
         artists: [a]
       )
+      id_counter += 1
     end
   end
 end
