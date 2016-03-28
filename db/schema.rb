@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artworks", force: :cascade do |t|
     t.string   "name"
+    t.string   "medium"
     t.string   "image_id"
     t.text     "description"
     t.date     "date_created"

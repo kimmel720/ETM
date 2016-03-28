@@ -38,12 +38,12 @@ class InitializeDatabase < ActiveRecord::Migration
       t.belongs_to :exhibition, index: true
       t.belongs_to :museum, index: true
       t.string :name
-
       t.timestamps null: false
     end
 
     create_table :artworks do |t|
       t.string :name
+      t.string :medium
       t.string :image_id
       t.text :description
       t.date :date_created
