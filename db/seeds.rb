@@ -114,8 +114,8 @@ id_counter = 0
         description: Faker::Hacker.say_something_smart,
         date_created: Faker::Date.between(1000.years.ago, Date.today),
         accession_no: Faker::Code.isbn,
-        artists: [a]
       )
+      artwork.artists << a
       id_counter += 1
     end
   end

@@ -11,6 +11,11 @@ class ArtworksController < FrontEndController
   # GET /artworks/1
   # GET /artworks/1.json
   def show
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
+      [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)]
+    ]
   end
 
   # GET /artworks/new
@@ -67,6 +72,8 @@ class ArtworksController < FrontEndController
     def set_artwork
       @artwork = Artwork.find(params[:id])
       @artists = @artwork.artists
+      @exhibition = @artwork.exhibition
+      @museum = @exhibition.museum
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

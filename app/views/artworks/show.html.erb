@@ -1,20 +1,29 @@
 <p id="notice"><%= notice %></p>
 <div id="main-container" class="container">
   <div class="row">
-    <h1 class="title"><%= @artwork.name %></h1>
+    <div class="col-xs-12">
+      <h1 class="title"><%= @artwork.name %></h1>
+      <h2 class="title in-line">
+        By:
+        <% @artists.each do |artist| %>
+        <%= artist.name %>
+        <% end %>
+      </h2>
+    <br />
   </div>
-  <p>
-    <strong>Img id:</strong>
-    <%= @artwork.image_id %>
-  </p>
+  <div class="row">
+    <div class="col-xs-12 horizontal-center-wrapper">
+      <div class="picture-frame">
+        PICTURE OF ARTWORK
+      </div>
+    </div>
+  </div>
+  <div class="row">
 
+  </div>
   <p>
     <strong>Description:</strong>
     <%= @artwork.description %>
   </p>
 
-  <p>
-    <strong>Date created:</strong>
-    <%= @artwork.date_created %>
-  </p>
 </div>
