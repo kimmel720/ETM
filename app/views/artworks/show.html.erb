@@ -6,7 +6,7 @@
       <h2 class="title in-line">
         By:
         <% @artists.each do |artist| %>
-        <%= artist.name %>
+        <%= link_to artist.name, artist_path(artist) %>
         <% end %>
       </h2>
     <br />
@@ -21,9 +21,6 @@
   <div class="row">
 
   </div>
-  <p>
-    <strong>Description:</strong>
-    <%= @artwork.description %>
-  </p>
+  <p><%= @artwork.description %></p>
 
 </div>

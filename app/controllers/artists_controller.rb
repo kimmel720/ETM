@@ -1,5 +1,6 @@
 class ArtistsController < FrontEndController
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize, only: [:show, :index]
 
   # GET /artists
   # GET /artists.json
@@ -10,6 +11,8 @@ class ArtistsController < FrontEndController
   # GET /artists/1
   # GET /artists/1.json
   def show
+    # TODO: a back button, since breadcrumbs don't work here
+    @breadcrumbs = @crumbs = [[@artist.name, artist_path(@artist)]]
   end
 
   # GET /artists/new
