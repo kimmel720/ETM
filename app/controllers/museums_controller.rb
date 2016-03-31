@@ -35,6 +35,8 @@ class MuseumsController < FrontEndController
   def show
     @exhibitions = @museum.exhibitions
     @crumbs = [[@museum.name, museum_path(@museum)]]
+    gon.dataset = @exhibitions.each.map{ |e| {id: e.id, content: e.name, start: e.start_date.strftime('%Y-%m-%d') }}
+
   end
 
   # GET /museums/new

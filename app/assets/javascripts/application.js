@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require underscore
 //= require bootstrap-sprockets
+//= require vis
 //= require_tree .

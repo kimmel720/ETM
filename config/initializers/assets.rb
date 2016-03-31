@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( nike.jpg )
 
 Rails.application.config.assets.precompile += %w( etm.css )
+Rails.application.config.assets.precompile += %w( timeline/* network/* )

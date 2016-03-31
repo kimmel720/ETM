@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= javascript_include_tag "application" %>
 <div id="main-container" class="container">
   <div class="row">
     <h1 class="title"><%= @museum.name %></h1>
@@ -26,6 +27,7 @@
               <div class="center-block-middle">
                 <div class="center-block-inner">
                   <h4 class="button-link-name"><%=exhibition.name %></h4>
+                  <p><%=exhibition.start_date.strftime('%Y-%m-%d') %></p>
                 </div>
               </div>
             </div>
@@ -33,5 +35,23 @@
         <% end %>
       </div>
     <% end %>
+  </div>
+
+  <div class="row">
+    <link href="../../dist/vis.css" rel="stylesheet" type="text/css" />
+    <div id="visualization"></div>
+
+    <script type="text/javascript">
+     // DOM element where the Timeline will be attached
+     var container = document.getElementById('visualization');
+     console.log(gon.dataset);
+     // Create a DataSet (allows two way data-binding)
+     var items = new vis.DataSet(gon.dataset);
+     // Configuration for the Timeline
+     var options = {};
+
+     // Create a Timeline
+     var timeline = new vis.Timeline(container, items, options);
+    </script>
   </div>
 </div>
