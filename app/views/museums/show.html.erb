@@ -42,7 +42,6 @@
   </div>
   <div class="row">
     <div class="col-xs-12" id="exhibition-container">
-
     </div>
   </div>
 </div>
@@ -57,9 +56,9 @@
 
  // Create a Timeline
  var timeline = new vis.Timeline(container, items, options);
- timeline.on('select', function(){
-   var d = new Date();
-   var t = d.toLocaleTimeString();
-   document.getElementById("exhibition-container").innerHTML = t;
+ timeline.on('select', function(properties){
+   $.ajax({url: window.location.href + "/exhibitions/" + properties.items}).done(function(html) {
+  return $("#results").append(html)});
+   document.getElementById("exhibition-container").innerHTML = properties.items;
  });
 </script>

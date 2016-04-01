@@ -16,6 +16,9 @@ class ExhibitionsController < FrontEndController
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
     ]
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /exhibitions/new
