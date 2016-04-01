@@ -25,7 +25,7 @@
     <hr />
     <% @museums.each do |museum| %>
     <div class="col-lg-4 col-md-6 col-sm-12">
-      <%= link_to museum, :class => "button-link" do %>
+      <%= link_to museum, :class => "button-link", 'data-no-turbolink' => true do %>
         <div class="museum btn btn-primary btn-block grid-button">
           <div class="center-block-outer">
             <div class="center-block-middle">

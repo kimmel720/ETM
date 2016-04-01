@@ -1,1 +1,1 @@
-$("<%= escape_javascript(render @exhibition) %>").appendTo("#exhibition-container");
+$("#exhibition-container").replaceWith("<%= escape_javascript(render @exhibition) %>");

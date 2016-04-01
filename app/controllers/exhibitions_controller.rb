@@ -18,6 +18,7 @@ class ExhibitionsController < FrontEndController
     ]
     respond_to do |format|
       format.js
+      format.html { render :show }
     end
   end
 
