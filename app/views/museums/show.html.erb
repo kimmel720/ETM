@@ -43,5 +43,6 @@
  var timeline = new vis.Timeline(container, items, options);
  timeline.on('select', function(properties){
    $.ajax({url: window.location.href + "/exhibitions/" + properties.items}).done(function(html) {});
- });
+
+});
 </script>
