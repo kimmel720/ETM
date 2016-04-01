@@ -1,2 +1,4 @@
-$("#exhibition-container").replaceWith("<%= escape_javascript(render @exhibition) %>");
-$("#exhibition-container").hide().fadeIn(1000);
+$("#exhibition-container").slideUp(300, function(){
+  $("#exhibition-container").replaceWith("<%= escape_javascript(render @exhibition) %>");
+  $("#exhibition-container").hide().slideDown(300);
+});
