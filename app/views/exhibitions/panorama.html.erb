@@ -1,4 +1,17 @@
+<% content_for(:head) do %>
+  <%= javascript_include_tag 'Three.js' %>
+  <%= javascript_include_tag 'panorama.js' %>
+<% end %>
+
+
 <div id="main-container" class="container">
+  <div class="row">
+    <% panorama_url = attachment_url(@panorama, :image, :fill, 300, 300, format: "png") %>
+    <%= content_tag :div, class: "panorama_class", data: {panorama: panorama_url} do %>
+    <% end %>
+    <div id="WebGL-output">
+    </div>
+  </div>
   <div class="row">
     <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png") %>
     <%= @panorama.id %>
