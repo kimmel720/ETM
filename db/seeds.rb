@@ -49,7 +49,7 @@ p = Panorama.create(
   exhibition: e1,
   artwork_coordinates: {}
 )
-p.image = File.open("app/assets/images/Farber/panorama_test.png")
+p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p.save
 
 fake_artist = Artist.create(

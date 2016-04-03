@@ -10,7 +10,7 @@ gem "refile-s3"
 
 gem 'rails_admin'
 
-gem 'threejs-rails', git: 'git://github.com/marvindanig/threejs-rails.git'
+
 
 
 # To use ActiveModel has_secure_password

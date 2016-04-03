@@ -1,40 +1,50 @@
-function init() {
-        var panoramaTexture = $('.panorama_class').data('panorama');
 
-        var scene = new THREE.Scene();
 
-        // create a camera, which defines where we're looking at. 16 is optimal
-        var camera = new THREE.PerspectiveCamera(46.6, window.innerWidth / window.innerHeight, 0.1, 1000);
+			function init() {
 
-        // create a render and set the size
-        var webGLRenderer = new THREE.WebGLRenderer();
-        webGLRenderer.setClearColor(new THREE.Color(0xcccccc, 1.0));
-        webGLRenderer.setSize(window.innerWidth, window.innerHeight);
-        webGLRenderer.shadowMapEnabled = true;
 
-        var axisHelper = new THREE.AxisHelper( 60 );
-        scene.add( axisHelper );
+        var container, stats;
+        var camera, scene, raycaster, renderer;
+        var mouse = new THREE.Vector2(), INTERSECTED;
+        var radius = 100, theta = 0;
 
-        //0, 0, 5 for camera in the middle
-        camera.position.x = 0;
+        var panoramUrl = $('.panorama_class').data('panorama');
+
+				scene = new THREE.Scene();
+
+			  camera = new THREE.PerspectiveCamera(46.6, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+				camera.position.x = 0;
         camera.position.y = 0;
         camera.position.z = 0;
         camera.lookAt(new THREE.Vector3(0, 0, 0 ));
 
-        var projector = new THREE.Projector();
+				var spotLight = new THREE.SpotLight(0xffffff);
+				spotLight.position.set(0, 150, 0);
+				spotLight.intensity = 1;
+				scene.add(spotLight);
 
-        var spotLight = new THREE.SpotLight(0xffffff);
-        spotLight.position.set(0, 150, 0);
-        spotLight.intensity = 1;
-        scene.add(spotLight);
+				var ambiLight = new THREE.AmbientLight(0xf4f5ec);
+				scene.add(ambiLight);
 
-        var ambiLight = new THREE.AmbientLight(0xd7d2b5);
-        scene.add(ambiLight);
+				var boxArray = [
+          [12 ,17, 4, -70, 2, 5, 0, 'https://www.google.com/'],
+          [20, 20, 5, 70, 15, 5, 0.26, 'https://www.yahoo.com/']
+        ];
 
-        // add the output of the renderer to the html element
-        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+        for (var i = 0; i <= 1; i++){
+          var geometry = new THREE.BoxGeometry( boxArray[i][0], boxArray[i][1], boxArray[i][2] );
+          var material = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent: true, opacity: 0});
+          var cube = new THREE.Mesh( geometry, material );
+          cube.position.z = boxArray[i][3];
+          cube.position.x = boxArray[i][4];
+          cube.position.y = boxArray[i][5];
+          cube.rotateY(boxArray[i][6]);
+					cube.userData = { URL: boxArray[i][7]};
+          scene.add( cube );
+        }
 
-        var cylinder = createMesh(new THREE.CylinderGeometry(70, 70, 60, 30, 8, true), panoramaTexture);
+				var cylinder = createMesh(new THREE.CylinderGeometry(70, 70, 70, 30, 8, true), panoramUrl);
 
         cylinder.position.x = 0;
         cylinder.position.y = 0;
@@ -43,21 +53,8 @@ function init() {
 
         scene.add(cylinder);
 
-        var geometry = new THREE.BoxGeometry( 5, 10, 10 );
-        var material = new THREE.MeshLambertMaterial({color: 0x0000ff, transparent: true, opacity: 0.2});
-        var cube = new THREE.Mesh( geometry, material );
-        cube.position.z = -70;
-        cube.position.x = 4;
-        scene.add( cube );
-
-
-        var cubeTwo = new THREE.Mesh( geometry, material );
-        cubeTwo.position.z = -70;
-        cubeTwo.position.x = 15;
-        scene.add( cubeTwo );
-
         function createMesh(geom, imageFile) {
-           var texture = THREE.TextureLoader(imageFile);
+           var texture = THREE.ImageUtils.loadTexture(imageFile);
            var mat = new THREE.MeshPhongMaterial();
            mat.map = texture;
            mat.side = THREE.DoubleSide;
@@ -66,106 +63,133 @@ function init() {
        }
 
 
-        var turningRight = false;
-        var turningLeft = false;
+				raycaster = new THREE.Raycaster();
+				renderer = new THREE.WebGLRenderer();
 
-        render();
+				renderer.setClearColor( 0xf0f0f0 );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.sortObjects = false;
+				//container.appendChild(renderer.domElement);
+        document.getElementById("WebGL-output").appendChild(renderer.domElement);
+
+				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				document.addEventListener('mousedown', onDocumentMouseDown, false);
+				window.addEventListener( 'resize', onWindowResize, false );
+				document.addEventListener('keydown', turnRight, false);
+				document.addEventListener('keydown', turnLeft, false);
+				document.addEventListener('keyup', stop, false);
 
 
-        function render() {
-            requestAnimationFrame(render);
-            updateCameraObject();
-            webGLRenderer.render(scene, camera);
-        }
+			function onWindowResize() {
 
-        function onDocumentMouseDown(event) {
+				camera.aspect = window.innerWidth / window.innerHeight;
+				renderer.setSize( window.innerWidth, window.innerHeight );
 
-            var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-            vector = vector.unproject(camera);
+			}
 
-            var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+			function onDocumentMouseMove( event ) {
 
-            var intersects = raycaster.intersectObjects([cube, cubeTwo]);
+				event.preventDefault();
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-            if (intersects.length > 0) {
+			}
 
-                console.log(intersects[0]);
+			function onDocumentMouseDown(event) {
 
-                window.open('/panoramaTest.html');
+					var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+					vector = vector.unproject(camera);
 
-                //window.location.href = 'http://www.google.com';
+					var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
 
-            }
-        }
+					var intersects = raycaster.intersectObjects(scene.children);
 
-        function onDocumentMouseMove(event) {
+					if (intersects.length > 1) {
 
-            var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-            vector = vector.unproject(camera);
+							console.log(intersects[0].object.userData);
+							//
+							// if (intersects[0].object == cube){
+							// 	window.open('/panoramaTest.html');
+							// } else {
+							// 	window.open('http://www.google.com');
+							// }
 
-            var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
-
-            var intersects = raycaster.intersectObjects([cube, cubeTwo]);
-
-            if (intersects.length > 0) {
-
-                console.log(intersects[0]);
-
-                intersects[0].object.material.transparent = true;
-                intersects[0].object.material.opacity = 0.5;
-            }
-
-            setTimeout(revert, 3000);
-
-        }
-
-        function revert() {
-            material.opacity = 0;
-        }
+							window.open(intersects[0].object.userData.URL);
 
 
 
-        function updateCameraObject(){
-          if (turningRight) {
-            camera.rotateY(-0.007);
-          } else if (turningLeft){
-            camera.rotateY(0.007);
-          }
+
+							//window.location.href = 'http://www.google.com';
+
+					}
+			}
+
+			var turningRight = false;
+			var turningLeft = false;
+
+			function updateCameraObject(){
+
+				if (turningRight) {
+					camera.rotateY(-0.007);
+				} else if (turningLeft){
+					camera.rotateY(0.007);
+				}
+
+			}
+
+			function turnRight(event) {
+					if (event.keyCode === 39) { //right arrow key
+					turningRight = true;
+
+					}
+			}
+
+			function turnLeft(event) {
+					if (event.keyCode === 37) { //left arrow key
+					turningLeft=true;
+					}
+			}
+
+			function stop(event){
+				turningRight = false;
+				turningLeft = false;
+			}
 
 
-        }
+			function animate(raycaster) {
 
-        function turnRight(event) {
-            if (event.keyCode === 39) { //right arrow key
-            turningRight = true;
+				requestAnimationFrame( animate );
+				render(raycaster);
 
-            }
-        }
+			}
 
-        function turnLeft(event) {
-            if (event.keyCode === 37) { //left arrow key
-            turningLeft=true;
-            }
-        }
+			function render(raycaster) {
+				updateCameraObject();
+				// find intersections
+				raycaster.setFromCamera( mouse, camera );
+				var intersects = raycaster.intersectObjects( scene.children );
+				if ( intersects.length > 0 ) {
+					if ( INTERSECTED != intersects[ 0 ].object ) {
 
-        function stop(event){
-          turningRight = false;
-          turningLeft = false;
-        }
+						if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
 
-        function onWindowResize() {
-				      camera.aspect = window.innerWidth / window.innerHeight;
-				      camera.updateProjectionMatrix();
-				      webGLRenderer.setSize( window.innerWidth, window.innerHeight );
-			   }
+						INTERSECTED = intersects[ 0 ].object;
+						INTERSECTED.material.opacity = 0.4;
 
-        document.addEventListener('keydown', turnRight, false);
-        document.addEventListener('keydown', turnLeft, false);
-        document.addEventListener('keyup', stop, false);
-        document.addEventListener('mousedown', onDocumentMouseDown, false);
-        document.addEventListener('mousemove', onDocumentMouseMove, false);
-        window.addEventListener( 'resize', onWindowResize, false );
 
+					}
+				} else {
+
+					if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
+
+					INTERSECTED = null;
+
+				}
+
+				renderer.render( scene, camera );
+        animate(raycaster);
+
+			}
 
     }
     window.onload = init;

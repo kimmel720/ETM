@@ -16,3 +16,5 @@ Rails.application.config.assets.precompile += %w( etm.css )
 Rails.application.config.assets.precompile += %w( panorama.js )
 
 Rails.application.config.assets.precompile += %w( Three.js )
+
+Rails.application.config.assets.precompile += %w( three.min.js )
