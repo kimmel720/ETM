@@ -21,12 +21,12 @@ user = User.create(
 farber = Museum.create(
   user: admin,
   name: "Farber Mezzanine",
-  latitude: 42.366284,
-  longitude: -71.258734,
+  latitude: 42.367819,
+  longitude: -71.258617,
   street_address: "415 South St",
   city: "Waltham",
   country: "United States",
-  description: "The Rose Art Museum is Brandeis University BLAHBLAHBLA",
+  description: Faker::Lorem.paragraph,
   website: "http://www.brandeis.edu/rose/"
 )
 farber.image = File.open("app/assets/images/Farber/goldfarb.png")
@@ -49,7 +49,7 @@ p = Panorama.create(
   exhibition: e1,
   artwork_coordinates: {}
 )
-p.image = File.open("app/assets/images/Farber/panorama_test.png")
+p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p.save
 
 fake_artist = Artist.create(

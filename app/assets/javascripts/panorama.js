@@ -1,71 +1,14 @@
-<p id="notice"><%= notice %></p>
-<div id="main-container" class="container">
-  <div class="row">
-    <h1 class="title"><%= @exhibition.name %></h1>
-    <br />
-  </div>
-  <div class="row">
-    <div class="col-xs-12 horizontal-center-wrapper">
-        <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png"), :class => "panorama horizontal-center" %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <hr />
-      <h2>Artworks:</h2>
-      <table class="table">
-        <% @artworks.each do |artwork| %>
-          <tr>
-            <td><%= artwork.name %> </td>
-            <td><%= link_to "show", museum_exhibition_artwork_path(@museum,@exhibition,artwork) %></td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-    <% panorama_url = attachment_url(@panorama, :image, :fill, 2048, 512, format: "png") %>
-    <%= content_tag :div, class: "panorama_class", data: {panorama: panorama_url} do %>
-    <% end %>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Panorama</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #f0f0f0;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
-	</head>
-	<body>
-
-		<script src="libs/three.js"></script>
-
-		<script>
-			var container, stats;
-			var camera, scene, raycaster, renderer;
-			var mouse = new THREE.Vector2(), INTERSECTED;
-			var radius = 100, theta = 0;
-
-      var panoramUrl = $('.panorama_class').data('panorama');
-
-			init();
-			animate();
 
 
 			function init() {
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+
+
+        var container, stats;
+        var camera, scene, raycaster, renderer;
+        var mouse = new THREE.Vector2(), INTERSECTED;
+        var radius = 100, theta = 0;
+
+        var panoramUrl = $('.panorama_class').data('panorama');
 
 				scene = new THREE.Scene();
 
@@ -126,7 +69,8 @@
 				renderer.setClearColor( 0xf0f0f0 );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				renderer.sortObjects = false;
-				container.appendChild(renderer.domElement);
+				//container.appendChild(renderer.domElement);
+        document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 				document.addEventListener('mousedown', onDocumentMouseDown, false);
@@ -135,12 +79,10 @@
 				document.addEventListener('keydown', turnLeft, false);
 				document.addEventListener('keyup', stop, false);
 
-			}
 
 			function onWindowResize() {
 
 				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
 				renderer.setSize( window.innerWidth, window.innerHeight );
 
 			}
@@ -214,16 +156,15 @@
 			}
 
 
-			function animate() {
+			function animate(raycaster) {
 
 				requestAnimationFrame( animate );
-				render();
+				render(raycaster);
 
 			}
 
-			function render() {
+			function render(raycaster) {
 				updateCameraObject();
-				camera.updateMatrixWorld();
 				// find intersections
 				raycaster.setFromCamera( mouse, camera );
 				var intersects = raycaster.intersectObjects( scene.children );
@@ -246,11 +187,9 @@
 				}
 
 				renderer.render( scene, camera );
+        animate(raycaster);
 
 			}
 
-		</script>
-
-	</body>
-
-</html>
+    }
+    window.onload = init;
