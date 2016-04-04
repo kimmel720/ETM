@@ -78,6 +78,42 @@ a2 = Artwork.create(
 a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
 a2.save
 
+harvard = Museum.create(
+  user: admin,
+  name: "Harvard Art Museums",
+  latitude: 42.374029,
+  longitude: -71.114101,
+  street_address: "32 Quincy Street",
+  city: "Cambridge",
+  country: "United States",
+  description: "The Harvard Art Museums is part of Harvard University and comprise three museums: the Fogg Museum (established in 1895), the Busch-Reisinger Museum (established in 1903), and the Arthur M. Sackler Museum (established in 1985) and four research centers: the Archaeological Exploration of Sardis (founded in 1958), the Center for the Technical Study of Modern Art (founded in 2002), the Harvard Art Museums Archives, and the Straus Center for Conservation and Technical Studies (founded in 1928). The three museums that comprise the Harvard Art Museums were initially integrated into a single institution under the name Harvard University Art Museums in 1983. University was dropped from the institutional name in 2008.
+The collections include approximately 250,000 objects in all media, ranging in date from antiquity to the present and originating in Europe, North America, North Africa, the Middle East, South Asia, East Asia, and Southeast Asia.
+",
+  website: "http://www.brandeis.edu/rose/"
+)
+harvard.image = File.open("app/assets/images/Harvard/harvard.jpg")
+harvard.save
+
+e2 = Exhibition.create(
+  user: admin,
+  museum: harvard,
+  name: "European Art, 13th-16th century",
+  start_date: Date.new(2014, 10, 16),
+  end_date: Date.new(2020, 5, 22),
+  description: "For centuries artists were tasked with painting images (icons) of Christ and the Virgin Mary. Viewers believed that these likenesses had been created miraculously, and artists were able to give their work a sense of authenticity by adhering closely to images that were reputedly painted by Saint Luke or by some other holy means. Over the centuries, Byzantine icons stayed true to these early images. Although there was considerable exchange btween Europe and the East, the sack of Constantinople by Western European and Venetian crusaders in 1204 brought a wave of artwork from the Byzantine capital to Europe. Early Italian painters initially remained faithful to Byzantine models, but they soon broke away from tradition, introducing personal and regional styles to their work. During the Renaissance, artistic practice became more codified through treatises as well as through critical awareness of differences between artists and personal styles. Around the middle of the sixteenth century Giorgio Vasari, the Italian artist and art historian, wrote a history of the lives of Italian artists that assessed Italian painting from the previous three centuries. ",
+  curator: "Team of Busch-Reisinger curators headed by Miriam Stewart"
+)
+e2.image = File.open("app/assets/images/Harvard/exhibition.png")
+e2.save
+
+p = Panorama.create(
+  exhibition: e2,
+  artwork_coordinates: {}
+)
+p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
+p.save
+
+
 # (0..2).each do
 #   m = Museum.create(
 #     user: admin,
