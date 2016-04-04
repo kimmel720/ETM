@@ -33,6 +33,7 @@
         <th>Artwork Name</th>
         <th>Exhibition</th>
         <th>Museum</th>
+        <th>Exhibited until</th>
         <% @artist.artworks.each do |artwork| %>
           <% exhibition = artwork.exhibition %>
           <% museum = exhibition.museum %>
@@ -40,6 +41,7 @@
             <td><%= link_to artwork.name, museum_exhibition_artwork_path(museum,exhibition,artwork) %></td>
             <td><%= link_to exhibition.name, museum_exhibition_path(museum,exhibition) %></td>
             <td><%= link_to museum.name, museum_path(museum) %></td>
+            <td><%= exhibition.end_date %></td>
           </tr>
         <% end %>
       </table>
@@ -60,4 +62,5 @@
         <% end %>
       </div>
     <% end %>
+    <%# TODO: Format Date better, Exhibition dates instead of until %>
 </div>
