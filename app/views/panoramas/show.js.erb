@@ -9,12 +9,8 @@ init();
 animate();
 
 function init() {
-  container = $('#panoramaContainer')[0];
+  container = $('#panoramaContainer');
 
-  if (container == null) {
-    container = $('<div id="panoramaContainer"></div>');
-    $('body').append(container);
-  }
 
   scene = new THREE.Scene();
 
@@ -74,7 +70,7 @@ function init() {
   renderer.setClearColor( 0xf0f0f0 );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.sortObjects = false;
-  container.append(renderer.domElement);
+  container.appendChild(renderer.domElement);
 
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener('mousedown', onDocumentMouseDown, false);

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'panoramas/:id' => 'panoramas#show'
+
   # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
@@ -24,7 +26,6 @@ Rails.application.routes.draw do
       member do
         get 'floor_plan'
         get 'resources'
-        get 'panorama'
       end
       resources :artworks
     end

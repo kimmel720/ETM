@@ -82,6 +82,11 @@ class ExhibitionsController < FrontEndController
     else
       @panorama = @panoramas.first
     end
+
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   private
