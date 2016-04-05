@@ -16,6 +16,11 @@ class ExhibitionsController < FrontEndController
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
     ]
+    gon.dataset = @artworks.each.map{ |a| {
+      id: a.id,
+      content: a.name,
+      start: a.date_created.strftime('%Y-%m-%d')
+      }}
     respond_to do |format|
       format.js
       format.html { render :show }
@@ -90,7 +95,6 @@ class ExhibitionsController < FrontEndController
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
       ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
     ]
-    @artworks = @exhibition.artworks
 
   end
 
@@ -99,6 +103,7 @@ class ExhibitionsController < FrontEndController
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
       @museum = @exhibition.museum
+      @artworks = @exhibition.artworks
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -88,5 +88,13 @@ hr{
 }
 
 .full-image {
-
+  max-width: 100%;
+  max-height: 100%;
+}
+#slidebox-container{
+  background-color: rgb(177, 241, 239);
+  border-radius: 10px;
+}
+div.white#slidebox-container{
+  background-color: white;
 }

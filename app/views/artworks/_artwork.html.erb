@@ -1,12 +1,12 @@
 <div class="col-xs-12" id="slidebox-container">
-  <h2><%= exhibition.name %></h2>
-  <p><%= exhibition.description %></p>
-  <%= link_to museum_exhibition_path(exhibition.museum, exhibition), :class => "button-link" do %>
+  <h2><%= artwork.name %></h2>
+  <p><%= artwork.description %></p>
+  <%= link_to museum_exhibition_artwork_path(artwork.exhibition.museum, artwork.exhibition, artwork), :class => "button-link" do %>
     <div class="exhibition btn btn-primary btn-block grid-button">
       <div class="center-block-outer">
         <div class="center-block-middle">
           <div class="center-block-inner">
-            <h4 class="button-link-name">Visit Exhibition</h4>
+            <h4 class="button-link-name">View Artwork</h4>
           </div>
         </div>
       </div>

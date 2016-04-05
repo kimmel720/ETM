@@ -8,13 +8,13 @@
   <div class="row museum-info">
     <div class="col-xs-4">
       <div class="picture-frame">
-        <%= image_tag attachment_url(@museum, :image, :fill, 300, 300, format: "png"), :class => "image side-image horizontal-center" %>
+        <%= image_tag attachment_url(@museum, :image, format: "png"), :class => "image side-image horizontal-center" %>
       </div>
     </div>
     <div class="col-xs-8">
       <p><%= @museum.description %></p>
       <p><%= @museum.street_address %></p>
-      <p><%= link_to "Official Website!", @museum.website %></p>
+      <p><%= link_to "Official Website", @museum.website %></p>
     </div>
   </div>
   <div class="row">
@@ -28,8 +28,8 @@
     <div id="visualization"></div>
   </div>
   <div class="row">
-    <div class="col-xs-12 white" id="exhibition-container">
-      <p>Click on an exhibition in the timeline above to see details and visit it</p>
+    <div class="col-xs-12 white" id="slidebox-container">
+      <h4>Click on an exhibition in the timeline above to see details and visit it</h4>
     </div>
   </div>
 </div>

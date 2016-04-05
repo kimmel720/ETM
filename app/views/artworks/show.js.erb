@@ -1,4 +1,4 @@
 $("#slidebox-container").slideUp(300, function(){
-  $("#slidebox-container").replaceWith("<%= escape_javascript(render @exhibition) %>");
+  $("#slidebox-container").replaceWith("<%= escape_javascript(render @artwork) %>");
   $("#slidebox-container").hide().slideDown(300);
 });

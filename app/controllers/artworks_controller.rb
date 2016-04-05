@@ -16,6 +16,10 @@ class ArtworksController < FrontEndController
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
       [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)]
     ]
+    respond_to do |format|
+      format.js
+      format.html { render :show }
+    end
   end
 
   # GET /artworks/new
