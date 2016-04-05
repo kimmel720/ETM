@@ -1,4 +1,7 @@
 $("#slidebox-container").slideUp(300, function(){
   $("#slidebox-container").replaceWith("<%= escape_javascript(render @artwork) %>");
   $("#slidebox-container").hide().slideDown(300);
+  $('html, body').animate({
+        scrollTop: $("#slidebox-container").offset().top
+    }, 2000);
 });
