@@ -7,15 +7,13 @@
   </div>
   <div class="row museum-info">
     <div class="col-xs-4">
-      <div class="picture-frame">
         <div class="center-block-outer">
           <div class="center-block-middle">
             <div class="center-block-inner">
-              PICTURE OF MUSEUM
+              <%= image_tag attachment_url(@museum, :image, :fill, 340, 220, format: "jpg") %>
             </div>
           </div>
         </div>
-      </div>
     </div>
     <div class="col-xs-8">
       <p><%= @museum.description %></p>
