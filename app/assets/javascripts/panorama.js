@@ -1,14 +1,14 @@
 var container, stats;
 var camera, scene, raycaster, renderer;
-var mouse = new THREE.Vector2(), INTERSECTED;
 var radius = 100, theta = 0;
 
 var panoramUrl = $('.panorama_class').data('panorama');
 
-init();
-animate();
+$(document).ready(init);
 
 function init() {
+  mouse = new THREE.Vector2(), INTERSECTED;
+
   container = $('#panoramaContainer')[0];
 
   if (container == null) {
@@ -74,7 +74,7 @@ function init() {
   renderer.setClearColor( 0xf0f0f0 );
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.sortObjects = false;
-  container.append(renderer.domElement);
+  container.appendChild(renderer.domElement);
 
   document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   document.addEventListener('mousedown', onDocumentMouseDown, false);
@@ -83,6 +83,7 @@ function init() {
   document.addEventListener('keydown', turnLeft, false);
   document.addEventListener('keyup', stop, false);
 
+  animate();
 }
 
 function onWindowResize() {
@@ -99,13 +100,6 @@ function onDocumentMouseMove( event ) {
   mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-}
-
-function imGonnaAjax() {
-  $.ajax({
-    type: "GET",
-    url: "/museums/1/exhibitions/1/panorama"
-  })
 }
 
 function onDocumentMouseDown(event) {

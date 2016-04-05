@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'panoramas/:id' => 'panoramas#show'
+  get 'panoramas/:id' => 'panoramas#show', as: 'panorama'
 
   # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
