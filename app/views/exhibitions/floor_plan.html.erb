@@ -3,9 +3,15 @@
 
 <div id="main-container" class="container">
   <div class="row">
-    <h1><%= @exhibition.name %></h1>
+    <div class="col-xs-12">
+      <h1><%= @exhibition.name %></h1>
+      <br />
+    </div>
   </div>
   <div class="row">
-
+    <div class="col-xs-12 picture-frame horizontal-center-wrapper">
+        <%= image_tag @floor_plan, :class => "image full-image horizontal-center" %>
+      <%# image_tag attachment_url(@floor_plan, :image, format: "png"), :class => "image full-image horizontal-center" %>
+    </div>
   </div>
 </div>
