@@ -18,6 +18,8 @@ user = User.create(
   admin: false
 )
 
+id_counter = 0
+
 farber = Museum.create(
   user: admin,
   name: "Farber Mezzanine",
@@ -62,10 +64,13 @@ a1 = Artwork.create(
   artists: [fake_artist],
   description: "Painted 3D printed replica of a Louise Nevelson sculpture with wooden frame and acrylic mirrors. Square Reflections, 1964 Pace Gallery Made possible with the generous help of the Brandeis MakerLab staff, the members of the Deis3D and DeisVR clubs, as well as  David Stiefel, Jack Holloman, and Debra Sarlin.",
   date_created: Faker::Date.between(1000.years.ago, Date.today),
-  accession_no: Faker::Code.isbn
+  accession_no: Faker::Code.isbn,
+  image_id: id_counter
 )
 a1.image = File.open("app/assets/images/Farber/3D Printed Replica of Square Reflections.png")
 a1.save
+
+id_counter += 1
 
 a2 = Artwork.create(
   name: "Nevelson Sculpture Renders",
@@ -73,11 +78,14 @@ a2 = Artwork.create(
   artists: [fake_artist],
   description: "Computer generated image of Louise Nevelson sculptures that were recreated by Daniela Dimitrova and Michael Makivic using 3D modeling. Left: Tropical Garden, 1957 Grey Art Gallery, NYU Right: Totality Dark, 1962",
   date_created: Faker::Date.between(1000.years.ago, Date.today),
-  accession_no: Faker::Code.isbn
+  accession_no: Faker::Code.isbn,
+  image_id: id_counter
 )
 a2.image = File.open("app/assets/images/Farber/Render of Two Sculptures.png")
 a2.save
-id_counter = 0
+
+id_counter += 1
+
 3.times do
   m = Museum.create(
     user: admin,
@@ -91,32 +99,108 @@ id_counter = 0
     website: Faker::Internet.url
   )
 
-  4.times do
-    e = Exhibition.create(
-      user: admin,
-      museum: m,
-      name: Faker::Name.name + " Collection",
-      start_date: Faker::Date.between(20.years.ago, 10.years.ago),
-      end_date: Faker::Date.between(10.years.ago, Date.today),
-      description: Faker::Lorem.paragraph,
-      curator: Faker::Name
-    )
+harvard = Museum.create(
+  user: admin,
+  name: "Harvard Art Museums",
+  latitude: 42.374029,
+  longitude: -71.114101,
+  street_address: "32 Quincy Street",
+  city: "Cambridge",
+  country: "United States",
+  description: "The Harvard Art Museums is part of Harvard University and comprise three museums: the Fogg Museum (established in 1895), the Busch-Reisinger Museum (established in 1903), and the Arthur M. Sackler Museum (established in 1985) and four research centers: the Archaeological Exploration of Sardis (founded in 1958), the Center for the Technical Study of Modern Art (founded in 2002), the Harvard Art Museums Archives, and the Straus Center for Conservation and Technical Studies (founded in 1928). The three museums that comprise the Harvard Art Museums were initially integrated into a single institution under the name Harvard University Art Museums in 1983. University was dropped from the institutional name in 2008.
+The collections include approximately 250,000 objects in all media, ranging in date from antiquity to the present and originating in Europe, North America, North Africa, the Middle East, South Asia, East Asia, and Southeast Asia.
+",
+  website: "http://www.brandeis.edu/rose/"
+)
+harvard.image = File.open("app/assets/images/Harvard/harvard.jpg")
+harvard.save
 
-    a = Artist.create(
-      name: Faker::Name.name
-    )
+e2 = Exhibition.create(
+  user: admin,
+  museum: harvard,
+  name: "European Art, 13th-16th century",
+  start_date: Date.new(2014, 10, 16),
+  end_date: Date.new(2020, 5, 22),
+  description: "For centuries artists were tasked with painting images (icons) of Christ and the Virgin Mary. Viewers believed that these likenesses had been created miraculously, and artists were able to give their work a sense of authenticity by adhering closely to images that were reputedly painted by Saint Luke or by some other holy means. Over the centuries, Byzantine icons stayed true to these early images. Although there was considerable exchange btween Europe and the East, the sack of Constantinople by Western European and Venetian crusaders in 1204 brought a wave of artwork from the Byzantine capital to Europe. Early Italian painters initially remained faithful to Byzantine models, but they soon broke away from tradition, introducing personal and regional styles to their work. During the Renaissance, artistic practice became more codified through treatises as well as through critical awareness of differences between artists and personal styles. Around the middle of the sixteenth century Giorgio Vasari, the Italian artist and art historian, wrote a history of the lives of Italian artists that assessed Italian painting from the previous three centuries. ",
+  curator: "Team of Busch-Reisinger curators headed by Miriam Stewart"
+)
+e2.image = File.open("app/assets/images/Harvard/exhibition.png")
+e2.save
 
-    5.times do
-      artwork = Artwork.create(
-        exhibition: e,
-        name: Faker::Book.title,
-        image_id: id_counter,  # should put default image maybe using faker somewhere else
-        description: Faker::Hacker.say_something_smart,
-        date_created: Faker::Date.between(1000.years.ago, Date.today),
-        accession_no: Faker::Code.isbn,
-      )
-      artwork.artists << a
-      id_counter += 1
-    end
+p = Panorama.create(
+  exhibition: e2,
+  artwork_coordinates: {}
+)
+p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
+p.save
+
+4.times do
+  e = Exhibition.create(
+    user: admin,
+    museum: m,
+    name: Faker::Name.name + " Collection",
+    start_date: Faker::Date.between(20.years.ago, 10.years.ago),
+    end_date: Faker::Date.between(10.years.ago, Date.today),
+    description: Faker::Lorem.paragraph,
+    curator: Faker::Name
+  )
+
+  a = Artist.create(
+    name: Faker::Name.name
+  )
+
+  5.times do
+    artwork = Artwork.create(
+      exhibition: e,
+      name: Faker::Book.title,
+      image_id: id_counter,  # should put default image maybe using faker somewhere else
+      description: Faker::Hacker.say_something_smart,
+      date_created: Faker::Date.between(1000.years.ago, Date.today),
+      accession_no: Faker::Code.isbn,
+    )
+    artwork.artists << a
+    id_counter += 1
   end
 end
+end
+# (0..2).each do
+#   m = Museum.create(
+#     user: admin,
+#     name: Faker::Company.name + " Museum",
+#     latitude: Faker::Address.latitude,
+#     longitude: Faker::Address.longitude,
+#     street_address: Faker::Address.street_address,
+#     city: Faker::Address.city,
+#     country: Faker::Address.country,
+#     description: Faker::Lorem.paragraph,
+#     website: Faker::Internet.url
+#   )
+#
+#   (0..3).each do
+#     e = Exhibition.create(
+#       user: admin,
+#       museum: m,
+#       name: Faker::Name.name + " Collection",
+#       start_date: Faker::Date.between(20.years.ago, 10.years.ago),
+#       end_date: Faker::Date.between(10.years.ago, Date.today),
+#       description: Faker::Lorem.paragraph,
+#       curator: Faker::Name
+#     )
+#
+#     a = Artist.create(
+#       name: Faker::Name.name
+#     )
+#
+#     (0..5).each do
+#       artwork = Artwork.create(
+#         exhibition: e,
+#         name: Faker::Book.title,
+#         image_id: 0,  # should put default image maybe using faker somewhere else
+#         description: Faker::Hacker.say_something_smart,
+#         date_created: Faker::Date.between(1000.years.ago, Date.today),
+#         accession_no: Faker::Code.isbn,
+#         artists: [a]
+#       )
+#     end
+#   end
+# end
