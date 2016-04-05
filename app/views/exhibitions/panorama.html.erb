@@ -1,274 +1,218 @@
 <p id="notice"><%= notice %></p>
-<% content_for :title, @exhibition.name + " Panorama" %>
-
-<div id="main-container" class="container">
-  <div class="row">
-    <h1 class="title"><%= @exhibition.name %></h1>
-    <br />
-  </div>
-  <div class="row">
-    <div class="col-xs-12 horizontal-center-wrapper">
-        <%= image_tag attachment_url(@panorama, :image, :fill, 300, 300, format: "png"), :class => "image panorama horizontal-center" %>
+ <div id="main-container" class="container">
+   <div class="row">
+      <h1 class="title"><%= @exhibition.name %></h1>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <hr />
-      <h2>Artworks:</h2>
-      <table class="table">
-        <% @artworks.each do |artwork| %>
-          <tr>
-            <td><%= link_to artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,artwork) %> </td>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
-</div>
 
 
-    <% panorama_url = attachment_url(@panorama, :image, :fill, 2048, 512, format: "png") %>
-    <%= content_tag :div, class: "panorama_class", data: {panorama: panorama_url} do %>
-    <% end %>
 
+      <% panorama_url = attachment_url(@panorama, :image, :fill, 2048, 512, format: "png") %>
+     <%= content_tag :div, class: "panorama_class", data: {panorama: panorama_url} do %>
+     <% end %>
 
 
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Panorama</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	</head>
-	<body>
 
-		<script src="libs/three.js"></script>
+ <!DOCTYPE html>
+ <html lang="en">
+ 	<head>
+ 		<title>Panorama</title>
 
-    <div class="extra-padding"></div>
-    <div class="container" id="content">
+ 	</head>
+ 	<body>
 
+           <script>
+       			var container, stats;
+       			var camera, scene, raycaster, renderer;
+       			var mouse = new THREE.Vector2(), INTERSECTED;
+       			var radius = 100, theta = 0;
 
+             var panoramUrl = $('.panorama_class').data('panorama');
 
-       <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
+       			init();
+       			animate();
 
 
+       			function init() {
+       				container = document.createElement( 'div' );
+       				document.body.appendChild( container );
 
-          <script src="libs/three.js"></script>
+       				scene = new THREE.Scene();
 
-          <script>
-      			var container, stats;
-      			var camera, scene, raycaster, renderer;
-      			var mouse = new THREE.Vector2(), INTERSECTED;
-      			var radius = 100, theta = 0;
+       			  camera = new THREE.PerspectiveCamera(46.6, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-            var panoramUrl = $('.panorama_class').data('panorama');
+       				camera.position.x = 0;
+               camera.position.y = 0;
+               camera.position.z = 0;
+               camera.lookAt(new THREE.Vector3(0, 0, 0 ));
 
-      			init();
-      			animate();
+       				var spotLight = new THREE.SpotLight(0xffffff);
+       				spotLight.position.set(0, 150, 0);
+       				spotLight.intensity = 1;
+       				scene.add(spotLight);
 
+       				var ambiLight = new THREE.AmbientLight(0xf4f5ec);
+       				scene.add(ambiLight);
 
-      			function init() {
-      				container = document.createElement( 'div' );
-      				document.body.appendChild( container );
+       				var boxArray = [
+                 [12 ,17, 4, -70, 2, 5, 0, 'https://www.google.com/'],
+                 [20, 20, 5, 70, 15, 5, 0.26, 'https://www.yahoo.com/']
+               ];
 
-      				scene = new THREE.Scene();
+               for (var i = 0; i <= 1; i++){
+                 var geometry = new THREE.BoxGeometry( boxArray[i][0], boxArray[i][1], boxArray[i][2] );
+                 var material = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent: true, opacity: 0});
+                 var cube = new THREE.Mesh( geometry, material );
+                 cube.position.z = boxArray[i][3];
+                 cube.position.x = boxArray[i][4];
+                 cube.position.y = boxArray[i][5];
+                 cube.rotateY(boxArray[i][6]);
+       					cube.userData = { URL: boxArray[i][7]};
+                 scene.add( cube );
+               }
 
-      var panoramUrl = $('.panorama_class').data('panorama');
+       				var cylinder = createMesh(new THREE.CylinderGeometry(70, 70, 70, 30, 8, true), panoramUrl);
 
-			init();
-			animate();
+               cylinder.position.x = 0;
+               cylinder.position.y = 0;
+               cylinder.position.z = 0;
+               cylinder.rotateY(3.14/2);
 
+               scene.add(cylinder);
 
-			function init() {
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+               function createMesh(geom, imageFile) {
+                  var texture = THREE.ImageUtils.loadTexture(imageFile);
+                  var mat = new THREE.MeshPhongMaterial();
+                  mat.map = texture;
+                  mat.side = THREE.DoubleSide;
+                  var mesh = new THREE.Mesh(geom, mat);
+                  return mesh;
+              }
 
-				scene = new THREE.Scene();
 
-			  camera = new THREE.PerspectiveCamera(46.6, window.innerWidth / window.innerHeight, 0.1, 1000);
+       				raycaster = new THREE.Raycaster();
+       				renderer = new THREE.WebGLRenderer();
 
-				camera.position.x = 0;
-        camera.position.y = 0;
-        camera.position.z = 0;
-        camera.lookAt(new THREE.Vector3(0, 0, 0 ));
+       				renderer.setClearColor( 0xf0f0f0 );
+       				renderer.setSize( window.innerWidth, window.innerHeight );
+       				renderer.sortObjects = false;
+       				container.appendChild(renderer.domElement);
 
-				var spotLight = new THREE.SpotLight(0xffffff);
-				spotLight.position.set(0, 150, 0);
-				spotLight.intensity = 1;
-				scene.add(spotLight);
+       				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+       				document.addEventListener('mousedown', onDocumentMouseDown, false);
+       				window.addEventListener( 'resize', onWindowResize, false );
+       				document.addEventListener('keydown', turnRight, false);
+       				document.addEventListener('keydown', turnLeft, false);
+       				document.addEventListener('keyup', stop, false);
 
-				var ambiLight = new THREE.AmbientLight(0xf4f5ec);
-				scene.add(ambiLight);
+       			}
 
-				var boxArray = [
-          [12 ,17, 4, -70, 2, 5, 0, 'https://www.google.com/'],
-          [20, 20, 5, 70, 15, 5, 0.26, 'https://www.yahoo.com/']
-        ];
+       			function onWindowResize() {
 
-        for (var i = 0; i <= 1; i++){
-          var geometry = new THREE.BoxGeometry( boxArray[i][0], boxArray[i][1], boxArray[i][2] );
-          var material = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent: true, opacity: 0});
-          var cube = new THREE.Mesh( geometry, material );
-          cube.position.z = boxArray[i][3];
-          cube.position.x = boxArray[i][4];
-          cube.position.y = boxArray[i][5];
-          cube.rotateY(boxArray[i][6]);
-					cube.userData = { URL: boxArray[i][7]};
-          scene.add( cube );
-        }
+       				camera.aspect = window.innerWidth / window.innerHeight;
+       				camera.updateProjectionMatrix();
+       				renderer.setSize( window.innerWidth, window.innerHeight );
 
-				var cylinder = createMesh(new THREE.CylinderGeometry(70, 70, 70, 30, 8, true), panoramUrl);
+       			}
 
-        cylinder.position.x = 0;
-        cylinder.position.y = 0;
-        cylinder.position.z = 0;
-        cylinder.rotateY(3.14/2);
+       			function onDocumentMouseMove( event ) {
 
-        scene.add(cylinder);
+       				event.preventDefault();
+       				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+       				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 
-        function createMesh(geom, imageFile) {
-           var texture = THREE.ImageUtils.loadTexture(imageFile);
-           var mat = new THREE.MeshPhongMaterial();
-           mat.map = texture;
-           mat.side = THREE.DoubleSide;
-           var mesh = new THREE.Mesh(geom, mat);
-           return mesh;
-       }
+       			}
 
+       			function onDocumentMouseDown(event) {
 
-				raycaster = new THREE.Raycaster();
-				renderer = new THREE.WebGLRenderer();
+       					var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+       					vector = vector.unproject(camera);
 
-				renderer.setClearColor( 0xf0f0f0 );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				renderer.sortObjects = false;
-				container.appendChild(renderer.domElement);
+       					var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
 
-				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-				document.addEventListener('mousedown', onDocumentMouseDown, false);
-				window.addEventListener( 'resize', onWindowResize, false );
-				document.addEventListener('keydown', turnRight, false);
-				document.addEventListener('keydown', turnLeft, false);
-				document.addEventListener('keyup', stop, false);
+       					var intersects = raycaster.intersectObjects(scene.children);
 
-			}
+       					if (intersects.length > 1) {
 
-			function onWindowResize() {
+       							window.open(intersects[0].object.userData.URL);
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize( window.innerWidth, window.innerHeight );
 
-			}
 
-			function onDocumentMouseMove( event ) {
+       					}
+       			}
 
-				event.preventDefault();
-				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+       			var turningRight = false;
+       			var turningLeft = false;
 
-			}
+       			function updateCameraObject(){
 
-			function onDocumentMouseDown(event) {
+       				if (turningRight) {
+       					camera.rotateY(-0.007);
+       				} else if (turningLeft){
+       					camera.rotateY(0.007);
+       				}
 
-					var vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
-					vector = vector.unproject(camera);
+       			}
 
-					var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+       			function turnRight(event) {
+       					if (event.keyCode === 39) { //right arrow key
+       					turningRight = true;
 
-					var intersects = raycaster.intersectObjects(scene.children);
+       					}
+       			}
 
-					if (intersects.length > 1) {
+       			function turnLeft(event) {
+       					if (event.keyCode === 37) { //left arrow key
+       					turningLeft=true;
+       					}
+       			}
 
-							console.log(intersects[0].object.userData);
-							//
-							// if (intersects[0].object == cube){
-							// 	window.open('/panoramaTest.html');
-							// } else {
-							// 	window.open('http://www.google.com');
-							// }
+       			function stop(event){
+       				turningRight = false;
+       				turningLeft = false;
+       			}
 
-							window.open(intersects[0].object.userData.URL);
 
+       			function animate() {
 
+       				requestAnimationFrame( animate );
+       				render();
 
+       			}
 
-							//window.location.href = 'http://www.google.com';
+       			function render() {
+       				updateCameraObject();
+       				camera.updateMatrixWorld();
+       				// find intersections
+       				raycaster.setFromCamera( mouse, camera );
+       				var intersects = raycaster.intersectObjects( scene.children );
+       				if ( intersects.length > 0 ) {
+       					if ( INTERSECTED != intersects[ 0 ].object ) {
 
-					}
-			}
+       						if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
 
-			var turningRight = false;
-			var turningLeft = false;
+       						INTERSECTED = intersects[ 0 ].object;
+       						INTERSECTED.material.opacity = 0.4;
 
-			function updateCameraObject(){
 
-				if (turningRight) {
-					camera.rotateY(-0.007);
-				} else if (turningLeft){
-					camera.rotateY(0.007);
-				}
+       					}
+       				} else {
 
-			}
+       					if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
 
-			function turnRight(event) {
-					if (event.keyCode === 39) { //right arrow key
-					turningRight = true;
+       					INTERSECTED = null;
 
-					}
-			}
+       				}
 
-			function turnLeft(event) {
-					if (event.keyCode === 37) { //left arrow key
-					turningLeft=true;
-					}
-			}
+       				renderer.render( scene, camera );
 
-			function stop(event){
-				turningRight = false;
-				turningLeft = false;
-			}
+       			}
 
+       		</script>
 
-			function animate() {
+         </div>
 
-				requestAnimationFrame( animate );
-				render();
 
-			}
 
-			function render() {
-				updateCameraObject();
-				camera.updateMatrixWorld();
-				// find intersections
-				raycaster.setFromCamera( mouse, camera );
-				var intersects = raycaster.intersectObjects( scene.children );
-				if ( intersects.length > 0 ) {
-					if ( INTERSECTED != intersects[ 0 ].object ) {
+ 	</body>
 
-						if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
-
-						INTERSECTED = intersects[ 0 ].object;
-						INTERSECTED.material.opacity = 0.4;
-
-
-					}
-				} else {
-
-					if ( INTERSECTED ) INTERSECTED.material.opacity = 0;
-
-					INTERSECTED = null;
-
-				}
-
-				renderer.render( scene, camera );
-
-			}
-
-		</script>
-
-	</body>
-
-</html>
+ </html>

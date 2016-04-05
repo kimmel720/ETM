@@ -18,3 +18,5 @@ Rails.application.config.assets.precompile += %w( panorama.js )
 Rails.application.config.assets.precompile += %w( Three.js )
 
 Rails.application.config.assets.precompile += %w( three.min.js )
+
+Rails.application.config.assets.precompile += %w( floor.js )

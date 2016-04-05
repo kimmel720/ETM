@@ -9,8 +9,15 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 picture-frame horizontal-center-wrapper">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
       <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :class => "image full-image horizontal-center" %>
+
+      <img src="http://people.brandeis.edu/~ddimitr/harvard_euro_floor.jpg" alt="" usemap="#Map" />
+        <map name="Map" id="Map">
+          <area alt="" title="Mercury" href="#" shape="rect" coords="217,146,224,165" />
+          <area alt="" title="Virgin Mary" href="#" shape="rect" coords="429,38,439,69" />
+        </map>
     </div>
   </div>
   <div class="row">
