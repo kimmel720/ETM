@@ -12,8 +12,8 @@ class InitializeDatabase < ActiveRecord::Migration
       t.belongs_to :user, index:true
       t.string :image_id
       t.string :name
-      t.integer :latitude
-      t.integer :longitude
+      t.float :latitude
+      t.float :longitude
       t.string :street_address
       t.string :city
       t.string :country

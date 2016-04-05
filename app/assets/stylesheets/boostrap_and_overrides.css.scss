@@ -16,7 +16,13 @@ Some way of doing a timeline, vertically
 
 
 */
-
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
 
 hr{
   display: block;
@@ -102,4 +108,11 @@ div.white#slidebox-container{
 .wrap-together{
   overflow: hidden;
   white-space: nowrap;
+}
+
+.panel-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
 }

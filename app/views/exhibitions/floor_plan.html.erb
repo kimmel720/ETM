@@ -10,8 +10,14 @@
   </div>
   <div class="row">
     <div class="col-xs-12 picture-frame horizontal-center-wrapper">
-        <%= image_tag @floor_plan, :class => "image full-image horizontal-center" %>
-      <%# image_tag attachment_url(@floor_plan, :image, format: "png"), :class => "image full-image horizontal-center" %>
+      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :class => "image full-image horizontal-center" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <br />
+      <h4>Click on a red or blue box to visit the coresponding artwork. Click on a camera icon
+      to view the corresponding panorama.</h4>
     </div>
   </div>
 </div>

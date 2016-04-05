@@ -77,7 +77,6 @@ class ExhibitionsController < FrontEndController
   end
 
   def floor_plan
-    @floor_plan = Faker::Placeholdit.image
   end
 
   def resources
