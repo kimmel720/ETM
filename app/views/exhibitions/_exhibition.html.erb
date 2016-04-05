@@ -1,7 +1,7 @@
 <div class="col-xs-12" id="slidebox-container">
   <h2><%= exhibition.name %></h2>
   <p><%= exhibition.description %></p>
-  <%= link_to museum_exhibition_path(exhibition.museum, exhibition), :class => "button-link" do %>
+  <%= link_to museum_exhibition_path(exhibition.museum, exhibition), :class => "button-link", 'data-no-turbolink' => true do %>
     <div class="exhibition btn btn-primary btn-block grid-button">
       <div class="center-block-outer">
         <div class="center-block-middle">

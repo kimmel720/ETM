@@ -16,7 +16,7 @@ class ExhibitionsController < FrontEndController
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)]
     ]
-    gon.dataset = @artworks.each.map{ |a| {
+    gon.datasetartwork = @artworks.each.map{ |a| {
       id: a.id,
       content: a.name,
       start: a.date_created.strftime('%Y-%m-%d')
