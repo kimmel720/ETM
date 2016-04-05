@@ -7,8 +7,8 @@
   </div>
   <div class="row exhibition-info">
     <div class="col-xs-4">
-      <div class="picture-frame">
-        PICTURE OF EXHIBITION
+      <div class="picture-frame horizontal-center-wrapper">
+        <%= image_tag attachment_url(@exhibition, :image, :fill, 300, 300, format: "png"), :class => "image side-image horizontal-center" %>
       </div>
     </div>
     <div class="col-xs-8">

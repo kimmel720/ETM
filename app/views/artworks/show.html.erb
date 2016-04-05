@@ -9,18 +9,21 @@
         <%= link_to artist.name, artist_path(artist) %>
         <% end %>
       </h2>
-    <br />
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-12 horizontal-center-wrapper">
+      <br />
       <div class="picture-frame">
-        PICTURE OF ARTWORK
+        <%= image_tag attachment_url(@artwork, :image, :fill, 300, 300, format: "png"), :class => "image full-image horizontal-center" %>
       </div>
     </div>
   </div>
   <div class="row">
-
+    <div class="col-xs-12">
+      <hr />
+      <p><%= @artwork.description %></p>
+    </div>
   </div>
-  <p><%= @artwork.description %></p>
 <%# TODO: Maybe add a way to see where a piece of artwork has been? %>
 </div>

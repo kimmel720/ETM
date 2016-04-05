@@ -86,19 +86,6 @@ a2.save
 
 id_counter += 1
 
-3.times do
-  m = Museum.create(
-    user: admin,
-    name: Faker::Company.name + " Museum",
-    latitude: Faker::Address.latitude,
-    longitude: Faker::Address.longitude,
-    street_address: Faker::Address.street_address,
-    city: Faker::Address.city,
-    country: Faker::Address.country,
-    description: Faker::Lorem.paragraph,
-    website: Faker::Internet.url
-  )
-
 harvard = Museum.create(
   user: admin,
   name: "Harvard Art Museums",
@@ -134,6 +121,22 @@ p = Panorama.create(
 p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p.save
 
+3.times do
+  m = Museum.create(
+    user: admin,
+    name: Faker::Company.name + " Museum",
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude,
+    street_address: Faker::Address.street_address,
+    city: Faker::Address.city,
+    country: Faker::Address.country,
+    description: Faker::Lorem.paragraph,
+    website: Faker::Internet.url
+  )
+  m.image = open(Faker::Placeholdit.image)
+  m.save
+
+
 4.times do
   e = Exhibition.create(
     user: admin,
@@ -144,6 +147,8 @@ p.save
     description: Faker::Lorem.paragraph,
     curator: Faker::Name
   )
+  e.image = open(Faker::Placeholdit.image)
+  e.save
 
   a = Artist.create(
     name: Faker::Name.name
@@ -159,6 +164,8 @@ p.save
       accession_no: Faker::Code.isbn,
     )
     artwork.artists << a
+    artwork.image = open(Faker::Placeholdit.image("600x300")
+    artwork.save
     id_counter += 1
   end
 end

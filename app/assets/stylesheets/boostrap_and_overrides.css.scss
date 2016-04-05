@@ -72,3 +72,21 @@ hr{
 .button-link:hover, .button-link:visited, .button-link:link, .button-link:active{
     text-decoration: none;
 }
+
+.picture-frame{
+  min-height: 150px;
+}
+
+.image {
+  border-style: solid;
+  border-width: medium;
+}
+
+.side-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.full-image {
+
+}

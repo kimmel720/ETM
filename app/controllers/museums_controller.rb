@@ -26,10 +26,6 @@ class MuseumsController < FrontEndController
     end
   end
 
-  def gmap4rails_title
-    "something"
-  end
-
   # GET /museums/1
   # GET /museums/1.json
   def show
