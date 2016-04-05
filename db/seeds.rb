@@ -23,8 +23,8 @@ id_counter = 0
 farber = Museum.create(
   user: admin,
   name: "Farber Mezzanine",
-  latitude: 42.367819,
-  longitude: -71.258617,
+  latitude: 42.368361,
+  longitude: -71.258061,
   street_address: "415 South St",
   city: "Waltham",
   country: "United States",
