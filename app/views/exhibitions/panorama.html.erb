@@ -44,11 +44,36 @@
 
 		<script src="libs/three.js"></script>
 
-		<script>
-			var container, stats;
-			var camera, scene, raycaster, renderer;
-			var mouse = new THREE.Vector2(), INTERSECTED;
-			var radius = 100, theta = 0;
+    <div class="extra-padding"></div>
+    <div class="container" id="content">
+
+
+
+       <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+
+
+
+          <script src="libs/three.js"></script>
+
+          <script>
+      			var container, stats;
+      			var camera, scene, raycaster, renderer;
+      			var mouse = new THREE.Vector2(), INTERSECTED;
+      			var radius = 100, theta = 0;
+
+            var panoramUrl = $('.panorama_class').data('panorama');
+
+      			init();
+      			animate();
+
+
+      			function init() {
+      				container = document.createElement( 'div' );
+      				document.body.appendChild( container );
+
+      				scene = new THREE.Scene();
 
       var panoramUrl = $('.panorama_class').data('panorama');
 
