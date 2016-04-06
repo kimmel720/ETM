@@ -41,13 +41,13 @@ class InitializeDatabase < ActiveRecord::Migration
       t.belongs_to :exhibition, index:true
       t.string :image_id
       t.integer :artwork_coordinates
-
       t.timestamps null: false
     end
 
-    create_table :artworks do |t|
+    create_table :artworkZs do |t|
       t.belongs_to :exhibition, index:true
       t.string :name
+      t.string :medium
       t.string :image_id
       t.text :description
       t.date :date_created

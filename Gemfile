@@ -3,12 +3,13 @@ source 'https://rubygems.org'
 
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
-
+#hello hello hello
 gem "refile", require: "refile/rails"
 gem "refile-mini_magick"
 gem "refile-s3"
 
 gem 'rails_admin'
+gem 'refile-s3'
 
 
 
