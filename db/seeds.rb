@@ -172,3 +172,32 @@ p.save
   end
 end
 end
+
+a3 = Artwork.create(
+  name: "Allegorical Portrait of a Young Man in the Guise of Mercury Slaying Argus",
+  exhibition: e2,
+  artists: [fake_artist],
+  description: "This portrait depicts a young man disguised as the mischievous Mercury after he has slain the hundred-eyed watchman Argus. Balancing himself on a puff of clouds as he holds a flute and caduceus (a staff entwined with snakes), he stands before a hillside that opens onto what Florentines would have recognized as a Flemish-style landscape. The Medici often identified themselves with classical gods, sometimes even assuming their guises in allegorical portraits. Francesco I de’ Medici, Grand Duke of Tuscany, was an enthusiast of alchemy and often had himself portrayed with an image of Mercury, who was associated with the metal of the same name. The facial features of this youth, however, more closely resemble those found in portraits of Antonio de’ Medici, son of Francesco’s second wife, Bianca Cappello.",
+  date_created: Date.new(1575, 1, 1),
+  accession_no: Faker::Code.isbn,
+  image_id: 200
+)
+a3.image = File.open("app/assets/images/Harvard/mercury.png")
+a3.save
+
+id_counter += 1
+
+a4 = Artwork.create(
+  name: "The Virgin and Child with Saints Peter and Paul",
+  exhibition: e2,
+  artists: [fake_artist],
+  description: "Painted in Lombardy, this altarpiece shows Christ handing the large, gleaming keys of the kingdom of heaven to Saint Peter. The saint rests one foot on what resembles a cornerstone, symbolizing his role as a founder of the Church — the “rock” upon which it was built. The image thus confirms that the authority of the Church was granted by Christ himself, a central tenet of the Counter-Reformation. On the right is Saint Paul, holding the sword with which he was martyred and a book representing his epistles.
+The throne of the Virgin seems to be carved out of the living rock, from which sprout roots and foliage. The emphasis on nature reveals the continuing influence of Leonardo da Vinci on the Lombard school of painting, though the crisp delineation of forms is more linear and straightforward than the ambiguity and subtlety of the great master’s work.",
+  date_created: Date.new(1550, 1, 1),
+  accession_no: Faker::Code.isbn,
+  image_id: 201
+)
+a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
+a4.save
+
+id_counter += 1
