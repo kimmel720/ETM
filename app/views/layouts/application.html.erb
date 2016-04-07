@@ -4,6 +4,9 @@
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
+<!-- Bootstrap requires jquery -->
+<%= javascript_include_tag "jquery" %>
+
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
@@ -29,7 +32,8 @@
   <%= yield(:head) %>
   <title><%= yield(:title) %></title>
 </head>
-<body>
+<!-- Added class to body element as per Brandon Hilkert's solution: http://brandonhilkert.com/blog/page-specific-javascript-in-rails/ -->
+<body class="<%= controller_name %> <%= action_name %>">
   <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -43,7 +47,7 @@
       <a class="navbar-brand" rel="home" href="/" title="Exhibition Time Machine" data-no-turbolink = "true">
         <img style="max-width:40px; margin-top: -10px; margin-left: +50px; margin-right: +80px;"
              src="http://people.brandeis.edu/~ddimitr/Images/logoIII.png">
-</a>
+      </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -81,6 +85,6 @@
   <br />
   <div class="panel-footer">
   </footer>
-  
+
 </body>
 </html>

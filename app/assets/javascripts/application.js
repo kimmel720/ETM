@@ -17,4 +17,5 @@
 //= require underscore
 //= require bootstrap-sprockets
 //= require vis
+//= require jquery-readyselector
 //= require_tree .

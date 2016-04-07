@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 #hello hello hello
@@ -10,9 +9,6 @@ gem "refile-s3"
 
 gem 'rails_admin'
 gem 'refile-s3'
-
-
-
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.2'
