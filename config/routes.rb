@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'search/results'
+
   # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
