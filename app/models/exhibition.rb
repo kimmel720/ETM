@@ -10,4 +10,8 @@ class Exhibition < ActiveRecord::Base
   belongs_to :museum
   has_many :panoramas
   has_many :artworks
+
+  def self.search(search)
+    where("name LIKE ? OR description LIKE ? OR curator LIKE ?", "%#{search}%","%#{search}%", "%#{search}%")
+  end
 end
