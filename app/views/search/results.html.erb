@@ -21,7 +21,7 @@
           <table class="table">
             <% catagory.each do |result| %>
             <tr>
-              <td><%= result.name %></td>
+              <td><%= link_to result[:name], result[:path] %></td>
             </tr>
             <% end %>
           </table>
