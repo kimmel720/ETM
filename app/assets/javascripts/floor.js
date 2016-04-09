@@ -1,8 +1,6 @@
-
-
+$(".exhibitions.floor_plan").ready(init);
 
 function init() {
-
         var scene = new THREE.Scene();
 
         var floorUrl = $('.exhibition_class').data('exhibition');
@@ -34,7 +32,7 @@ function init() {
 
 
         // add the output of the renderer to the html element
-        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+        $('#floorPlanContainer').append(webGLRenderer.domElement);
 
 
         var box = createMesh(new THREE.BoxGeometry(44.7, 3, 32.5), floorUrl);
@@ -108,4 +106,3 @@ function init() {
 
         document.addEventListener('mousedown', onDocumentMouseDown, false);
     }
-    window.onload = init;

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<div id="main-container" class="container">
+ <div class="row">
+    <h1 class="title"><%= @exhibition.name %></h1>
+  </div>
+</div>
+
+<div id="panoramaContainer">
+
+<% panorama_urls = [] %>
+<% panorama_urls << attachment_url(@panorama, :image, :fill, 2048, 512, format: "png") %>
+<% panorama_urls << image_path("nike.jpg") %>
+<%= content_tag :div, class: "panorama_class", data: {panorama: panorama_urls} do %>
+<% end %>

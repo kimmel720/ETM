@@ -44,7 +44,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    create_table :artworkZs do |t|
+    create_table :artworks do |t|
       t.belongs_to :exhibition, index:true
       t.string :name
       t.string :medium

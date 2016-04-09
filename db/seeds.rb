@@ -118,6 +118,13 @@ e2.image = File.open("app/assets/images/Harvard/exhibition.png")
 e2.floor_plan = File.open("app/assets/images/Harvard/harvard_euro_floor.jpg")
 e2.save
 
+p1 = Panorama.create(
+  exhibition: e2,
+  artwork_coordinates: {}
+)
+p.image = File.open("app/assets/images/HarvardPanorama1.jpg")
+p.save
+
 p = Panorama.create(
   exhibition: e2,
   artwork_coordinates: {}

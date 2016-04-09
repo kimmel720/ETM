@@ -18,4 +18,5 @@
 //= require bootstrap-sprockets
 //= require vis
 //= require jquery-readyselector
+//= require three.min
 //= require_tree .
