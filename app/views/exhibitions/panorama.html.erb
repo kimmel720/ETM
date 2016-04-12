@@ -36,15 +36,13 @@
        			var camera, scene, raycaster, renderer;
        			var mouse = new THREE.Vector2(), INTERSECTED;
        			var radius = 100, theta = 0;
+            var array = [];
+
 
             CANVAS_WIDTH = 1400,
             CANVAS_HEIGHT = 600;
 
             var panoramUrl = $('.panorama_class').data('panorama');
-
-            THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
-              console.log(item, loaded, total);
-            };
 
        			init();
        			animate();
@@ -79,28 +77,7 @@
        				var ambiLight = new THREE.AmbientLight(0xf4f5ec);
        				scene.add(ambiLight);
 
-       				var boxArray = [
-                 [12 ,17, 4, -70, 2, 5, 0, "<%= escape_javascript museum_exhibition_url(@museum, @exhibition)%>" + "/artworks/379/"],
-                 [20, 20, 5, 70, 15, 5, 0.26, 'http://localhost:3000/museums/33/exhibitions/78/artworks/380/']
-               ];
-
-
-               for (var i = 0; i <= 1; i++){
-                 var geometry = new THREE.BoxGeometry( boxArray[i][0], boxArray[i][1], boxArray[i][2] );
-                 var material = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent: true, opacity: 0});
-                 var cube = new THREE.Mesh( geometry, material );
-
-                 cube.position.z = boxArray[i][3];
-                 cube.position.x = boxArray[i][4];
-                 cube.position.y = boxArray[i][5];
-                 cube.rotateY(boxArray[i][6]);
-
-       					 cube.userData = { URL: boxArray[i][7]};
-
-                 scene.add( cube );
-               }
-
-       				var cylinder = createMesh(new THREE.CylinderGeometry(70, 70, 70, 30, 8, true), panoramUrl);
+       				var cylinder = createCylinder(new THREE.CylinderGeometry(70, 70, 70, 30, 8, true), panoramUrl);
 
                cylinder.position.x = 0;
                cylinder.position.y = 0;
@@ -109,7 +86,7 @@
 
                scene.add(cylinder);
 
-               function createMesh(geom, imageFile) {
+               function createCylinder(geom, imageFile) {
 
                     var loader = new THREE.TextureLoader();
 
@@ -126,6 +103,57 @@
        				raycaster = new THREE.Raycaster();
 
 
+              var sphere;
+              var add = true;
+
+              // setup the control gui
+              var controls = new function () {
+                  // we need the first child, since it's a multimaterial
+                  this.radius = 5;
+
+                  this.save = function () {
+                      array.push([sphere.position.x, sphere.position.y, sphere.position.z, controls.radius]);
+                      var sphereTwo = sphere;
+                      add = true;
+                      console.log(array);
+                      console.log(controls.radius);
+                  };
+
+                  this.redraw = function () {
+                      // remove the old plane
+                      var posX = sphere.position.x;
+                      var posY = sphere.position.y;
+                      var posZ = sphere.position.z;
+                      scene.remove(sphere);
+                      // create a new one
+                      sphere = createMeshSphr(new THREE.SphereGeometry(controls.radius, 30, 30));
+                      // add it to the scene.
+                      sphere.position.x = posX;
+                      sphere.position.y = posY;
+                      sphere.position.z = posZ;
+                      scene.add(sphere);
+                  };
+              };
+
+              var gui = new dat.GUI();
+              gui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
+              gui.add(controls, 'save');
+
+              render();
+
+              function createMeshSphr(geom) {
+
+                  // assign two materials
+                  var meshMaterial = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent:true, opacity: 0.3});
+                  var wireFrameMat = new THREE.MeshLambertMaterial({color: 0xe4e5f1, transparent:true, opacity: 0.3});
+
+
+                  // create a multimaterial
+                  var mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial, wireFrameMat]);
+
+                  return mesh;
+              }
+
               function onDocumentMouseMove( event ) {
 
            			event.preventDefault();
@@ -136,24 +164,34 @@
 
               function onDocumentMouseDown(event) {
 
-         					var vector = new THREE.Vector2(( ( event.clientX - container.offsetLeft ) / container.clientWidth ) * 2 - 1,- ( ( event.clientY - container.offsetTop ) / container.clientHeight ) * 2 + 1);
+                if (add){
+                  var vector = new THREE.Vector2(( ( event.clientX - container.offsetLeft ) / container.clientWidth ) * 2 - 1,- ( ( event.clientY - container.offsetTop ) / container.clientHeight ) * 2 + 1);
                   var raycaster = new THREE.Raycaster();
 
                   raycaster.setFromCamera( vector, camera );
 
-
-
          					var intersects = raycaster.intersectObjects(scene.children);
 
-         					if (intersects.length > 1) {
+                  sphere = createMeshSphr(new THREE.SphereGeometry(5, 30, 30));
 
-         							window.open(intersects[0].object.userData.URL);
+                  sphere.position.z = intersects[0].point.z;
+                  sphere.position.x = intersects[0].point.x;
+                  sphere.position.y = intersects[0].point.y;
+
+                  scene.add( sphere );
+
+                  console.log(scene.children);
+
+                  add = false;
 
 
-
-         					}
+                }
 
          			}
+
+              function saveData(){
+                array.push([sphere.position.z, sphere.position.x, sphere.position.y, sphere.radius ]);
+              }
 
 
        				document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -172,7 +210,6 @@
        				renderer.setSize( window.innerWidth, window.innerHeight );
 
        			}
-
 
        			var turningRight = false;
        			var turningLeft = false;
@@ -227,7 +264,6 @@
        						INTERSECTED = intersects[ 0 ].object;
        						INTERSECTED.material.opacity = 0.4;
 
-
        					}
        				} else {
 
@@ -244,10 +280,6 @@
        		</script>
 
          </div>
-
-
-
-
 
  	</body>
 
