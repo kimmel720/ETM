@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'search/results'
 
+  resources :museum_users
   # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
