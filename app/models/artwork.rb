@@ -1,5 +1,6 @@
 class Artwork < ActiveRecord::Base
   validates :name, presence: true
+  
   validates :image_id, presence: true, uniqueness: true
 
   attachment :image

@@ -62,6 +62,7 @@ fake_artist = Artist.create(
 a1 = Artwork.create(
   name: "Square Reflections",
   exhibition: e1,
+  medium: "Crayon",
   artists: [fake_artist],
   description: "Painted 3D printed replica of a Louise Nevelson sculpture with wooden frame and acrylic mirrors. Square Reflections, 1964 Pace Gallery Made possible with the generous help of the Brandeis MakerLab staff, the members of the Deis3D and DeisVR clubs, as well as  David Stiefel, Jack Holloman, and Debra Sarlin.",
   date_created: Faker::Date.between(1000.years.ago, Date.today),
@@ -76,6 +77,7 @@ id_counter += 1
 a2 = Artwork.create(
   name: "Nevelson Sculpture Renders",
   exhibition: e1,
+  medium: "Crayon",
   artists: [fake_artist],
   description: "Computer generated image of Louise Nevelson sculptures that were recreated by Daniela Dimitrova and Michael Makivic using 3D modeling. Left: Tropical Garden, 1957 Grey Art Gallery, NYU Right: Totality Dark, 1962",
   date_created: Faker::Date.between(1000.years.ago, Date.today),
