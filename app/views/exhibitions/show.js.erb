@@ -4,4 +4,9 @@ $("#slidebox-container").slideUp(300, function(){
   $('html, body').animate({
         scrollTop: $("#slidebox-container").offset().top
     }, 2000);
+    $('a').on('click', function(){
+      $(".loading-container").show();
+      $(".loading-container").removeClass('animated fadeOut');
+      $(".loading-container").addClass('animated fadeIn');
+    });
 });
