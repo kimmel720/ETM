@@ -2,6 +2,7 @@ function fadeInIcon(){
   $(".loading-container").show();
   $(".loading-container").removeClass('animated fadeOut');
   $(".loading-container").addClass('animated fadeIn');
+  $(".loading-container").delay(1500).hide(0);
 }
 
 
