@@ -119,24 +119,28 @@
             transform: scale(1);
   }
 }
+.fullpage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+    z-index: 1000;
+    background-color: #fff;
+    background-color: rgba(121, 121, 121, 0.5);
+}
 
 .loading-icon .background-addon {
   position: fixed;
   top: 0;
   width: 51%;
   height: 100%;
-  background: #222222;
   z-index: 1000;
 }
 
 .sk-circle {
   z-index: 1001;
-}
-
-.loading-icon .background-addon.background-left {
-  left: 0;
-}
-
-.loading-icon .background-addon.background-right {
-  right: 0;
 }
