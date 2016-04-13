@@ -53,7 +53,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
         <%= bootstrap_form_tag url: "/search/results", method: "get", roll: "search", class: "navbar-form navbar-right" do |f| %>
-          <%= f.text_field :search, class: "navbar-form", icon:"search", hide_label: true %>
+          <%= f.search_field :search, class: "navbar-form search-bar", icon:"search", hide_label: true, placeholder: "Search" %>
         <% end %>
         </li>
         <li><a href="/users/new">Sign up<span class="sr-only">(current)</span></a></li>
