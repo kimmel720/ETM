@@ -11,7 +11,7 @@ $( document ).ready(function() {
   $(".loading-container").addClass('animated fadeOut');
   $(".loading-container").delay(900).hide(0);
   $('a').on('click', fadeInIcon);
-  $('#submit-button').on('click', fadeInIcon);
+  $('form').on('submit', fadeInIcon);
 
 });
 // $(document).on("page:fetch", function(){
