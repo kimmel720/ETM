@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409200714) do
+ActiveRecord::Schema.define(version: 20160302023508) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 20160409200714) do
 
   add_index "exhibitions", ["museum_id"], name: "index_exhibitions_on_museum_id"
   add_index "exhibitions", ["user_id"], name: "index_exhibitions_on_user_id"
+
+  create_table "floor_coordinates", force: :cascade do |t|
+    t.integer  "artwork_id"
+    t.integer  "left"
+    t.integer  "right"
+    t.integer  "top"
+    t.integer  "bottom"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "floor_coordinates", ["artwork_id"], name: "index_floor_coordinates_on_artwork_id"
 
   create_table "museum_users", force: :cascade do |t|
     t.datetime "created_at", null: false

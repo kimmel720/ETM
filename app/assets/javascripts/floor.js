@@ -1,9 +1,5 @@
 // Here's some data.
-var data = [
-  ["http://www.google.com/" , "356,129,385,187"],
-  ["https://www.youtube.com/" , "71,97,101,154"],
-  ["http://www.isitajewishholidaytoday.com/", "102,261,133,283"]
-];
+
 
 // Here's a function that formats data
 // passed to it in the above format
@@ -35,7 +31,7 @@ function insertHTML(id, html) {
 
 // This function ties things up.
 function run() {
-    var html = createTable(data);
+    var html = createTable(gon.floor_data);
 
     insertHTML("floor", html);
 }

@@ -186,6 +186,13 @@ a3 = Artwork.create(
 )
 a3.image = File.open("app/assets/images/Harvard/mercury.png")
 a3.save
+Floor_Coordinate.create(
+  artwork_id: a3.id,
+  left: 356,
+  right: 129,
+  top: 385,
+  bottom: 187
+)
 
 id_counter += 1
 
@@ -201,5 +208,12 @@ The throne of the Virgin seems to be carved out of the living rock, from which s
 )
 a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
 a4.save
+Floor_Coordinate.create(
+  artwork_id: a3.id,
+  left: 71,
+  right: 97,
+  top: 101,
+  bottom: 154
+)
 
 id_counter += 1

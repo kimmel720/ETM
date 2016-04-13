@@ -77,6 +77,12 @@ class ExhibitionsController < FrontEndController
   end
 
   def floor_plan
+    floor_data = [
+      ["http://www.google.com/" , "356,129,385,187"],
+      ["https://www.youtube.com/" , "71,97,101,154"],
+      ["http://www.isitajewishholidaytoday.com/", "102,261,133,283"]
+    ]
+    gon.floor_data = floor_data
   end
 
   def resources

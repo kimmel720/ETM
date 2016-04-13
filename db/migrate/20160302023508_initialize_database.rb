@@ -69,5 +69,20 @@ class InitializeDatabase < ActiveRecord::Migration
       t.belongs_to :artist, index: true
       t.belongs_to :artwork, index: true
     end
+
+    create_table :museum_users do |t|
+
+      t.timestamps null: false
+    end
+
+    create_table :floor_coordinates do |t|
+      t.belongs_to :artwork, index: true
+      t.integer :left
+      t.integer :right
+      t.integer :top
+      t.integer :bottom
+
+      t.timestamps null: false
+    end
   end
 end
