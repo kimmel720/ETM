@@ -56,6 +56,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.integer :right
       t.integer :top
       t.integer :bottom
+      t.string :catagory
       # t.integer :artist_id, foreign_key: true
 
       t.timestamps null: false

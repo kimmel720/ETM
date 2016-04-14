@@ -9,19 +9,22 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#Map" %>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-6">
+      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#floor-map", id: "floormap-img" %>
         <div id="floor">
-          <map name="map" id="map">
-            <% @floor_dataa.each do |data| %>
-                <area alt="" title="" href= '<%= data[:link] %>' shape="rect" coords= '<%= data[:coord_string] %>' />
+          <map name="floor-map" id="floor-map">
+            <% @floor_data_local.each do |data| %>
+                <area alt="" title="" href= '<%= data[:link] %>' shape="rect" coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
             <% end %>
           </map>
         </div>
         <%= javascript_include_tag "floor" %>
     </div>
-    <div class="col-lg-3"></div>
+    <div class="col-xs-3">
+      <input type="submit" value="Show Sculptures" id="highlight-sculptures" class="btn btn-primary" />
+      <input type="submit" value="Show Paintings" id="highlight-paintings" class="btn btn-primary "/>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
@@ -31,3 +34,6 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  $('map').imageMapResize();
+</script>

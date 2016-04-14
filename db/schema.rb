@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.integer  "right"
     t.integer  "top"
     t.integer  "bottom"
+    t.string   "catagory"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end

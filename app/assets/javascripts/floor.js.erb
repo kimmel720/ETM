@@ -1,3 +1,19 @@
+$('img').mapster({
+  singleSelect : true,
+  clickNavigate : true
+})
+$(function() {
+  $('#highlight-sculptures').click(function(){
+    $('area').mapster('deselect');
+    $('.sculpture').mapster('select');
+  });
+
+  $('#highlight-paintings').click(function(){
+    $('area').mapster('deselect');
+    $('.painting').mapster('select');
+  });
+});
+
 // // Here's some data.
 //
 //

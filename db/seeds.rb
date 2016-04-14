@@ -186,7 +186,8 @@ a3 = Artwork.create(
   left: 356,
   right: 129,
   top: 385,
-  bottom: 187
+  bottom: 187,
+  catagory: "painting"
 )
 a3.image = File.open("app/assets/images/Harvard/mercury.png")
 a3.save
@@ -205,7 +206,8 @@ The throne of the Virgin seems to be carved out of the living rock, from which s
   left: 71,
   right: 97,
   top: 101,
-  bottom: 154
+  bottom: 154,
+  catagory: "sculpture"
 )
 a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
 a4.save
