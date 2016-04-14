@@ -12,7 +12,13 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
       <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#Map" %>
-        <div id="floor"></div>
+        <div id="floor">
+          <map name="map" id="map">
+            <% @floor_dataa.each do |data| %>
+                <area alt="" title="" href= '<%= data[:link] %>' shape="rect" coords= '<%= data[:coord_string] %>' />
+            <% end %>
+          </map>
+        </div>
         <%= javascript_include_tag "floor" %>
     </div>
     <div class="col-lg-3"></div>

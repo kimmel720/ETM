@@ -81,6 +81,10 @@ class ExhibitionsController < FrontEndController
       link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
       coord_string: artwork.floor_coordinates
       } }
+    @floor_dataa = @artworks.each.map { |artwork| {
+      link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
+      coord_string: artwork.floor_coordinates
+      } }
   end
 
   def resources
