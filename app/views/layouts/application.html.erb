@@ -52,8 +52,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <%= form_tag "/search/results", class: "navbar-form navbar-left", :html =>{ :role => "search"}, method: "get" do %>
-          <%= text_field_tag :search %>
-          <%= submit_tag "Search", :id => "submit-button", :class => "btn btn-default" %>
+          <div class="form-group has-feedback left-inner-addon">
+            <span class="glyphicon glyphicon-search from-control-feedback"></span>
+            <label class="control-label sr-only", for="search-bar">Search</label>
+            <%= text_field_tag :search, nil, class: "form-control", id: "search-bar", placeholder: "Search" %>
+         </div>
         <% end %>
         <li><a href="/users/new">Sign up<span class="sr-only">(current)</span></a></li>
         <li><a href="/login">Log in<span class="sr-only">(current)</span></a></li>

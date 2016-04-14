@@ -33,6 +33,21 @@ hr{
   padding: 0;
 }
 
+#search-bar{
+  max-width: 150px;
+}
+.left-inner-addon input {
+    padding-left: 30px;
+}
+.left-inner-addon span {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+.left-inner-addon {
+    position: relative;
+}
+
 .logo {
   max-height: 40px;
   margin-top: 5px;

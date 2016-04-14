@@ -1,0 +1,2 @@
+module MuseumUsersHelper
+end
