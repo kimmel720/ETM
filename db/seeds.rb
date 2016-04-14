@@ -182,17 +182,14 @@ a3 = Artwork.create(
   description: "This portrait depicts a young man disguised as the mischievous Mercury after he has slain the hundred-eyed watchman Argus. Balancing himself on a puff of clouds as he holds a flute and caduceus (a staff entwined with snakes), he stands before a hillside that opens onto what Florentines would have recognized as a Flemish-style landscape. The Medici often identified themselves with classical gods, sometimes even assuming their guises in allegorical portraits. Francesco I de’ Medici, Grand Duke of Tuscany, was an enthusiast of alchemy and often had himself portrayed with an image of Mercury, who was associated with the metal of the same name. The facial features of this youth, however, more closely resemble those found in portraits of Antonio de’ Medici, son of Francesco’s second wife, Bianca Cappello.",
   date_created: Date.new(1575, 1, 1),
   accession_no: Faker::Code.isbn,
-  image_id: 200
-)
-a3.image = File.open("app/assets/images/Harvard/mercury.png")
-a3.save
-Floor_Coordinate.create(
-  artwork_id: a3.id,
+  image_id: 200,
   left: 356,
   right: 129,
   top: 385,
   bottom: 187
 )
+a3.image = File.open("app/assets/images/Harvard/mercury.png")
+a3.save
 
 id_counter += 1
 
@@ -204,16 +201,13 @@ a4 = Artwork.create(
 The throne of the Virgin seems to be carved out of the living rock, from which sprout roots and foliage. The emphasis on nature reveals the continuing influence of Leonardo da Vinci on the Lombard school of painting, though the crisp delineation of forms is more linear and straightforward than the ambiguity and subtlety of the great master’s work.",
   date_created: Date.new(1550, 1, 1),
   accession_no: Faker::Code.isbn,
-  image_id: 201
-)
-a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
-a4.save
-Floor_Coordinate.create(
-  artwork_id: a3.id,
+  image_id: 201,
   left: 71,
   right: 97,
   top: 101,
   bottom: 154
 )
+a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
+a4.save
 
 id_counter += 1

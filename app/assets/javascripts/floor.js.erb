@@ -12,9 +12,10 @@ function createTable(data) {
     html += '<map name="Map" id="Map">';
 
     // Step through the rows of the data.
-    for (var i = 0; i < 3; i++){
-        html += '<area alt="" title="" href=' + data[i][0] + ' shape="rect" coords=' + data[i][1] +  '/>';
-    }
+    for (var i = 0; i < data.length; i++){
+        if (data[i].coord_string) {
+            html += '<area alt="" title="" href=' + data[i].link + ' shape="rect" coords=' + data[i].coord_string +  '/>';
+    }}
 
     html += '</map>';
 

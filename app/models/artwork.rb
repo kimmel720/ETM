@@ -12,4 +12,10 @@ class Artwork < ActiveRecord::Base
   def self.search(search)
     where("name LIKE ? OR medium LIKE ? OR description LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
+
+  def floor_coordinates
+    if !self.left.blank? || !self.right.blank? || !self.top.blank? || !self.bottom.blank?
+      "#{self.left},#{self.right},#{self.top},#{self.bottom}"
+    end
+  end
 end

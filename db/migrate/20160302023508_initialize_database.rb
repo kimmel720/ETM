@@ -52,6 +52,10 @@ class InitializeDatabase < ActiveRecord::Migration
       t.text :description
       t.date :date_created
       t.integer :accession_no
+      t.integer :left
+      t.integer :right
+      t.integer :top
+      t.integer :bottom
       # t.integer :artist_id, foreign_key: true
 
       t.timestamps null: false
@@ -71,16 +75,6 @@ class InitializeDatabase < ActiveRecord::Migration
     end
 
     create_table :museum_users do |t|
-
-      t.timestamps null: false
-    end
-
-    create_table :floor_coordinates do |t|
-      t.belongs_to :artwork, index: true
-      t.integer :left
-      t.integer :right
-      t.integer :top
-      t.integer :bottom
 
       t.timestamps null: false
     end
