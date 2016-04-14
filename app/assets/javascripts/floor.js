@@ -2,28 +2,6 @@
 var data = [
   ["http://www.google.com/" , "356,129,385,187"],
   ["https://www.youtube.com/" , "71,97,101,154"],
-  ["http://www.isitajewishholidaytoday.com/", "102,261,133,283"]
-];
-
-// Here's a function that formats data
-// passed to it in the above format
-// as a table. The HTML is returned
-// as a string.
-
-function createTable(data) {
-    var html = '';
-
-    html += '<map name="Map" id="Map">';
-
-    // Step through the rows of the data.
-    for (var i = 0; i < 3; i++){
-        html += '<area alt="" title="" href=' + data[i][0] + ' shape="rect" coords=' + data[i][1] +  '/>';
-    }
-
-// Here's some data.
-var data = [
-  ["http://www.google.com/" , "356,129,385,187"],
-  ["https://www.youtube.com/" , "71,97,101,154"],
   ["http://www.isitajewishholidaytoday.com/", "102,261,133,283"],
   ["http://localhost:3000/museums/2/exhibitions/2/panorama", "312,65,342,82"]
 ];
