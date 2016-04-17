@@ -1,4 +1,5 @@
 
+
 // http://www.chestysoft.com/imagefile/javascript/get-coordinates.asp
 function FindPosition(oElement)
 {
@@ -17,12 +18,11 @@ function FindPosition(oElement)
     }
 }
 
-function GetCoordinates(e)
-{
+function GetCoordinates(e){
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
-  ImgPos = FindPosition(myImg);
+  ImgPos = FindPosition(e.data.img);
   if (!e) var e = window.event;
   if (e.pageX || e.pageY)
   {
@@ -38,6 +38,14 @@ function GetCoordinates(e)
     }
   PosX = PosX - ImgPos[0];
   PosY = PosY - ImgPos[1];
-  document.getElementById("x").innerHTML = PosX;
-  document.getElementById("y").innerHTML = PosY;
+  var coordinates = [PosX, PosY];
+  console.log(coordinates);
+  if (e.data.coordinates1) {
+    $(e.data.img).off("mousedown", GetCoordinates);
+    $(e.data.img).off("mouseup", GetCoordinates);
+    console.log("MISSION SUCCESS");
+  }
+  else {
+    $(e.data.img).on("mouseup", {img: e.data.img, coordinates1: coordinates}, GetCoordinates);
+  }
 }
