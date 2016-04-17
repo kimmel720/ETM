@@ -17,5 +17,4 @@
 //= require bootstrap-sprockets
 //= require vis
 //= require jquery.imagemapster.js
-//= imageMapResizer.min.js
 //= require_tree .

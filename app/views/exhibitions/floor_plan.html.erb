@@ -19,11 +19,12 @@
             <% end %>
           </map>
         </div>
-        <%= javascript_include_tag "floor" %>
     </div>
     <div class="col-xs-3">
       <input type="submit" value="Show Sculptures" id="highlight-sculptures" class="btn btn-primary" />
       <input type="submit" value="Show Paintings" id="highlight-paintings" class="btn btn-primary "/>
+      <input type="submit" value="New Painting" id="new-painting" class="btn btn-primary "/>
+
     </div>
   </div>
   <div class="row">
@@ -31,6 +32,14 @@
       <br />
       <h4>Click on a red or blue box to visit the coresponding artwork. Click on a camera icon
       to view the corresponding panorama.</h4>
+      <p>X:<span id="x"></span></p>
+      <p>Y:<span id="y"></span></p>
     </div>
   </div>
 </div>
+<%= javascript_include_tag "displayfloorplan" %>
+<%= javascript_include_tag "editfloorplan" %>
+<script type="text/javascript">
+  var myImg = document.getElementById("floormap-img");
+  myImg.onmousedown = GetCoordinates;
+</script>

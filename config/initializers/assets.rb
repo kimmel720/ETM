@@ -19,6 +19,8 @@ Rails.application.config.assets.precompile += %w( Three.js )
 
 Rails.application.config.assets.precompile += %w( three.min.js )
 
-Rails.application.config.assets.precompile += %w( floor.js )
+Rails.application.config.assets.precompile += %w( displayfloorplan.js )
+
+Rails.application.config.assets.precompile += %w( editfloorplan.js )
 
 Rails.application.config.assets.precompile += %w( dat.gui.js )
