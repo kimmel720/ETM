@@ -1,7 +1,8 @@
+var originalContent = $('#floor').clone().html();
 $('img').mapster({
   singleSelect : true,
   clickNavigate : true
-})
+});
 $(function() {
   $('#highlight-sculptures').click(function(){
     $('area').mapster('deselect');
@@ -13,37 +14,39 @@ $(function() {
     $('.painting').mapster('select');
   });
 });
-$(document).ready(onWindowResize);
+// $(document).ready(onWindowResize);
+//
+// var resizeTime = 100;     // total duration of the resize effect, 0 is instant
+// var resizeDelay = 100;    // time to wait before checking the window size again
+//                           // the shorter the time, the more reactive it will be.
+//                           // short or 0 times could cause problems with old browsers.
+//
+// // Track window resizing events, but only actually call the map resize when the
+// // window isn't being resized any more
+//
+// function onWindowResize() {
+//     var curWidth = $(window).width(),
+//         curHeight = $(window).height(),
+//         checking=false;
+//     if (checking) {
+//         return;
+//             }
+//     checking = true;
+//     window.setTimeout(function() {
+//         var newWidth = $(window).width(),
+//            newHeight = $(window).height();
+//         if (newWidth === curWidth &&
+//             newHeight === curHeight) {
+//               var newDivWidth = $("#floor").width();
+//                 $('img').mapster('resize',newDivWidth,0,resizeTime);
+//         }
+//         checking=false;
+//     },resizeDelay );
+// }
+//
+// $(window).bind('resize',onWindowResize);
 
-var resizeTime = 100;     // total duration of the resize effect, 0 is instant
-var resizeDelay = 100;    // time to wait before checking the window size again
-                          // the shorter the time, the more reactive it will be.
-                          // short or 0 times could cause problems with old browsers.
 
-// Track window resizing events, but only actually call the map resize when the
-// window isn't being resized any more
-
-function onWindowResize() {
-    var curWidth = $(window).width(),
-        curHeight = $(window).height(),
-        checking=false;
-    if (checking) {
-        return;
-            }
-    checking = true;
-    window.setTimeout(function() {
-        var newWidth = $(window).width(),
-           newHeight = $(window).height();
-        if (newWidth === curWidth &&
-            newHeight === curHeight) {
-              var newDivWidth = $("#floor").width();
-                $('img').mapster('resize',newDivWidth,0,resizeTime);
-        }
-        checking=false;
-    },resizeDelay );
-}
-
-$(window).bind('resize',onWindowResize);
 
 // // Here's some data.
 //

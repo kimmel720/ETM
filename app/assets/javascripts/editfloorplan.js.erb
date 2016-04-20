@@ -1,4 +1,24 @@
-
+function BuildArea(x1,x2,y1,y2){
+  var coords = new Array(4);
+  if (x2 > x1){
+    coords[0] = x1.toString();
+    coords[2] = x2.toString();
+  }
+  else {
+    coords[0] = x2.toString();
+    coords[2] = x1.toString();
+  }
+  if (y2 > y1){
+    coords[1] = y1.toString();
+    coords[3] = y2.toString();
+  }
+  else {
+    coords[1] = y2.toString();
+    coords[3] = y1.toString();
+  }
+  console.log(coords.join());
+  return "<area alt='' title='' href= 'http://www.google.com' shape='rect' coords='"+ coords.join() + "' />";
+}
 
 // http://www.chestysoft.com/imagefile/javascript/get-coordinates.asp
 function FindPosition(oElement)
@@ -44,6 +64,16 @@ function GetCoordinates(e){
     $(e.data.img).off("mousedown", GetCoordinates);
     $(e.data.img).off("mouseup", GetCoordinates);
     console.log("MISSION SUCCESS");
+    var newArea = BuildArea(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);
+    $('#floor-map').replaceWith(originalContent);
+    $('#floor-map').append(newArea);
+    originalContent = $('#floor').clone().html();
+    $('img').mapster('unbind');
+    $('img').mapster({
+      singleSelect : true,
+      clickNavigate : true
+    });
+    // $(document).ready(onWindowResize);
   }
   else {
     $(e.data.img).on("mouseup", {img: e.data.img, coordinates1: coordinates}, GetCoordinates);

@@ -15,7 +15,7 @@
         <div id="floor">
           <map name="floor-map" id="floor-map">
             <% @floor_data_local.each do |data| %>
-                <area alt="" title="" href= '<%= data[:link] %>' shape="rect" coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
+                <area alt='' title='' href= '<%= data[:link] %>' shape='rect' coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
             <% end %>
           </map>
         </div>
@@ -23,7 +23,8 @@
     <div class="col-xs-3">
       <input type="submit" value="Show Sculptures" id="highlight-sculptures" class="btn btn-primary" />
       <input type="submit" value="Show Paintings" id="highlight-paintings" class="btn btn-primary "/>
-      <input type="submit" value="New Painting" id="new-painting" class="btn btn-primary "/>
+      <input type="submit" value="New Artwork" id="new-artwork" class="btn btn-primary "/>
+      <input type="submit" value="Reset" id="reset" class="btn btn-primary "/>
 
     </div>
   </div>
@@ -45,11 +46,11 @@ var myImg = document.getElementById("floormap-img");
 $(myImg).addClass( 'unselectable' ) // All these attributes are inheritable
 $(myImg).attr( 'unselectable', 'on' ) // For IE9 - This property is not inherited, needs to be placed onto everything
 $(myImg).attr( 'draggable', 'false' ) // For moz and webkit, although Firefox 16 ignores this when -moz-user-select: none; is set, it's like these properties are mutually exclusive, seems to be a bug.
-$(myImg).on( 'dragstart', function() { return false; } );  // Needed since Firefox 16 seems to ingore the 'draggable' attribute we just applied above when '-moz-user-select: none' is applied to the CSS 
+$(myImg).on( 'dragstart', function() { return false; } );  // Needed since Firefox 16 seems to ingore the 'draggable' attribute we just applied above when '-moz-user-select: none' is applied to the CSS
 $(myImg).attr( 'draggable', 'false' )
 $(myImg).attr( 'unselectable', 'on' );
 
-  $("#new-painting").click(function(){
+  $("#new-artwork").click(function(){
     $(myImg).on( "mousedown", {img: myImg}, GetCoordinates);
   });
 

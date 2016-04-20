@@ -15,7 +15,7 @@ class Artwork < ActiveRecord::Base
 
   def floor_coordinates
     if !self.left.blank? || !self.right.blank? || !self.top.blank? || !self.bottom.blank?
-      "#{self.left},#{self.right},#{self.top},#{self.bottom}"
+      "#{self.left},#{self.top},#{self.right},#{self.bottom}"
     end
   end
 end

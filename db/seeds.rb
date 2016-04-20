@@ -184,8 +184,8 @@ a3 = Artwork.create(
   accession_no: Faker::Code.isbn,
   image_id: 200,
   left: 356,
-  right: 129,
-  top: 385,
+  right: 385,
+  top: 129,
   bottom: 187,
   catagory: "painting"
 )
