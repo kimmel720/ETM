@@ -68,6 +68,15 @@ function GetCoordinates(e){
     console.log("MISSION SUCCESS");
     var sortedCoords = SortCoordinates(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);
     var temp = new TempDiv(sortedCoords);
+    var gui = new dat.GUI();
+    gui.add(temp, 'leftCoordinate').name('X Coordinate');
+    gui.add(temp, 'topCoordinate').name('Y Coodinate');
+    gui.add(temp, 'rightCoordinate').name('Width');
+    gui.add(temp, 'bottomCoordinate').name('Height');
+    gui.onChange(new TempDiv())
+
+
+
     // var newArea = BuildArea(sortedCoords);
     // $('#floor-map').replaceWith(originalContent);
     // $('#floor-map').append(newArea);
@@ -90,8 +99,8 @@ var TempDiv = function(coords){
   this.rightCoordinate = coords[2];
   this.topCoordinate = coords[1];
   this.bottomCoordinate = coords[3];
-  this.myWidth = this.rightCoordinate - this.leftCoordinate;
-  this.myHeight = this.bottomCoordinate - this.topCoordinate;
+  this.width = this.rightCoordinate - this.leftCoordinate;
+  this.height = this.bottomCoordinate - this.topCoordinate;
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
-  $('#mapster_wrap_0').append("<div style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.myWidth.toString() + "; height: " + this.myHeight.toString() + "; border-style: dotted; border-width: medium;' </div>");
+  $('#mapster_wrap_0').append("<div class='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
 };
