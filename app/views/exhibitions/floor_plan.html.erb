@@ -11,13 +11,13 @@
   <div class="row">
     <div class="col-xs-3"></div>
     <div class="col-xs-6">
-      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#floor-map", id: "floormap-img", class: "unselectable" %>
-        <div id="floor">
-          <map name="floor-map" id="floor-map">
-            <% @floor_data_local.each do |data| %>
-                <area alt='' title='' href= '<%= data[:link] %>' shape='rect' coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
-            <% end %>
-          </map>
+      <div id="floor">
+        <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#floor-map", id: "floormap-img", class: "unselectable" %>
+        <map name="floor-map" id="floor-map">
+          <% @floor_data_local.each do |data| %>
+              <area alt='' title='' href= '<%= data[:link] %>' shape='rect' coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
+          <% end %>
+        </map>
         </div>
     </div>
     <div class="col-xs-3">
@@ -40,6 +40,7 @@
 </div>
 <%= javascript_include_tag "displayfloorplan" %>
 <%= javascript_include_tag "editfloorplan" %>
+<%= javascript_include_tag "dat.gui" %>
 <script type="text/javascript">
 var myImg = document.getElementById("floormap-img");
 

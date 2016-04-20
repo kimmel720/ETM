@@ -1,4 +1,4 @@
-function BuildArea(x1,x2,y1,y2){
+function SortCoordinates(x1,x2,y1,y2){
   var coords = new Array(4);
   if (x2 > x1){
     coords[0] = x1.toString();
@@ -16,7 +16,9 @@ function BuildArea(x1,x2,y1,y2){
     coords[1] = y2.toString();
     coords[3] = y1.toString();
   }
-  console.log(coords.join());
+  return coords;
+}
+function BuildArea(coords){
   return "<area alt='' title='' href= 'http://www.google.com' shape='rect' coords='"+ coords.join() + "' />";
 }
 
@@ -64,18 +66,32 @@ function GetCoordinates(e){
     $(e.data.img).off("mousedown", GetCoordinates);
     $(e.data.img).off("mouseup", GetCoordinates);
     console.log("MISSION SUCCESS");
-    var newArea = BuildArea(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);
-    $('#floor-map').replaceWith(originalContent);
-    $('#floor-map').append(newArea);
-    originalContent = $('#floor').clone().html();
-    $('img').mapster('unbind');
-    $('img').mapster({
-      singleSelect : true,
-      clickNavigate : true
-    });
+    var sortedCoords = SortCoordinates(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);
+    var temp = new TempDiv(sortedCoords);
+    // var newArea = BuildArea(sortedCoords);
+    // $('#floor-map').replaceWith(originalContent);
+    // $('#floor-map').append(newArea);
+    // originalContent = $('#floor').clone().html();
+    // $('img').mapster('unbind');
+    // $('img').mapster({
+    //   singleSelect : true,
+    //   clickNavigate : true
+    // });
     // $(document).ready(onWindowResize);
+
   }
   else {
     $(e.data.img).on("mouseup", {img: e.data.img, coordinates1: coordinates}, GetCoordinates);
   }
 }
+
+var TempDiv = function(coords){
+  this.leftCoordinate = coords[0];
+  this.rightCoordinate = coords[2];
+  this.topCoordinate = coords[1];
+  this.bottomCoordinate = coords[3];
+  this.myWidth = this.rightCoordinate - this.leftCoordinate;
+  this.myHeight = this.bottomCoordinate - this.topCoordinate;
+  // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
+  $('#mapster_wrap_0').append("<div style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.myWidth.toString() + "; height: " + this.myHeight.toString() + "; border-style: dotted; border-width: medium;' </div>");
+};
