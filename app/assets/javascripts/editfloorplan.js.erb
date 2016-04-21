@@ -113,18 +113,9 @@ function showResults(coord1, coord2){
     temp.draw();
   });
   heightControl.name('Height');
+  var saveControl = gui.add(temp, "save");
+  saveControl.name('SAVE');
 
-
-  // var newArea = BuildArea(sortedCoords);
-  // $('#floor-map').replaceWith(originalContent);
-  // $('#floor-map').append(newArea);
-  // originalContent = $('#floor').clone().html();
-  // $('img').mapster('unbind');
-  // $('img').mapster({
-  //   singleSelect : true,
-  //   clickNavigate : true
-  // });
-  // $(document).ready(onWindowResize);
 }
 var TempDiv = function(coords){
   this.leftCoordinate = coords[0];
@@ -133,17 +124,28 @@ var TempDiv = function(coords){
   this.bottomCoordinate = coords[3];
   this.width = this.rightCoordinate - this.leftCoordinate;
   this.height = this.bottomCoordinate - this.topCoordinate;
-  console.log("initialized");
-  console.log(this.leftCoordinate);
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
 
   this.draw = function(){
-    console.log("drawing");
     if ($('#scaffold').length){
       $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
     }
     else {
       $('#mapster_wrap_0').append("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
     }
+  }
+
+  this.save = function(){
+    var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate]);
+    $('img').mapster('unbind');
+    $('#floor').html(originalContent);
+    $('#floor-map').append(newArea);
+    console.log(newArea);
+    originalContent = $('#floor').clone().html();
+    $('img').mapster({
+      singleSelect : true,
+      clickNavigate : true
+    });
+    // $(document).ready(onWindowResize);
   }
 }
