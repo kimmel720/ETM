@@ -63,6 +63,7 @@ function GetCoordinates(e){
   var coordinates = [PosX, PosY];
   console.log(coordinates);
   if (e.data.coordinates1) {
+    $("#floormap-img").css("cursor", "default");
     $(myImg).off("mousedown", GetCoordinates);
     $(myImg).off("mouseup", GetCoordinates);
     var sortedCoords = SortCoordinates(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);

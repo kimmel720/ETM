@@ -33,8 +33,6 @@
       <br />
       <h4>Click on a red or blue box to visit the coresponding artwork. Click on a camera icon
       to view the corresponding panorama.</h4>
-      <p>Click 1:<span id="x"></span></p>
-      <p>Click 2:<span id="y"></span></p>
     </div>
   </div>
 </div>
@@ -52,6 +50,7 @@ $(myImg).attr( 'draggable', 'false' );
 $(myImg).attr( 'unselectable', 'on' );
 
   $("#new-artwork").click(function(){
+    $("#floormap-img").css("cursor", "crosshair");
     $(myImg).on( "mousedown", {}, GetCoordinates);
   });
 
