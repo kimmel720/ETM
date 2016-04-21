@@ -44,15 +44,15 @@
 <script type="text/javascript">
 var myImg = document.getElementById("floormap-img");
 
-$(myImg).addClass( 'unselectable' ) // All these attributes are inheritable
-$(myImg).attr( 'unselectable', 'on' ) // For IE9 - This property is not inherited, needs to be placed onto everything
-$(myImg).attr( 'draggable', 'false' ) // For moz and webkit, although Firefox 16 ignores this when -moz-user-select: none; is set, it's like these properties are mutually exclusive, seems to be a bug.
+$(myImg).addClass( 'unselectable' ); // All these attributes are inheritable
+$(myImg).attr( 'unselectable', 'on' ); // For IE9 - This property is not inherited, needs to be placed onto everything
+$(myImg).attr( 'draggable', 'false' ); // For moz and webkit, although Firefox 16 ignores this when -moz-user-select: none; is set, it's like these properties are mutually exclusive, seems to be a bug.
 $(myImg).on( 'dragstart', function() { return false; } );  // Needed since Firefox 16 seems to ingore the 'draggable' attribute we just applied above when '-moz-user-select: none' is applied to the CSS
-$(myImg).attr( 'draggable', 'false' )
+$(myImg).attr( 'draggable', 'false' );
 $(myImg).attr( 'unselectable', 'on' );
 
   $("#new-artwork").click(function(){
-    $(myImg).on( "mousedown", {img: myImg}, GetCoordinates);
+    $(myImg).on( "mousedown", {}, GetCoordinates);
   });
 
 </script>

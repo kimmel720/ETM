@@ -44,7 +44,7 @@ function GetCoordinates(e){
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
-  ImgPos = FindPosition(e.data.img);
+  ImgPos = FindPosition(myImg);
   if (!e) var e = window.event;
   if (e.pageX || e.pageY)
   {
@@ -63,18 +63,41 @@ function GetCoordinates(e){
   var coordinates = [PosX, PosY];
   console.log(coordinates);
   if (e.data.coordinates1) {
-    $(e.data.img).off("mousedown", GetCoordinates);
-    $(e.data.img).off("mouseup", GetCoordinates);
-    console.log("MISSION SUCCESS");
+    $(myImg).off("mousedown", GetCoordinates);
+    $(myImg).off("mouseup", GetCoordinates);
     var sortedCoords = SortCoordinates(PosX, e.data.coordinates1[0], PosY, e.data.coordinates1[1]);
     var temp = new TempDiv(sortedCoords);
+    temp.draw();
     var gui = new dat.GUI();
-    gui.add(temp, 'leftCoordinate').name('X Coordinate');
-    gui.add(temp, 'topCoordinate').name('Y Coodinate');
-    gui.add(temp, 'rightCoordinate').name('Width');
-    gui.add(temp, 'bottomCoordinate').name('Height');
-    gui.onChange(new TempDiv())
+    var leftControl = gui.add(temp, 'leftCoordinate');
+    leftControl.onChange(function(value){
+      temp.leftCoordinate = value;
+      temp.draw();
+    });
+    // leftControl.step(5);
+    leftControl.name('Left Coordinate');
 
+    var topControl = gui.add(temp, 'topCoordinate');
+    topControl.onChange(function(value){
+      temp.topCoordinate = value;
+      temp.draw();
+    });
+    // topControl.step(5);
+    topControl.name('Top Coordinate');
+
+    var widthControl = gui.add(temp, 'width');
+    widthControl.onChange(function(value){
+      temp.width = value;
+      temp.draw();
+    });
+    widthControl.name('Width');
+
+    var heightControl = gui.add(temp, 'height');
+    heightControl.onChange(function(value){
+      temp.height = value;
+      temp.draw();
+    });
+    heightControl.name('Height');
 
 
     // var newArea = BuildArea(sortedCoords);
@@ -90,7 +113,7 @@ function GetCoordinates(e){
 
   }
   else {
-    $(e.data.img).on("mouseup", {img: e.data.img, coordinates1: coordinates}, GetCoordinates);
+    $(myImg).on("mouseup", { coordinates1: coordinates}, GetCoordinates);
   }
 }
 
@@ -101,6 +124,18 @@ var TempDiv = function(coords){
   this.bottomCoordinate = coords[3];
   this.width = this.rightCoordinate - this.leftCoordinate;
   this.height = this.bottomCoordinate - this.topCoordinate;
+  console.log("initialized");
+  console.log(this.leftCoordinate);
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
-  $('#mapster_wrap_0').append("<div class='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
-};
+
+  this.draw = function(){
+    console.log("drawing");
+    if ($('#scaffold').length){
+      $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
+    }
+    else {
+      $('#mapster_wrap_0').append("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
+    }
+
+  }
+}
