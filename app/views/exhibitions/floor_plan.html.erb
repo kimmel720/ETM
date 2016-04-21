@@ -48,10 +48,14 @@ $(myImg).attr( 'draggable', 'false' ); // For moz and webkit, although Firefox 1
 $(myImg).on( 'dragstart', function() { return false; } );  // Needed since Firefox 16 seems to ingore the 'draggable' attribute we just applied above when '-moz-user-select: none' is applied to the CSS
 $(myImg).attr( 'draggable', 'false' );
 $(myImg).attr( 'unselectable', 'on' );
-
+var coord1;
+var coord2;
+var drawing = 0;
   $("#new-artwork").click(function(){
     $("#floormap-img").css("cursor", "crosshair");
-    $(myImg).on( "mousedown", {}, GetCoordinates);
+    drawing = 2;
   });
+  $(myImg).on( "mousedown", GetCoordinates);
+  $(myImg).on("mouseup", GetCoordinates);
 
 </script>
