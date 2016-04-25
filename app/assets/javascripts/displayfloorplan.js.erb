@@ -1,8 +1,5 @@
 var originalContent = $('#floor').clone().html();
-$('img').mapster({
-  singleSelect : true,
-  clickNavigate : true
-});
+initializeMapster();
 $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
 $(function() {
   $('#highlight-sculptures').click(function(){
@@ -15,6 +12,21 @@ $(function() {
     $('.painting').mapster('select');
   });
 });
+
+function initializeMapster() {
+  $('img').mapster({
+    singleSelect : true,
+    clickNavigate : true
+  //   showToolTip: true,
+  //   mapKey: 'data',
+  //   areas: [{
+  //     key: 'go'
+  //   }]
+  //   onShowToolTip: function(data) {
+  //     data.toolTip.text(this.id);
+  //   }
+  });
+}
 // $(document).ready(onWindowResize);
 //
 // var resizeTime = 100;     // total duration of the resize effect, 0 is instant

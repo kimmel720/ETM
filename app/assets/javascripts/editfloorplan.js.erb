@@ -146,10 +146,7 @@ var TempDiv = function(coords){
     $('#floor').html(originalContent);
     $('#floor-map').append(newArea);
     originalContent = $('#floor').clone().html();
-    $('img').mapster({
-      singleSelect : true,
-      clickNavigate : true
-    });
+    initializeMapster();
     $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();

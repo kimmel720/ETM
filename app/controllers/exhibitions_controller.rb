@@ -84,7 +84,8 @@ class ExhibitionsController < FrontEndController
     @floor_data_local = @artworks.each.map { |artwork| {
       link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
       coord_string: artwork.floor_coordinates,
-      type: artwork.catagory
+      type: artwork.catagory,
+      name: artwork.name
       } }
       hsh = {}
       @artworks.each do |artwork|

@@ -16,7 +16,7 @@
         <div id="sub-floor">
           <map name="floor-map" id="floor-map">
             <% @floor_data_local.each do |data| %>
-              <area alt='' title='' href= '<%= data[:link] %>' shape='rect' coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
+              <area alt='' title='<%= data[:name] %>' href= '<%= data[:link] %>' href= '<%= data[:link] %>' shape='rect' coords= '<%= data[:coord_string] %>' class='<%= data[:type] %>' />
             <% end %>
           </map>
         </div>
