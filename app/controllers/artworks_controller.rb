@@ -1,6 +1,6 @@
 class ArtworksController < FrontEndController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show, :index]
+  skip_before_action :authorize, only: [:show, :index, :update]
 
   # GET /artworks
   # GET /artworks.json
@@ -53,10 +53,10 @@ class ArtworksController < FrontEndController
     respond_to do |format|
       if @artwork.update(artwork_params)
         format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
-        format.json { render :show, status: :ok, location: @artwork }
+        format.json { render :nothing => true }
       else
         format.html { render :edit }
-        format.json { render json: @artwork.errors, status: :unprocessable_entity }
+        format.json { render :nothing => true }
       end
     end
   end
@@ -82,6 +82,6 @@ class ArtworksController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:img, :description, :date_created)
+      params.require(:artwork).permit(:img, :description, :date_created, :left, :right, :top, :bottom)
     end
 end

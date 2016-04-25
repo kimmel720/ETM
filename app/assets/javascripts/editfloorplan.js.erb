@@ -1,4 +1,3 @@
-console.log(JSON.parse(gon.artworks));
 var mouse = {
   x: 0,
   y: 0,
@@ -6,6 +5,9 @@ var mouse = {
   startY: 0,
   drawing: 0
 };
+var saveURL = window.location.href;
+saveURL = saveURL.substring(0, saveURL.length - 10);
+saveURL = saveURL + "artworks/"
 
 function storeCoordinates() {
   mouse.startX = mouse.x;
@@ -151,12 +153,26 @@ var TempDiv = function(coords){
     $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();
-    console.log(this.artwork);
-    // $.ajax({
-    //   type: "PUT",
-    //   url:
-    // })
+    console.log(saveURL + this.artwork);
+    $.ajax({
+      data: JSON.stringify({
+        "left": this.leftCoordinate,
+        "right": this.rightCoordinate,
+        "top": this.topCoordinate,
+        "bottom": this.bottomCoordinate
+      }),
+      type: "PUT",
+      url: (saveURL + this.artwork),
+      dataType: "json",
+      contentType: "application/json",
+      success: function(){
+        console.log("SHOULD BE SAVED!!!");
+      },
+      error: function(a,b,c) {
+        console.log("ERROR WITH AJAX:" + a + b + c);
+      }
 
+    });
   }
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");

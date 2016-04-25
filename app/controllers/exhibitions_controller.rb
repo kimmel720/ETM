@@ -91,6 +91,7 @@ class ExhibitionsController < FrontEndController
         hsh[artwork.name] = artwork.id
       end
       gon.artworks = hsh.to_json
+      # TODO: make sure only unbound artworks are sent
   end
 
   def resources
