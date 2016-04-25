@@ -57,7 +57,22 @@ var drawing = 0;
     $("#floormap-img").css("cursor", "crosshair");
     drawing = 2;
   });
-  $(myImg).on( "mousedown", GetCoordinates);
-  $(myImg).on("mouseup", GetCoordinates);
+  $(myImg).on( "mousedown", function(e) {
+    setMousePosition(e);
+    storeCoordinates();
+    mouse.drawing = true;
+  });
+  $(myImg, '#scaffold').on("mousemove", function(e){
+    setMousePosition(e);
+    if (mouse.drawing){
+      drawTemp();
+    }
+  });
+  $(myImg).on("mouseup", function(e){
+    setMousePosition(e);
+    t = drawTemp();
+    drawGui(t);
+    mouse.drawing = false;
+  });
 
 </script>
