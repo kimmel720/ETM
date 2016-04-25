@@ -34,6 +34,13 @@ function SortCoordinates(x1,x2,y1,y2){
   }
   return coords;
 }
+function verifyCoords(coordinateArray, maxX, maxY){
+  coordinateArray[0] = Math.max(coordinateArray[0], 0);
+  coordinateArray[1] = Math.max(coordinateArray[1], 0);
+  coordinateArray[2] = Math.min(coordinateArray[2], maxX);
+  coordinateArray[3] = Math.min(coordinateArray[3], maxY);
+  return coordinateArray;
+}
 
 function BuildArea(coords){
   return "<area alt='' title='' href= 'http://www.google.com' shape='rect' coords='"+ coords.join() + "' />";
@@ -83,6 +90,10 @@ function setMousePosition(e){
 
 function drawTemp(){
   var sortedCoords = SortCoordinates(mouse.x, mouse.startX, mouse.y, mouse.startY);
+  imgLocation = FindPosition(myImg);
+  maxX = myImg.offsetWidth;
+  maxY = myImg.offsetHeight;
+  sortedCoords = verifyCoords(sortedCoords, maxX, maxY);
   var temp = new TempDiv(sortedCoords);
   temp.draw();
   return temp;

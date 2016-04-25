@@ -65,15 +65,11 @@ var drawing = 0;
     }
   });
 
-  $(myImg).on("mousemove", function(e){
+  $(document).on("mousemove", function(e){
     setMousePosition(e);
     if (mouse.drawing == 1){
       drawTemp();
-      $('#scaffold').on("mousemove", function(e){
-        if (mouse.drawing == 1){
-          drawTemp();
-        }
-      });
+      $("#scaffold").css("cursor", "crosshair");
     }
   });
   $(myImg).on("mouseup", function(e){
@@ -85,6 +81,6 @@ var drawing = 0;
       $("#floormap-img").css("cursor", "default");
 
     }
-  });
 
+  });
 </script>
