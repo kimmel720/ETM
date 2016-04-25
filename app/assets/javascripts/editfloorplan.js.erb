@@ -120,6 +120,8 @@ function drawGui(divElement){
   saveControl.name('SAVE');
   var cancelControl = gui.add(divElement, 'cancel');
   cancelControl.name('Cancel');
+
+  $('select').addClass('dat-ui-selection');
 }
 
 var TempDiv = function(coords){
