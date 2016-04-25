@@ -116,11 +116,12 @@ function drawGui(divElement){
     divElement.draw();
   });
   heightControl.name('Height');
+  var artworkSelectControl = gui.add(divElement, 'artworkTitle', gon.artworks);
+  artworkSelectControl.name('Artwork');
   var saveControl = gui.add(divElement, "save");
   saveControl.name('SAVE');
   var cancelControl = gui.add(divElement, 'cancel');
   cancelControl.name('Cancel');
-
 }
 
 var TempDiv = function(coords){
@@ -130,6 +131,7 @@ var TempDiv = function(coords){
   this.bottomCoordinate = coords[3];
   this.width = this.rightCoordinate - this.leftCoordinate;
   this.height = this.bottomCoordinate - this.topCoordinate;
+  this.artworkTitle = 'NONE';
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
 
   this.draw = function(){
@@ -152,6 +154,6 @@ var TempDiv = function(coords){
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
     $('.dg.main.a').remove();
-    
+
   }
 }

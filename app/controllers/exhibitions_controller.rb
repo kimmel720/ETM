@@ -77,15 +77,16 @@ class ExhibitionsController < FrontEndController
   end
 
   def floor_plan
-    gon.floor_data = @artworks.each.map { |artwork| {
-      link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
-      coord_string: artwork.floor_coordinates
-      } }
+    # gon.floor_data = @artworks.each.map { |artwork| {
+    #   link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
+    #   coord_string: artwork.floor_coordinates
+    #   } }
     @floor_data_local = @artworks.each.map { |artwork| {
       link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
       coord_string: artwork.floor_coordinates,
       type: artwork.catagory
       } }
+    gon.artworks = @artworks.each.map { |artwork| artwork.name }
   end
 
   def resources
