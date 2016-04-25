@@ -16,22 +16,10 @@ function storeCoordinates() {
 
 function SortCoordinates(x1,x2,y1,y2){
   var coords = new Array(4);
-  if (x2 > x1){
-    coords[0] = x1.toString();
-    coords[2] = x2.toString();
-  }
-  else {
-    coords[0] = x2.toString();
-    coords[2] = x1.toString();
-  }
-  if (y2 > y1){
-    coords[1] = y1.toString();
-    coords[3] = y2.toString();
-  }
-  else {
-    coords[1] = y2.toString();
-    coords[3] = y1.toString();
-  }
+  coords[0] = Math.min(x1,x2);
+  coords[2] = Math.max(x1,x2);
+  coords[1] = Math.min(y1,y2);
+  coords[3] = Math.max(y1,y2);
   return coords;
 }
 function verifyCoords(coordinateArray, maxX, maxY){

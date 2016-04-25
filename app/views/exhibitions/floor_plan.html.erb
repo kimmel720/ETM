@@ -72,15 +72,13 @@ var drawing = 0;
       $("#scaffold").css("cursor", "crosshair");
     }
   });
-  $(myImg).on("mouseup", function(e){
+  $(document).on("mouseup", function(e){
     if (mouse.drawing == 1){
       setMousePosition(e);
       t = drawTemp();
       drawGui(t);
       mouse.drawing = 0;
       $("#floormap-img").css("cursor", "default");
-
     }
-
   });
 </script>
