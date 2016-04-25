@@ -22,13 +22,6 @@ function SortCoordinates(x1,x2,y1,y2){
   coords[3] = Math.max(y1,y2);
   return coords;
 }
-function verifyCoords(coordinateArray, maxX, maxY){
-  coordinateArray[0] = Math.max(coordinateArray[0], 0);
-  coordinateArray[1] = Math.max(coordinateArray[1], 0);
-  coordinateArray[2] = Math.min(coordinateArray[2], maxX);
-  coordinateArray[3] = Math.min(coordinateArray[3], maxY);
-  return coordinateArray;
-}
 
 function BuildArea(coords){
   return "<area alt='' title='' href= 'http://www.google.com' shape='rect' coords='"+ coords.join() + "' />";
@@ -78,10 +71,6 @@ function setMousePosition(e){
 
 function drawTemp(){
   var sortedCoords = SortCoordinates(mouse.x, mouse.startX, mouse.y, mouse.startY);
-  imgLocation = FindPosition(myImg);
-  maxX = myImg.offsetWidth;
-  maxY = myImg.offsetHeight;
-  sortedCoords = verifyCoords(sortedCoords, maxX, maxY);
   var temp = new TempDiv(sortedCoords);
   temp.draw();
   return temp;
@@ -89,35 +78,42 @@ function drawTemp(){
 
 function drawGui(divElement){
   var gui = new dat.GUI();
-  var leftControl = gui.add(divElement, 'leftCoordinate');
+  var leftControl = gui.add(divElement, 'leftCoordinate', 0, myImg.offsetWidth);
   leftControl.onChange(function(value){
     divElement.leftCoordinate = value;
+    divElement.rightCoordinate = value + divElement.width;
     divElement.draw();
   });
   // leftControl.step(5);
   leftControl.name('Left Coordinate');
 
-  var topControl = gui.add(divElement, 'topCoordinate');
+  var topControl = gui.add(divElement, 'topCoordinate', 0, myImg.offsetHeight);
   topControl.onChange(function(value){
     divElement.topCoordinate = value;
+    divElement.bottomCoordinate = value + divElement.height;
     divElement.draw();
   });
   // topControl.step(5);
   topControl.name('Top Coordinate');
 
-  var widthControl = gui.add(divElement, 'width');
+  var widthControl = gui.add(divElement, 'width', 0,300);
   widthControl.onChange(function(value){
     divElement.width = value;
+    divElement.rightCoordinate = (divElement.leftCoordinate + divElement.width);
     divElement.draw();
   });
   widthControl.name('Width');
+  widthControl.listen();
 
-  var heightControl = gui.add(divElement, 'height');
+  var heightControl = gui.add(divElement, 'height', 0, 300);
   heightControl.onChange(function(value){
     divElement.height = value;
+    divElement.bottomCoordinate = (divElement.topCoordinate + divElement.height);
     divElement.draw();
   });
   heightControl.name('Height');
+  heightControl.listen();
+
   var artworkSelectControl = gui.add(divElement, 'artwork', buildArtworkList());
   artworkSelectControl.name('Artwork');
   var saveControl = gui.add(divElement, "save");
@@ -137,7 +133,8 @@ var TempDiv = function(coords){
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
 
   this.draw = function(){
-      $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
+    this.checkForBounds();
+    $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
   }
   this.save = function(){
     var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate]);
@@ -173,6 +170,19 @@ var TempDiv = function(coords){
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
     $('.dg.main.a').remove();
+
+  }
+  this.checkForBounds = function(){
+    maxX = myImg.offsetWidth;
+    maxY = myImg.offsetHeight;
+    this.leftCoordinate = Math.max(this.leftCoordinate, 0);
+    this.rightCoordinate = Math.min(this.rightCoordinate, maxX);
+    this.topCoordinate = Math.max(this.topCoordinate, 0);
+    this.bottomCoordinate = Math.min(this.bottomCoordinate, maxY);
+
+
+    this.width = this.rightCoordinate - this.leftCoordinate;
+    this.height = this.bottomCoordinate - this.topCoordinate;
 
   }
 }
