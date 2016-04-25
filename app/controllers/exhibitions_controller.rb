@@ -86,7 +86,11 @@ class ExhibitionsController < FrontEndController
       coord_string: artwork.floor_coordinates,
       type: artwork.catagory
       } }
-    gon.artworks = @artworks.each.map { |artwork| artwork.name }
+      hsh = {}
+      @artworks.each do |artwork|
+        hsh[artwork.name] = artwork.id
+      end
+      gon.artworks = hsh.to_json
   end
 
   def resources

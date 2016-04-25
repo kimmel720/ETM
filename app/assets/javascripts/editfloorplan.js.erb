@@ -1,3 +1,4 @@
+console.log(JSON.parse(gon.artworks));
 var mouse = {
   x: 0,
   y: 0,
@@ -116,7 +117,7 @@ function drawGui(divElement){
     divElement.draw();
   });
   heightControl.name('Height');
-  var artworkSelectControl = gui.add(divElement, 'artworkTitle', gon.artworks);
+  var artworkSelectControl = gui.add(divElement, 'artwork', buildArtworkList());
   artworkSelectControl.name('Artwork');
   var saveControl = gui.add(divElement, "save");
   saveControl.name('SAVE');
@@ -131,7 +132,7 @@ var TempDiv = function(coords){
   this.bottomCoordinate = coords[3];
   this.width = this.rightCoordinate - this.leftCoordinate;
   this.height = this.bottomCoordinate - this.topCoordinate;
-  this.artworkTitle = 'NONE';
+  this.artwork = -1;
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
 
   this.draw = function(){
@@ -150,10 +151,22 @@ var TempDiv = function(coords){
     $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();
+    console.log(this.artwork);
+    // $.ajax({
+    //   type: "PUT",
+    //   url:
+    // })
+
   }
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
     $('.dg.main.a').remove();
 
   }
+}
+
+function buildArtworkList(){
+  none = {'NONE': -1};
+  artworks = JSON.parse(gon.artworks);
+  return $.extend({}, none, artworks);
 }
