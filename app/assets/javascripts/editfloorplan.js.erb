@@ -118,6 +118,9 @@ function drawGui(divElement){
   heightControl.name('Height');
   var saveControl = gui.add(divElement, "save");
   saveControl.name('SAVE');
+  var cancelControl = gui.add(divElement, 'cancel');
+  cancelControl.name('Cancel');
+
 }
 
 var TempDiv = function(coords){
@@ -145,5 +148,10 @@ var TempDiv = function(coords){
     $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();
+  }
+  this.cancel = function(){
+    $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
+    $('.dg.main.a').remove();
+    
   }
 }
