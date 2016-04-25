@@ -1,9 +1,9 @@
 var originalContent = $('#floor').clone().html();
-console.log(originalContent);
 $('img').mapster({
   singleSelect : true,
   clickNavigate : true
 });
+$('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
 $(function() {
   $('#highlight-sculptures').click(function(){
     $('area').mapster('deselect');
@@ -46,41 +46,3 @@ $(function() {
 // }
 //
 // $(window).bind('resize',onWindowResize);
-
-
-
-// // Here's some data.
-//
-//
-// // Here's a function that formats data
-// // passed to it in the above format
-// // as a table. The HTML is returned
-// // as a string.
-//
-// function createTable(data) {
-//     var html = '';
-//
-//     // Step through the rows of the data.
-//     for (var i = 0; i < data.length; i++){
-//         if (data[i].coord_string) {
-//             html += '<area alt="" title="" href=' + data[i].link + ' shape="rect" coords=' + data[i].coord_string +  '/>';
-//     }}
-//
-//     return html;
-// }
-//
-// // This function takes the formatted HTML
-// // and inserts it into the document as
-// // 'child' HTML of the specified element.
-// function insertHTML(id, html) {
-//     $('#' + id).append(html);
-// }
-//
-// // This function ties things up.
-// function run() {
-//     var html = createTable(gon.floor_data);
-//
-//     insertHTML("map", html);
-// }
-//
-// window.onload = run();

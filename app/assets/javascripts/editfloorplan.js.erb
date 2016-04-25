@@ -3,7 +3,7 @@ var mouse = {
   y: 0,
   startX: 0,
   startY: 0,
-  drawing: false
+  drawing: 0
 };
 
 function storeCoordinates() {
@@ -55,7 +55,6 @@ function FindPosition(oElement)
 }
 
 function setMousePosition(e){
-  console.log(e);
   var PosX = 0;
   var PosY = 0;
   var ImgPos;
@@ -78,25 +77,6 @@ function setMousePosition(e){
   mouse.x = PosX;
   mouse.y = PosY;
 }
-
-// function logCoordinates(e, coordinates){
-//   if (drawing == 2) {
-//     coord1 = coordinates;
-//     drawing = 1;
-//   }
-//   else if (drawing == 1) {
-//     if (e.type == 'mousemove'){
-//       showResults(coord1, coordinates)
-//     }
-//     else {
-//       coord2 = coordinates;
-//       drawing = 0;
-//       $("#floormap-img").css("cursor", "default");
-//       box = showResults(coord1, coord2);
-//       drawGui(box);
-//     }
-//   }
-// }
 
 function drawTemp(){
   var sortedCoords = SortCoordinates(mouse.x, mouse.startX, mouse.y, mouse.startY);
@@ -150,25 +130,19 @@ var TempDiv = function(coords){
   // $('#floor').prepend("<div style='width: 200px; height: 100px; border-style: dotted; border-width: medium;'> </div>");
 
   this.draw = function(){
-    if ($('#scaffold').length){
       $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
-    }
-    else {
-      $('#mapster_wrap_0').append("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
-    }
   }
-
   this.save = function(){
     var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate]);
     $('img').mapster('unbind');
     $('#floor').html(originalContent);
     $('#floor-map').append(newArea);
-    console.log(newArea);
     originalContent = $('#floor').clone().html();
     $('img').mapster({
       singleSelect : true,
       clickNavigate : true
     });
+    $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();
   }

@@ -55,24 +55,34 @@ var coord2;
 var drawing = 0;
   $("#new-artwork").click(function(){
     $("#floormap-img").css("cursor", "crosshair");
-    drawing = 2;
+    mouse.drawing = 2;
   });
   $(myImg).on( "mousedown", function(e) {
     setMousePosition(e);
     storeCoordinates();
-    mouse.drawing = true;
+    if (mouse.drawing == 2){
+      mouse.drawing = 1;
+    }
   });
-  $(myImg, '#scaffold').on("mousemove", function(e){
+
+  $(myImg).on("mousemove", function(e){
     setMousePosition(e);
-    if (mouse.drawing){
+    if (mouse.drawing == 1){
       drawTemp();
+      $('#scaffold').on("mousemove", function(e){
+        if (mouse.drawing == 1){
+          drawTemp();
+        }
+      });
     }
   });
   $(myImg).on("mouseup", function(e){
-    setMousePosition(e);
-    t = drawTemp();
-    drawGui(t);
-    mouse.drawing = false;
+    if (mouse.drawing == 1){
+      setMousePosition(e);
+      t = drawTemp();
+      drawGui(t);
+      mouse.drawing = 0;
+    }
   });
 
 </script>
