@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160302023508) do
     t.string   "country"
     t.string   "description"
     t.string   "website"
+    t.string   "color"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end

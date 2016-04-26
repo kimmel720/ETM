@@ -50,3 +50,20 @@
 
 });
 </script>
+
+<script type="text/javascript">
+  var lighterColor = shadeBlendConvert(0.3,'<%= @museum.color %>');
+  $('.breadcrumb').css('background-color', '<%= @museum.color %>');
+  $('.vis-item').css('background-color', '<%= @museum.color %>');
+  // $('.vis-item').hover(function(){
+  //   $(this).css('background-color', lighterColor);
+  // });
+  var css = ".vis-item:hover *{ background-color: " + lighterColor +"}";
+  style = document.createElement('style');
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  document.getElementsByTagName('head')[0].appendChild(style);
+</script>

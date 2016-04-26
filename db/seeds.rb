@@ -30,7 +30,8 @@ farber = Museum.create(
   city: "Waltham",
   country: "United States",
   description: Faker::Lorem.paragraph,
-  website: "http://www.brandeis.edu/rose/"
+  website: "http://www.brandeis.edu/rose/",
+  color: "#09e685"
 )
 farber.image = File.open("app/assets/images/Farber/goldfarb.png")
 farber.save
@@ -100,7 +101,8 @@ harvard = Museum.create(
   description: "The Harvard Art Museums is part of Harvard University and comprise three museums: the Fogg Museum (established in 1895), the Busch-Reisinger Museum (established in 1903), and the Arthur M. Sackler Museum (established in 1985) and four research centers: the Archaeological Exploration of Sardis (founded in 1958), the Center for the Technical Study of Modern Art (founded in 2002), the Harvard Art Museums Archives, and the Straus Center for Conservation and Technical Studies (founded in 1928). The three museums that comprise the Harvard Art Museums were initially integrated into a single institution under the name Harvard University Art Museums in 1983. University was dropped from the institutional name in 2008.
 The collections include approximately 250,000 objects in all media, ranging in date from antiquity to the present and originating in Europe, North America, North Africa, the Middle East, South Asia, East Asia, and Southeast Asia.
 ",
-  website: "http://www.harvardartmuseums.org/"
+  website: "http://www.harvardartmuseums.org/",
+  color: "#8ce630"
 )
 harvard.image = File.open("app/assets/images/Harvard/harvard.jpg")
 harvard.save
@@ -135,7 +137,8 @@ p.save
     city: Faker::Address.city,
     country: Faker::Address.country,
     description: Faker::Lorem.paragraph,
-    website: Faker::Internet.url
+    website: Faker::Internet.url,
+    color: ('#' + SecureRandom.hex(3))
   )
   m.image = open(Faker::Placeholdit.image)
   m.save

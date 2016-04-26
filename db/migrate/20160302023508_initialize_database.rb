@@ -19,6 +19,7 @@ class InitializeDatabase < ActiveRecord::Migration
       t.string :country
       t.string :description
       t.string :website
+      t.string :color
 
       t.timestamps null: false
     end
