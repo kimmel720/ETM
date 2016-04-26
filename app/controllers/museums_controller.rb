@@ -14,7 +14,7 @@ class MuseumsController < FrontEndController
         """
         <div class='infobox'>
           <h2>#{museum.name}</h2>
-            <p class='infobox'>#{museum.description}</p>
+            <p class='infobox'>#{(museum.description).match(/^.{0,300}\b/)[0] + '...'}</p>
             <a class='button-link' href='/museums/#{museum.id.to_s}'>
               <div class='btn btn-primary btn-block grid-button'>
                 Visit Museum

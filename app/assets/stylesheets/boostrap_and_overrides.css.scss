@@ -150,3 +150,30 @@ div.white#slidebox-container{
     -webkit-user-drag: none; /* Prevents dragging of images/divs etc */
     user-drag: none;
 }
+
+a:hover {
+  background-color: inherit;
+}
+
+.vis-item {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+.vis-item:hover * {
+  cursor: pointer;
+  text-decoration: underline;
+  background-color: #bfc9ec;
+  border-color: #799af7;
+}
+.vis-item-content:hover{
+
+}
+
+.vis.timeline .item.range .content {
+    text-overflow: ellipsis;
+}
