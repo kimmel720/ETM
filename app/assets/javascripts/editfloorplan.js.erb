@@ -77,7 +77,9 @@ function drawTemp(){
 }
 
 function drawGui(divElement){
-  var gui = new dat.GUI();
+  var gui = new dat.GUI({ autoPlace: false});
+  // $('#scaffold').append("<div id='gui-container' style='display: none;' </div>");
+  document.getElementById('gui-container').appendChild(gui.domElement);
   var leftControl = gui.add(divElement, 'leftCoordinate', 0, myImg.offsetWidth);
   leftControl.onChange(function(value){
     divElement.leftCoordinate = value;
