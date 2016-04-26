@@ -7,7 +7,14 @@ var panoramUrl;
 
 $(".exhibitions.panorama").ready(init);
 
+//
+
 function init() {
+    var boxArray = [
+        [12, 17, 4, -70, 2, 5, 0, 'https://www.google.com/'],
+        [20, 20, 5, 70, 15, 5, 0.26],
+    ];
+
     panoramUrls = $('.panorama_class').data('panorama');
     console.log(panoramUrls);
 
@@ -34,10 +41,7 @@ function init() {
     var ambiLight = new THREE.AmbientLight(0xf4f5ec);
     scene.add(ambiLight);
 
-    var boxArray = [
-        [12, 17, 4, -70, 2, 5, 0, 'https://www.google.com/'],
-        [20, 20, 5, 70, 15, 5, 0.26],
-    ];
+
 
     for (var i = 0; i <= 1; i++) {
         var geometry = new THREE.BoxGeometry(boxArray[i][0], boxArray[i][1], boxArray[i][2]);
@@ -125,7 +129,7 @@ function init() {
 		        // }
 
 		        if (intersects.length > 1) {
-                update();
+                update(panoramUrls[1]);
 		            //window.open(intersects[0].object.userData.URL);
 
 		        }
@@ -148,7 +152,6 @@ function init() {
 		function turnRight(event) {
 		    if (event.keyCode === 39) { //right arrow key
 		        turningRight = true;
-
 		    }
 		}
 
@@ -198,8 +201,8 @@ function init() {
 
 		}
 
-    function update() {
-      cylinder.material.map = new THREE.TextureLoader().load( panoramUrls[1] );
+    function update(textureUrl) {
+      cylinder.material.map = new THREE.TextureLoader().load( textureUrl );
       cylinder.material.needsUpdate = true;
     }
 }

@@ -5,7 +5,7 @@ class PanoramasController < ApplicationController
   # GET /panoramas/1.json
   def show
     respond_to do |format|
-      format.js
+      format.json { render :json => @panorama }
       format.html
     end
   end

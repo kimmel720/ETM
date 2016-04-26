@@ -6,7 +6,10 @@ class Panorama < ActiveRecord::Base
                           class_name: "Panorama",
                           join_table: :adjacency,
                           foreign_key: :panorama_id,
-                          association_foreign_key: :adjacent_panorama_id                      
+                          association_foreign_key: :adjacent_panorama_id
 
   belongs_to :exhibition
+
+  def as_json(options={})
+    
 end

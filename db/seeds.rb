@@ -120,17 +120,19 @@ e2.save
 
 p1 = Panorama.create(
   exhibition: e2,
+  adjacent_panoramas: [p],
   artwork_coordinates: {}
 )
-p.image = File.open("app/assets/images/HarvardPanorama1.jpg")
-p.save
+p1.image = File.open("app/assets/images/Harvard_Panorama_I.jpg")
+p1.save
 
-p = Panorama.create(
+p2 = Panorama.create(
   exhibition: e2,
+  adjacent_panoramas: [p1],
   artwork_coordinates: {}
 )
-p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
-p.save
+p2.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
+p2.save
 
 3.times do
   m = Museum.create(
