@@ -67,6 +67,11 @@ ActiveRecord::Schema.define(version: 20160407202945) do
   add_index "exhibitions", ["museum_id"], name: "index_exhibitions_on_museum_id"
   add_index "exhibitions", ["user_id"], name: "index_exhibitions_on_user_id"
 
+  create_table "museum_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "museums", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "image_id"

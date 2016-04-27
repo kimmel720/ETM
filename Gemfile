@@ -10,6 +10,8 @@ gem "refile-s3"
 gem 'rails_admin'
 gem 'refile-s3'
 
+gem 'rails_12factor'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

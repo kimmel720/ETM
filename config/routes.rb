@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'panoramas/:id' => 'panoramas#show', as: 'panorama'
+  get 'search/results'
 
+  resources :museum_users
   # admin page is broken right now
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 

@@ -1,0 +1,32 @@
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Search for: <%= @search_term %> </h1>
+      <hr />
+    </div>
+  </div>
+  <% if !@any_results %>
+    <h2>No Results</h2>
+  <% end %>
+
+  <% @results.each do |key, catagory| %>
+    <% if !catagory.blank? %>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2><%= key %></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <table class="table">
+            <% catagory.each do |result| %>
+            <tr>
+              <td><%= link_to result[:name], result[:path] %></td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

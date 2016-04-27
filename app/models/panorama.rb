@@ -11,5 +11,9 @@ class Panorama < ActiveRecord::Base
   belongs_to :exhibition
 
   def as_json(options={})
-    
+    { :artwork_coordinates => self.artwork_coordinates,
+      :image_url => nil
+    }
+  end
+
 end

@@ -47,21 +47,24 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" rel="home" href="/" title="Exhibition Time Machine" data-no-turbolink = "true">
+      <!-- <a class="navbar-brand" rel="home" href="/" title="Exhibition Time Machine" data-no-turbolink = "true">
         <img style="max-width:40px; margin-top: -10px; margin-left: +50px; margin-right: +80px;"
-             src="http://people.brandeis.edu/~ddimitr/Images/logoIII.png">
-      </a>
+             src="http://people.brandeis.edu/~ddimitr/Images/logoIII.png"> -->
+        <%= link_to image_tag("stationary-clock.gif", :class => "logo pull-left"), "/" %>
+
+<!-- </a> -->
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+        <%= form_tag "/search/results", class: "navbar-form navbar-left", :html =>{ :role => "search"}, method: "get" do %>
+          <div class="form-group has-feedback left-inner-addon">
+            <span class="glyphicon glyphicon-search from-control-feedback"></span>
+            <label class="control-label sr-only", for="search-bar">Search</label>
+            <%= text_field_tag :search, nil, class: "form-control", id: "search-bar", placeholder: "Search" %>
+         </div>
+        <% end %>
         <li><a href="/users/new">Sign up<span class="sr-only">(current)</span></a></li>
         <li><a href="/login">Log in<span class="sr-only">(current)</span></a></li>
       </ul>
@@ -82,12 +85,21 @@
   </ol>
 <% end %>
 
+  <!-- <%= image_tag "ajax-loader.gif" %> -->
+  <div class="center-block-outer fullpage overlay loading-container">
+    <div class="center-block-middle">
+      <div class="center-block-inner">
+        <div class="loading-icon">
+          <%= image_tag "clock.gif" %>
+        </div>
+      </div>
+    </div>
+  </div>
 <%= yield %>
 
   <br />
   <div class="panel-footer">
   </footer>
-
 
 </body>
 </html>
