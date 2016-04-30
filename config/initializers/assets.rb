@@ -22,3 +22,5 @@ Rails.application.config.assets.precompile += %w( floor.js )
 Rails.application.config.assets.precompile += %w( jquery.js )
 
 Rails.application.config.assets.precompile += %w( dat.gui.js )
+
+Rails.application.config.assets.precompile += %w( timeline/* network/* )
