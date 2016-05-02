@@ -83,25 +83,29 @@ class ExhibitionsController < FrontEndController
   end
 
   def panorama
-    @panoramas = @exhibition.panoramas
-    pid = params[:panorama_id]
-    if pid
-      @panorama = @panoramas.find(pid)
+    if params[:panorama_id]
+      @panorama = @panoramas.find(params[:panorama_id])
     else
       @panorama = @panoramas.first
     end
+
+    @panoramas = @exhibition.panoramas
+    gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
+    gon.art_array = @panorama.artwork_coordinates
+    gon.pan_array = @panorama.adjacent_panoramas
+
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
       ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
     ]
-
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_exhibition
       @exhibition = Exhibition.find(params[:id])
+      @panoramas = @exhibition.panoramas
       @museum = @exhibition.museum
       @artworks = @exhibition.artworks
     end

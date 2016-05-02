@@ -18,7 +18,6 @@ user = User.create(
   admin: false
 )
 
-
 id_counter = 0
 
 farber = Museum.create(

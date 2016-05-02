@@ -1,3 +1,5 @@
+$('exhibitions.floor').ready(run);
+
 // Here's some data.
 var data = [
   ["http://www.google.com/" , "356,129,385,187"],
@@ -39,6 +41,3 @@ function run() {
 
     insertHTML("floor", html);
 }
-
-
-window.onload = run();
