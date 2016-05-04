@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :addContent]
   skip_before_action :authorize, only: [:show, :index, :new, :create, :addContent]
 
   # GET /users
@@ -76,8 +76,8 @@ class UsersController < ApplicationController
     @museums = []
 
     raw_json["museums"].each do |museum|
-      curent_museum = Museum.create(
-        # user: @user,
+      curent_museum = Museum.new(
+        user: @user,
         name: museum["name"],
         latitude: museum["latitude"],
         longitude: museum["longitude"],
@@ -89,6 +89,10 @@ class UsersController < ApplicationController
         color: museum["color"]
       )
       @museums << curent_museum.name
+      if !curent_museum.save
+        puts "NOPENOPENOPENOPENOEP***********"
+        render action: 'addContent', notice: "NOPE.JPG"
+      end
     end
 
   end
