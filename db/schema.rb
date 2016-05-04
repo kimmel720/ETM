@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407202945) do
+ActiveRecord::Schema.define(version: 20160409200714) do
 
   create_table "adjacency", id: false, force: :cascade do |t|
     t.integer "panorama_id"
