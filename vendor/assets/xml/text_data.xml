@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+	<museums>
+		<name>The MOMA2</name>
+		<latitude>40.761417</latitude>
+		<longitude>-73.97712</longitude>
+		<street_address>11 W 53rd St</street_address>
+		<city>New York</city>
+		<country>United States</country>
+		<description>New York's Museum of Modern Art!</description>
+		<website>http://www.moma.org/</website>
+		<color>#FF3300</color>
+		<exhibitions>
+			<name>Edgar Degas: A Strange New Beauty</name>
+			<start_date>2016, 3, 26</start_date>
+			<end_date>2016, 7, 24</end_date>
+			<description>Edgar Degas is best known as a painter and chronicler of the ballet, yet his work as a printmaker reveals the true extent of his restless experimentation. In the mid-1870s, Degas was introduced to the monotype process—drawing in ink on a metal plate that was then run through a press, typically resulting in a single print. Captivated by the monotype’s potential, he immersed in the technique with enormous enthusiasm, taking the medium to radical ends. He expanded the possibilities of drawing, created surfaces with a heightened sense of tactility, and invented new means for new subjects, from dancers in motion to the radiance of electric light, from women in intimate settings to meteorological effects in nature. The monotype also sparked a host of experiments for Degas, who often used the medium as a starting point from which an image could be reworked and revised. This process of repetition and transformation, mirroring and reversal, allowed Degas to extend his approach to the study of form. The profound impact of his work with monotype can be seen in his variations in different mediums of key motifs, revealing a new kind of artwork that was less about progress or completion than endless innovation. The exhibition includes approximately 120 rarely seen monotypes—along with some 60 related paintings, drawings, pastels, sketchbooks, and prints—that show Degas at his most modern, capturing the spirit of urban life; depicting the body in new and daring ways; liberating mark-making from tradition; and boldly engaging the possibilities of abstraction. (From the MOMA Website)</description>
+			<curator>Jodi Hauptman</curator>
+			<artworks>
+				<name>famous degas 1</name>
+				<medium>ink on metal</medium>
+				<artists>
+					<name>Edgar Degas</name>
+				</artists>
+				<description>this is some fancy degas!</description>
+				<date_created>1870, 1, 1</date_created>
+				<accession_no>123456</accession_no>
+			</artworks>
+			<artworks>
+				<name>famous degas 2</name>
+				<medium>something</medium>
+				<artists>
+					<name>Edgar Degas</name>
+				</artists>
+				<description>this is some fancy degas 2!</description>
+				<date_created>1871, 1, 1</date_created>
+				<accession_no>123457</accession_no>
+			</artworks>
+			<artworks>
+				<name>famous degas 3</name>
+				<medium>ink on metal 3</medium>
+				<artists>
+					<name>Edgar Degas</name>
+				</artists>
+				<description>this is some fancy degas 3!</description>
+				<date_created>1873, 1, 1</date_created>
+				<accession_no>123458</accession_no>
+			</artworks>
+		</exhibitions>
+	</museums>

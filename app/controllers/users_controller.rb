@@ -69,9 +69,14 @@ class UsersController < ApplicationController
   end
 
   def addContent
-    @file = params[:file]
-    @content = @file.read
-    raw_json = JSON.parse(@content)
+    file = params[:file]
+    content = file.read
+    puts "*****************#{file.content_type}"
+    if file.content_type == 'application/json'
+      raw_data = JSON.parse(content)
+    elsif file.content_type == 'text/xml'
+      raw_data = Hash.from_xml(content)
+    end
 
     @museums = []
     @exhibitions = []
@@ -79,7 +84,7 @@ class UsersController < ApplicationController
     @artists = []
     i = 21
 
-    raw_json["museums"].each do |museum|
+    raw_data["museums"].each do |museum|
       current_museum = Museum.new(
         user: @user,
         name: museum["name"],
@@ -149,7 +154,6 @@ class UsersController < ApplicationController
         end
       end
     end
-
   end
 
   private
