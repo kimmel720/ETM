@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'panoramas/:id' => 'panoramas#show', as: 'panorama'
+  post 'panoramas/:id' => 'panoramas#transition', as: 'transition'
+
   get 'search/results'
 
   resources :museum_users

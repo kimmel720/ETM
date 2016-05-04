@@ -1,12 +1,11 @@
 class PanoramasController < ApplicationController
-  before_action :set_panorama, only: [:show]
+  before_action :set_panorama
 
   # GET /panoramas/1
-  # GET /panoramas/1.json
   def show
-    gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
     gon.art_array = @panorama.artwork_coordinates
-    gon.pan_array = @panorama.adjacent_panoramas
+    gon.pan_array = @panorama.adjacent_panoramas.map { |adj| transition_path(adj) }
+    gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
 
     @crumbs = [
       [@museum.name, museum_path(@museum)],
@@ -14,9 +13,18 @@ class PanoramasController < ApplicationController
       ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
     ]
 
+  end
+
+  # POST /panoramas/1
+  def transition
     respond_to do |format|
-      format.json { render :json => @panorama }
-      format.html
+      format.json do
+        render json: {
+          image: Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png"),
+          art_array: @panorama.artwork_coordinates,
+          pan_array: @panorama.adjacent_panoramas.map { |adj| transition_path(adj) }
+        }.to_json
+      end
     end
   end
 
