@@ -1,0 +1,18 @@
+<%= form_tag "/addContent", method: 'POST', multipart: true do %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@artwork.errors.count, "error") %> caused your upload to fail:</h2>
+
+      <ul>
+      <% @artwork.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label for="file">Content Upload</label><%= file_field_tag 'file' %>
+  </div>
+  <%= submit_tag %>
+<% end %>

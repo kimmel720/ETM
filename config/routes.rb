@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   resources :users
+  post '/addContent' => 'users#addContent'
   root 'museums#index'
 
   # could pull artworks out and redirect instead of nesting

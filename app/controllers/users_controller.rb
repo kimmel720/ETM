@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authorize, only: [:show, :index, :new, :create]
+  skip_before_action :authorize, only: [:show, :index, :new, :create, :addContent]
 
   # GET /users
   # GET /users.json
@@ -66,6 +66,31 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def addContent
+    @file = params[:file]
+    @content = @file.read
+    raw_json = JSON.parse(@content)
+
+    @museums = []
+
+    raw_json["museums"].each do |museum|
+      curent_museum = Museum.create(
+        # user: @user,
+        name: museum["name"],
+        latitude: museum["latitude"],
+        longitude: museum["longitude"],
+        street_address: museum["street_address"],
+        city: museum["city"],
+        country: museum["country"],
+        description: museum["description"],
+        website: museum["website"],
+        color: museum["color"]
+      )
+      @museums << curent_museum.name
+    end
+
   end
 
   private
