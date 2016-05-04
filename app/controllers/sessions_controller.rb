@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         redirect_to user_path(user)
       else
         redirect_to login_url, alert: "Invalid user/password combination"
-    end
+      end
   end
 
   def destroy
