@@ -80,6 +80,10 @@ class UsersController < ApplicationController
     @saved_data = raw_data
 
     # @content = {}
+    @museums = {}
+    @exhibitions = {}
+    @arworks = {}
+    @artists = {}
 
     @saved_data["museums"].each do |museum|
       current_museum = Museum.new(
@@ -99,7 +103,7 @@ class UsersController < ApplicationController
         # render action: 'addContent', notice: "unable to save museum: #{current_museum.name}"
         museum["name"] = "Unable to save museum: #{museum["name"]}"
       else
-        # @content[]
+        @museums[current_museum.name] = museum_path(current_museum.id)
 
         museum["exhibitions"].each do |exhibition|
           current_exhibition = Exhibition.new(

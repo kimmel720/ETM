@@ -41,4 +41,11 @@
       </ul>
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <ul>
+        <% @museums.each do |name, path| %>
+          <li><%= link_to name, path %></li>
+        <% end %>
+      </ul>
 </div
