@@ -8,42 +8,37 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <h2>Museums:</h2>
+      <ul class="list-group">
+        <li class="list-group-item"><span class="badge"><%= 5%></span>Museums</li>
+        <li class="list-group-item"><span class="badge"><%= 5%></span>Exhibitions</li>
+        <li class="list-group-item"><span class="badge"><%= 5%></span>Artists</li>
+        <li class="list-group-item"><span class="badge"><%= 5%></span>Artworks</li>
+
+      </ul>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <%= @museums %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Exhibitions:</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <%= @exhibitions %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Artwork:</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <%= @artworks %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Artists:</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <%= @artists %>
+      <ul>
+        <% @saved_data["museums"].each do |museum| %>
+          <li><h2>Museum:</h2> <%= museum["name"] %></li>
+          <ul>
+            <% museum["exhibitions"].each do |exhibition| %>
+              <li><%= exhibition["name"] %></li>
+              <ul>
+                <% exhibition["artworks"].each do |artwork| %>
+                  <li><%= artwork["name"] %></li>
+                  <ul>
+                    <% artwork["artists"].each do |artist| %>
+                      <li><%= artist["name"] %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </ul>
+            <% end %>
+          </ul>
+        <% end %>
+      </ul>
     </div>
   </div>
 </div

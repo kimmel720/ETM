@@ -77,14 +77,11 @@ class UsersController < ApplicationController
     elsif file.content_type == 'text/xml'
       raw_data = Hash.from_xml(content)
     end
+    @saved_data = raw_data
 
-    @museums = []
-    @exhibitions = []
-    @artworks = []
-    @artists = []
-    i = 21
+    # @content = {}
 
-    raw_data["museums"].each do |museum|
+    @saved_data["museums"].each do |museum|
       current_museum = Museum.new(
         user: @user,
         name: museum["name"],
@@ -100,8 +97,9 @@ class UsersController < ApplicationController
       if !current_museum.save
         puts "unable to save museum: #{current_museum.name}"
         # render action: 'addContent', notice: "unable to save museum: #{current_museum.name}"
+        museum["name"] = "Unable to save museum: #{museum["name"]}"
       else
-        @museums << current_museum.name
+        # @content[]
       end
 
       museum["exhibitions"].each do |exhibition|
@@ -117,8 +115,9 @@ class UsersController < ApplicationController
         if !current_exhibition.save
           puts "unable to save exhibition: #{current_exhibition.name}"
           # render action: 'addContent', notice: "unable to save exhibition: #{current_exhibition.name}"
+          exhibition["name"] = "Unable to save exhibition: #{exhibition["name"]}"
         else
-          @exhibitions << current_exhibition.name
+          # @exhibitions << current_exhibition.name
         end
 
         exhibition["artworks"].each do |artwork|
@@ -129,9 +128,9 @@ class UsersController < ApplicationController
             description: artwork["description"],
             date_created: Date.strptime(artwork["date_created"], "%Y, %m, %d"),
             accession_no: artwork["accession_no"],
-            image_id: i #DOES THIS DO ANYTHING?
+            image_id: 0
           )
-          i += 1
+
           artwork["artists"].each do |artist|
             current_artist = Artist.create(
               name: artist["name"]
@@ -139,8 +138,9 @@ class UsersController < ApplicationController
             if !current_artist.save
               puts "unable to save artist: #{current_artist.name}"
               # render action: 'addContent', notice: "unable to save artist: #{current_artist.name}"
+              artist["name"] = "Unable to save artist: #{artist["name"]}"
             else
-              @artists << current_artist.name
+              # @artists << current_artist.name
               current_artwork.artists << current_artist
             end
 
@@ -148,8 +148,9 @@ class UsersController < ApplicationController
           if !current_artwork.save
             puts "unable to save artwork: #{current_artwork.name}"
             # render action: 'addContent', notice: "unable to save artwork: #{current_artwork.name}"
+            artwork["name"] = "Unable to save artwork: #{artwork["name"]}"
           else
-            @artworks << current_artwork.name
+            # @artworks << current_artwork.name
           end
         end
       end
