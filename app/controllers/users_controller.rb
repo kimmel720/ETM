@@ -100,57 +100,57 @@ class UsersController < ApplicationController
         museum["name"] = "Unable to save museum: #{museum["name"]}"
       else
         # @content[]
-      end
 
-      museum["exhibitions"].each do |exhibition|
-        current_exhibition = Exhibition.new(
-          user: @user,
-          museum: current_museum,
-          name: exhibition["name"],
-          start_date: Date.strptime(exhibition["start_date"], "%Y, %m, %d"),
-          end_date: Date.strptime(exhibition["end_date"], "%Y, %m, %d"),
-          description: exhibition["description"],
-          curator: exhibition["curator"],
-        )
-        if !current_exhibition.save
-          puts "unable to save exhibition: #{current_exhibition.name}"
-          # render action: 'addContent', notice: "unable to save exhibition: #{current_exhibition.name}"
-          exhibition["name"] = "Unable to save exhibition: #{exhibition["name"]}"
-        else
-          # @exhibitions << current_exhibition.name
-        end
-
-        exhibition["artworks"].each do |artwork|
-          current_artwork = Artwork.new(
-            name: artwork["name"],
-            exhibition: current_exhibition,
-            medium: artwork["medium"],
-            description: artwork["description"],
-            date_created: Date.strptime(artwork["date_created"], "%Y, %m, %d"),
-            accession_no: artwork["accession_no"],
-            image_id: 0
+        museum["exhibitions"].each do |exhibition|
+          current_exhibition = Exhibition.new(
+            user: @user,
+            museum: current_museum,
+            name: exhibition["name"],
+            start_date: Date.strptime(exhibition["start_date"], "%Y, %m, %d"),
+            end_date: Date.strptime(exhibition["end_date"], "%Y, %m, %d"),
+            description: exhibition["description"],
+            curator: exhibition["curator"],
           )
-
-          artwork["artists"].each do |artist|
-            current_artist = Artist.create(
-              name: artist["name"]
-            )
-            if !current_artist.save
-              puts "unable to save artist: #{current_artist.name}"
-              # render action: 'addContent', notice: "unable to save artist: #{current_artist.name}"
-              artist["name"] = "Unable to save artist: #{artist["name"]}"
-            else
-              # @artists << current_artist.name
-              current_artwork.artists << current_artist
-            end
-
-          end
-          if !current_artwork.save
-            puts "unable to save artwork: #{current_artwork.name}"
-            # render action: 'addContent', notice: "unable to save artwork: #{current_artwork.name}"
-            artwork["name"] = "Unable to save artwork: #{artwork["name"]}"
+          if !current_exhibition.save
+            puts "unable to save exhibition: #{current_exhibition.name}"
+            # render action: 'addContent', notice: "unable to save exhibition: #{current_exhibition.name}"
+            exhibition["name"] = "Unable to save exhibition: #{exhibition["name"]}"
           else
-            # @artworks << current_artwork.name
+            # @exhibitions << current_exhibition.name
+
+            exhibition["artworks"].each do |artwork|
+              current_artwork = Artwork.new(
+                name: artwork["name"],
+                exhibition: current_exhibition,
+                medium: artwork["medium"],
+                description: artwork["description"],
+                date_created: Date.strptime(artwork["date_created"], "%Y, %m, %d"),
+                accession_no: artwork["accession_no"],
+                image_id: 0
+              )
+
+              artwork["artists"].each do |artist|
+                current_artist = Artist.create(
+                  name: artist["name"]
+                )
+                if !current_artist.save
+                  puts "unable to save artist: #{current_artist.name}"
+                  # render action: 'addContent', notice: "unable to save artist: #{current_artist.name}"
+                  artist["name"] = "Unable to save artist: #{artist["name"]}"
+                else
+                  # @artists << current_artist.name
+                  current_artwork.artists << current_artist
+                end
+
+              end
+              if !current_artwork.save
+                puts "unable to save artwork: #{current_artwork.name}"
+                # render action: 'addContent', notice: "unable to save artwork: #{current_artwork.name}"
+                artwork["name"] = "Unable to save artwork: #{artwork["name"]}"
+              else
+                # @artworks << current_artwork.name
+              end
+            end
           end
         end
       end
