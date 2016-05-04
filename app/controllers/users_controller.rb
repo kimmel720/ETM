@@ -74,9 +74,12 @@ class UsersController < ApplicationController
     raw_json = JSON.parse(@content)
 
     @museums = []
+    @exhibitions = []
+    @artworks = []
+    @artists = []
 
     raw_json["museums"].each do |museum|
-      curent_museum = Museum.new(
+      current_museum = Museum.new(
         user: @user,
         name: museum["name"],
         latitude: museum["latitude"],
@@ -88,10 +91,61 @@ class UsersController < ApplicationController
         website: museum["website"],
         color: museum["color"]
       )
-      @museums << curent_museum.name
-      if !curent_museum.save
-        puts "NOPENOPENOPENOPENOEP***********"
-        render action: 'addContent', notice: "NOPE.JPG"
+      if !current_museum.save
+        puts "unable to save museum: #{current_museum.name}"
+        # render action: 'addContent', notice: "unable to save museum: #{current_museum.name}"
+      else
+        @museums << current_museum.name
+      end
+
+      museum["exhibitions"].each do |exhibition|
+        current_exhibition = Exhibition.new(
+          user: @user,
+          museum: current_museum,
+          name: exhibition["name"],
+          start_date: Date.strptime(exhibition["start_date"], "%Y, %m, %d"),
+          end_date: Date.strptime(exhibition["end_date"], "%Y, %m, %d"),
+          description: exhibition["description"],
+          curator: exhibition["curator"],
+        )
+        if !current_exhibition.save
+          puts "unable to save exhibition: #{current_exhibition.name}"
+          # render action: 'addContent', notice: "unable to save exhibition: #{current_exhibition.name}"
+        else
+          @exhibitions << current_exhibition.name
+        end
+
+        exhibition["artworks"].each do |artwork|
+          current_artwork = Artwork.new(
+            name: artwork["name"],
+            exhibition: current_exhibition,
+            medium: artwork["medium"],
+            description: artwork["description"],
+            date_created: Date.strptime(artwork["date_created"], "%Y, %m, %d"),
+            accession_no: artwork["accession_no"],
+            image_id: 0 #DOES THIS DO ANYTHING?
+          )
+
+          artwork["artists"].each do |artist|
+            current_artist = Artist.create(
+              name: artist["name"]
+            )
+            if !current_artist.save
+              puts "unable to save artist: #{current_artist.name}"
+              # render action: 'addContent', notice: "unable to save artist: #{current_artist.name}"
+            else
+              @artists << current_artist.name
+              current_artwork.artists << current_artist
+            end
+
+          end
+          if !current_artwork.save
+            puts "unable to save artwork: #{current_artwork.name}"
+            # render action: 'addContent', notice: "unable to save artwork: #{current_artwork.name}"
+          else
+            @artworks << current_artwork.name
+          end
+        end
       end
     end
 

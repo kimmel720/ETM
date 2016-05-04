@@ -27,7 +27,7 @@
                 }
               ],
               "description": "this is some fancy degas!",
-              "date_created": " 1870, 1, 1",
+              "date_created": "1870, 1, 1",
               "accession_no": 123456
             },
             {
@@ -39,7 +39,7 @@
                 }
               ],
               "description": "this is some fancy degas 2!",
-              "date_created": " 1871, 1, 1",
+              "date_created": "1871, 1, 1",
               "accession_no": 123457
             },
             {
@@ -51,7 +51,7 @@
                 }
               ],
               "description": "this is some fancy degas 3!",
-              "date_created": " 1873, 1, 1",
+              "date_created": "1873, 1, 1",
               "accession_no": 123458
             }
           ]
