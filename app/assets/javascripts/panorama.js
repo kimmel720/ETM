@@ -64,7 +64,6 @@ function updatePanorama(image) {
 
 function drawBoxes(boxArray, type) {
     for (var i = 0; i < boxArray.length; i++) {
-				console.log("i=" + i);
         var box = boxArray[i];
 
         var geometry = new THREE.BoxGeometry(box[0],              box[1], box[2]);
@@ -88,14 +87,9 @@ function drawBoxes(boxArray, type) {
 
 
 function loadPanorama() {
-		console.log("loading " + gon.image);
     var image = gon.image;
     var artArray = gon.art_array;
     var panArray = gon.pan_array;
-
-    // console.log("image: " + image);
-    // console.log("art array: " + artArray);
-    // console.log("pan array: " + panArray);
 
     artArray = [
         [20, 20, 5, 70, 15, 5, 0.26, 'http://localhost:3000/museums/33/exhibitions/78/artworks/64/'],
@@ -115,20 +109,34 @@ function loadNewPanorama() {
 }
 
 function transition(newPanoramaUrl) {
-		console.log("Here's the url: " + newPanoramaUrl);
     $.ajax({
         url: newPanoramaUrl,
         type: "POST",
     }).success( function(result) {
-			console.log("success!");
 			console.log(result.image);
-			update(result.image);
+			update(result.image, result.art_array, result.pan_array);
 		});
 }
 
-function update(textureUrl) {
-    cylinder.material.map = new THREE.TextureLoader().load(textureUrl);
+function update(newTexture, newArt, newPan) {
+		// leave the first 3 children, which are lights and the cylinder, untouched
+		for (var i = scene.children.length-1; i >= 3; i--) {
+			scene.remove(scene.children[i]);
+		}
+    cylinder.material.map = new THREE.TextureLoader().load( newTexture );
     cylinder.material.needsUpdate = true;
+
+		newArt = [
+        [20, 20, 5, 70, 15, 5, 0.26, 'http://localhost:3000/museums/33/exhibitions/78/artworks/64/'],
+    ];
+
+    newPan = [
+        [12, 17, 4, -70, 2, 5, 0, 'http://localhost:3000/panoramas/1']
+    ];
+
+		drawBoxes(newArt, "art");
+		drawBoxes(newPan, "pan");
+
 }
 
 function createMesh(geom, imageFile) {

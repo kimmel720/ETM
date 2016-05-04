@@ -10,7 +10,7 @@ gem "refile-s3"
 gem 'rails_admin'
 gem 'refile-s3'
 
-gem 'rails_12factor'
+gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.2'
