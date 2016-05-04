@@ -77,6 +77,7 @@ class UsersController < ApplicationController
     @exhibitions = []
     @artworks = []
     @artists = []
+    i = 21
 
     raw_json["museums"].each do |museum|
       current_museum = Museum.new(
@@ -123,9 +124,9 @@ class UsersController < ApplicationController
             description: artwork["description"],
             date_created: Date.strptime(artwork["date_created"], "%Y, %m, %d"),
             accession_no: artwork["accession_no"],
-            image_id: 0 #DOES THIS DO ANYTHING?
+            image_id: i #DOES THIS DO ANYTHING?
           )
-
+          i += 1
           artwork["artists"].each do |artist|
             current_artist = Artist.create(
               name: artist["name"]
