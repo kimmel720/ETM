@@ -18,11 +18,6 @@ function initializeEditMapster() {
 
 }
 
-function handleEditClicks(e){
-
-}
-
-
 var mouse = {
   x: 0,
   y: 0,
@@ -33,7 +28,7 @@ var mouse = {
 var saveURL = window.location.href;
 saveURL = saveURL.substring(0, saveURL.length - 15);
 saveURL = saveURL + "artworks/"
-
+var originalContent = $('#floor').clone().html();
 function storeCoordinates() {
   mouse.startX = mouse.x;
   mouse.startY = mouse.y;
@@ -48,8 +43,8 @@ function SortCoordinates(x1,x2,y1,y2){
   return coords;
 }
 
-function BuildArea(coords){
-  return "<area alt='' title='' href= 'http://www.google.com' shape='rect' coords='"+ coords.join() + "' />";
+function BuildArea(coords, link){
+  return "<area alt='' title='' href= '"+ link + "' shape='rect' coords='"+ coords.join() + "' />";
 }
 
 // http://www.chestysoft.com/imagefile/javascript/get-coordinates.asp
@@ -166,38 +161,43 @@ var TempDiv = function(coords){
     $('#scaffold').replaceWith("<div id='scaffold' style='position: absolute; left: " + this.leftCoordinate.toString() + "; top: " + this.topCoordinate.toString() + "; width: " + this.width.toString() + "; height: " + this.height.toString() + "; border-style: dotted; border-width: medium;' </div>");
   }
   this.save = function(){
-    var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate]);
-    $('img').mapster('unbind');
-    $('#floor').html(originalContent);
-    $('#floor-map').append(newArea);
-    originalContent = $('#floor').clone().html();
-    initializeEditMapster();
-    $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
-    // $(document).ready(onWindowResize);
-    $('.dg.main.a').remove();
-    dataToSend = JSON.stringify({
-      "left": this.leftCoordinate,
-      "right": this.rightCoordinate,
-      "top": this.topCoordinate,
-      "bottom": this.bottomCoordinate
-    });
-    console.log(dataToSend);
-    console.log(saveURL + this.artwork);
-    $.ajax({
-      data: dataToSend,
-      type: "PUT",
-      url: (saveURL + this.artwork),
-      dataType: "json",
-      contentType: "application/json",
-      success: function(){
-        console.log("SHOULD BE SAVED!!!");
-        this.cancel();
-      },
-      error: function(a,b,c) {
-        console.log("ERROR WITH AJAX:" + a + b + c);
-      }
+    if (this.artwork != -1){
+      saveTo = saveURL + this.artwork;
+      var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate], saveTo);
+      $('img').mapster('unbind');
+      $('#floor').html(originalContent);
+      $("area[href$=saveTo]").remove();
+      $('#floor-map').append(newArea);
+      originalContent = $('#floor').clone().html();
+      initializeEditMapster();
+      $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
+      // $(document).ready(onWindowResize);
+      $('.dg.main.a').remove();
+      dataToSend = JSON.stringify({
+        "left": this.leftCoordinate,
+        "right": this.rightCoordinate,
+        "top": this.topCoordinate,
+        "bottom": this.bottomCoordinate
+      });
+      console.log(dataToSend);
+      console.log(saveURL + this.artwork);
 
-    });
+      $.ajax({
+        data: dataToSend,
+        type: "PUT",
+        url: (saveURL + this.artwork),
+        dataType: "json",
+        contentType: "application/json",
+        success: function(){
+          console.log("SHOULD BE SAVED!!!");
+          this.cancel();
+        },
+        error: function(a,b,c) {
+          console.log("ERROR WITH AJAX:" + a + b + c);
+          this.cancel();
+        }
+      });
+    }
   }
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
