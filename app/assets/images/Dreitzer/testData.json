@@ -1,0 +1,74 @@
+{
+  "museums": [
+    {
+      "name": "Dreitzer Gallery at Brandeis University",
+      "latitude": 42.36433109002188,
+      "longitude": -71.2619161605835,
+      "street_address": "415 South St",
+      "city": "Waltham",
+      "country": "United States",
+      "description": "Dreitzer Gallery is located in the Spingold Theatre Center at Brandeis University. It regularly exhibits the work of Brandeis Fine Arts students.",
+      "website": "http://www.brandeis.edu/",
+      "color": "#FF3300",
+      "exhibitions": [
+        {
+          "name":"Class of 2016 Senior Studio Majors Exhibition Opening",
+          "start_date": "2016, 5, 4",
+          "end_date": "2016, 5, 23",
+          "description": "This exhibit showcases the art of Brandeis seniors who have been working on their Fine Arts degree. It includes several pieces by each student. The artists have been working in different media - from found objects to oil.  ",
+          "curator": "Tory Fair",
+          "artworks": [
+            {
+              "name": "Untitiled",
+              "medium": "oil pastel on paper",
+              "artists": [
+                {
+                  "name": "Ceaser Pineda"
+                }
+              ],
+              "description": "This artwork is a collage and it is an exploration of Pineda's experiences in Japan. There he had to get out of his comfort zone and that challanged his painting.",
+              "date_created": "2016, 1, 1",
+              "accession_no": 85610
+            },
+            {
+              "name": "Eddie Guerro 2",
+              "medium": "oil on panel",
+              "artists": [
+                {
+                  "name": "Ceaser Pineda"
+                }
+              ],
+              "description": "This is a portrait of professional wrestler Eddie Guerrero. was a Mexican-American professional wrestler and a member of the Guerrero wrestling family. He performed in Mexico and Japan for several major professional wrestling promotions. ",
+              "date_created": "2014, 1, 1",
+              "accession_no": 123457
+            },
+            {
+              "name": "The Observatory/The Study",
+              "medium": "Found objects on cardboard",
+              "artists": [
+                {
+                  "name": "Jack Holloman"
+                }
+              ],
+              "description": "Jack Holloman explores his relationship with being an artist and what it means to use expensive materials. He has moved towards using found materials.",
+              "date_created": "2012, 1, 1",
+              "accession_no": 123458
+            },
+            {
+              "name": "Sun Earth Moon",
+              "medium": "Found objects on floor",
+              "artists": [
+                {
+                  "name": "Jack Holloman"
+                }
+              ],
+              "description": "Jack Holloman explores his relationship with being an artist and what it means to use expensive materials. He has moved towards using found materials.",
+              "date_created": "1990, 1, 1",
+              "accession_no": 123458
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
