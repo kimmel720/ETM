@@ -181,6 +181,9 @@ m = Museum.create(
   website: "http://www.moma.org/",
   color: "#FF3300"
 )
+m.image = File.open("app/assets/images/moma.jpg")
+m.save
+#Image courtesy of :https://zealnyc.com/wp-content/uploads/2014/06/moma.jpg
 
 m = Museum.create(
   user: admin,
@@ -194,6 +197,9 @@ m = Museum.create(
   website: "http://www.louvre.fr",
   color: "#222222"
 )
+m.image = File.open("app/assets/images/louvre.jpg")
+m.save
+#http://aflouvre.org/assets/slideshows/38/home_temp1__medium.jpg
 
 m = Museum.create(
   user: admin,
@@ -207,6 +213,9 @@ m = Museum.create(
   website: "http://www.nhm.ac.uk/",
   color: "#565656"
 )
+m.image = File.open("app/assets/images/nathist.jpg")
+m.save
+#https://upload.wikimedia.org/wikipedia/commons/c/c1/Natural_History_Museum_London_Jan_2006.jpg
 
 m = Museum.create(
   user: admin,
@@ -220,6 +229,9 @@ m = Museum.create(
   website: "http://www.english.imjnet.org.il/",
   color: "#abb03c"
 )
+m.image = File.open("app/assets/images/isreal.jpg")
+m.save
+#http://www.english.imjnet.org.il/media/Uploads/Israel-Museum-entry-nighttime%281%29.jpg
 
 # 3.times do
 #   m = Museum.create(
