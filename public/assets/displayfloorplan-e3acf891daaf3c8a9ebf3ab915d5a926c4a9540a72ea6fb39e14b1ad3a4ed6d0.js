@@ -1,0 +1,1 @@
+function initializeMapster(){$("img").mapster({singleSelect:!0,clickNavigate:!0})}$(function(){$("#highlight-sculptures").click(function(){$("area").mapster("deselect"),$(".sculpture").mapster("select")}),$("#highlight-paintings").click(function(){$("area").mapster("deselect"),$(".painting").mapster("select")}),$("#clear").click(function(){$("area").mapster("deselect")})});
