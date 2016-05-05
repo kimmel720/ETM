@@ -3,16 +3,6 @@ class PanoramasController < ApplicationController
 
   before_action :set_panorama
 
-  # GET panoramas/1/autocomplete_artwork_name/
-  def autocomplete_artwork_name
-    @artworks = @artworks.where("name like ?", "%#{params[:q]}%")
-
-    respond_to do |format|
-      format.js
-      format.html
-    end
-  end
-
   # POST /panoramas
   def create
   end
@@ -44,7 +34,7 @@ class PanoramasController < ApplicationController
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
-      ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
+      ["Panorama", panorama_path(@museum,@exhibition,@panorama)]
     ]
   end
 
@@ -75,7 +65,7 @@ class PanoramasController < ApplicationController
   def add_artwork
     @panorama.coordinates[params[:art_id]] = [params[:x], params[:y], params[:z], params[:r], artwork_path(params[:art_id])]
     @panorama.save
-    
+
     render :nothing => true
   end
 
