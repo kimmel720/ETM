@@ -22,7 +22,7 @@ id_counter = 0
 
 farber = Museum.create(
   user: admin,
-  name: "Farber Mezzanine",
+  name: "Brandeis University",
   latitude: 42.36787,
   longitude: -71.25857,
   street_address: "415 South St",
@@ -120,7 +120,7 @@ e2.save
 p1 = Panorama.create(
   exhibition: e2,
 )
-p1.image = File.open("app/assets/images/DreitzerV.jpg")
+p1.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p1.save
 
 p2 = Panorama.create(
