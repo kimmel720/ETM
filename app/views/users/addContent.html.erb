@@ -6,46 +6,12 @@
       <h1 class="title">Just added content:</h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <ul class="list-group">
-        <li class="list-group-item"><span class="badge"><%= 5%></span>Museums</li>
-        <li class="list-group-item"><span class="badge"><%= 5%></span>Exhibitions</li>
-        <li class="list-group-item"><span class="badge"><%= 5%></span>Artists</li>
-        <li class="list-group-item"><span class="badge"><%= 5%></span>Artworks</li>
 
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <ul>
-        <% @saved_data["museums"].each do |museum| %>
-          <li><h2>Museum:</h2> <%= museum["name"] %></li>
-          <ul>
-            <% museum["exhibitions"].each do |exhibition| %>
-              <li><%= exhibition["name"] %></li>
-              <ul>
-                <% exhibition["artworks"].each do |artwork| %>
-                  <li><%= artwork["name"] %></li>
-                  <ul>
-                    <% artwork["artists"].each do |artist| %>
-                      <li><%= artist["name"] %></li>
-                    <% end %>
-                  </ul>
-                <% end %>
-              </ul>
-            <% end %>
-          </ul>
-        <% end %>
-      </ul>
-    </div>
-  </div>
   <div class="row">
     <div class="col-xs-12">
       <ul>
         <% @museums.each do |name, path| %>
-          <li><%= link_to name, path %></li>
+          <li><h2><%= link_to name, path %></h2></li>
         <% end %>
       </ul>
 </div
