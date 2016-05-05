@@ -47,6 +47,10 @@ class MuseumsController < FrontEndController
 
   # GET /museums/1/edit
   def edit
+    @crumbs = [[@museum.name, museum_path(@museum)],
+              ["Editing Museum", edit_museum_path(@museum)]
+              ]
+    gon.colorcode = @museum.color
   end
 
   # POST /museums

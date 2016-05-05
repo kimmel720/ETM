@@ -1,27 +1,34 @@
-<p id="notice"><%= notice %></p>
 <% content_for :title, @artwork.name %>
+<%= javascript_include_tag "application" %>
 
 <div id="main-container" class="container">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="title"><%= @artwork.name %> EDITING</h1>
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="title"><%= @artwork.name %></h1>
       <h2 class="title in-line">
         By:
         <% @artists.each do |artist| %>
         <%= link_to artist.name, artist_path(artist) %>
         <% end %>
       </h2>
+      <br />
     </div>
   </div>
   <div class="row">
     <div class="col-xs-12 horizontal-center-wrapper">
-      <br />
       <div class="picture-frame">
+        <%= image_tag attachment_url(@artwork, :image, format: "png"), :class => "image full-image horizontal-center" %>
+      </div>
+      <div class="horizontal-center">
         <%= form_for @artwork, url: museum_exhibition_artwork_path do |form| %>
           <%= form.attachment_field :image %>
           <%= submit_tag %>
         <% end %>
-        <%= image_tag attachment_url(@artwork, :image, format: "png"), :class => "image full-image horizontal-center" %>
       </div>
     </div>
   </div>

@@ -30,6 +30,13 @@ class ArtworksController < FrontEndController
 
   # GET /artworks/1/edit
   def edit
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
+      [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)],
+      ["Edit Artwork", edit_museum_exhibition_artwork_path(@museum, @exhibition, @artwork)]
+    ]
+    gon.colorcode = @museum.color
   end
 
   # POST /artworks
