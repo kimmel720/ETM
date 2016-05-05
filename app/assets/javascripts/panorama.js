@@ -95,6 +95,7 @@ function init() {
 	}
 
 	function transition(newPanoramaUrl) {
+		console.log(newPanoramaUrl);
 	    $.ajax({
 	        url: newPanoramaUrl,
 	        type: "GET",
@@ -128,8 +129,8 @@ function init() {
 	}
 
 	function loadListeners() {
-	    document.addEventListener('mousemove', onDocumentMouseMove, false);
-	    document.addEventListener('mousedown', onDocumentMouseDown, false);
+			$('canvas').on('mousemove', onDocumentMouseMove);
+			$('canvas').on('mousedown', onDocumentMouseDown);
 	    window.addEventListener('resize', onWindowResize, false);
 	    document.addEventListener('keydown', turnRight, false);
 	    document.addEventListener('keydown', turnLeft, false);
@@ -144,11 +145,11 @@ function init() {
 	    function onDocumentMouseMove(event) {
 	        event.preventDefault();
 	        mouse.x = (event.clientX / CANVAS_WIDTH) * 2 - 1;
-	        mouse.y = -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1;
+	        mouse.y = -((event.clientY-200) / CANVAS_HEIGHT) * 2 + 1;
 	    }
 
 	    function onDocumentMouseDown(event) {
-	        var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1, 0.5);
+	        var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY-200) / CANVAS_HEIGHT) * 2 + 1, 0.5);
 	        vector = vector.unproject(camera);
 
 	        var raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
