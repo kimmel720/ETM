@@ -101,7 +101,7 @@ harvard = Museum.create(
 The collections include approximately 250,000 objects in all media, ranging in date from antiquity to the present and originating in Europe, North America, North Africa, the Middle East, South Asia, East Asia, and Southeast Asia.
 ",
   website: "http://www.harvardartmuseums.org/",
-  color: "#8ce630"
+  color: "#72bb27"
 )
 harvard.image = File.open("app/assets/images/Harvard/harvard.jpg")
 harvard.save
