@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  get 'panoramas/:id' => 'panoramas#show', as: 'panorama'
-  post 'panoramas/:id' => 'panoramas#transition', as: 'transition'
+
+  resources :panoramas, only: [:new, :create, :show, :edit] do
+    get :autocomplete_artwork_name, :on => :collection
+
+    member do
+      get 'transition' => 'panoramas#transition'
+      post 'add_art/:art_id' => 'panoramas#add_artwork'
+      post 'add_pan/:adj_id' => 'panoramas#add_adjacent_panorama'
+    end
+  end
 
   get 'search/results'
 
@@ -32,9 +40,10 @@ Rails.application.routes.draw do
         get 'resources'
         get 'panorama'
       end
-      resources :artworks
     end
   end
+  resources :artworks
+
   resources :artists
 
 

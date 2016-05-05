@@ -1,6 +1,6 @@
 class Panorama < ActiveRecord::Base
   attachment :image
-  serialize :artwork_coordinates, Hash
+  serialize :coordinates, Hash
 
   has_and_belongs_to_many :adjacent_panoramas,
                           class_name: "Panorama",

@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(version: 20160409200714) do
   create_table "panoramas", force: :cascade do |t|
     t.integer  "exhibition_id"
     t.string   "image_id"
-    t.integer  "artwork_coordinates"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.text     "coordinates"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "panoramas", ["exhibition_id"], name: "index_panoramas_on_exhibition_id"

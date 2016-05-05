@@ -14,7 +14,7 @@ class ArtworksController < FrontEndController
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
-      [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)]
+      [@artwork.name, artwork_path(@museum,@exhibition,@artwork)]
     ]
     respond_to do |format|
       format.js

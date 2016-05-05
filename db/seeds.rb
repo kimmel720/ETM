@@ -49,7 +49,6 @@ e1.save
 
 p = Panorama.create(
   exhibition: e1,
-  artwork_coordinates: {}
 )
 p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p.save
@@ -120,7 +119,6 @@ e2.save
 p1 = Panorama.create(
   exhibition: e2,
   adjacent_panoramas: [p],
-  artwork_coordinates: {}
 )
 p1.image = File.open("app/assets/images/Harvard_Panorama_I.jpg")
 p1.save
@@ -128,7 +126,6 @@ p1.save
 p2 = Panorama.create(
   exhibition: e2,
   adjacent_panoramas: [p1],
-  artwork_coordinates: {}
 )
 p2.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p2.save

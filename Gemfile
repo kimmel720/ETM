@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'rails4-autocomplete'
+
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
 #hello hello hello
