@@ -41,7 +41,8 @@ class InitializeDatabase < ActiveRecord::Migration
     create_table :panoramas do |t|
       t.belongs_to :exhibition, index:true
       t.string :image_id
-      t.text :coordinates
+      t.text :art_coordinates
+      t.text :pan_coordinates
       t.timestamps null: false
     end
 

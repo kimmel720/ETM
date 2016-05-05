@@ -30,3 +30,5 @@ Rails.application.config.assets.precompile += %w( dat.gui.js )
 Rails.application.config.assets.precompile += %w( resizefloorplan.js )
 
 Rails.application.config.assets.precompile += %w( timeline/* network/* )
+
+Rails.application.config.assets.precompile += %w( colorcoding.js )

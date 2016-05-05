@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :panoramas, only: [:new, :create, :show, :edit] do
-    get :autocomplete_artwork_name, :on => :collection
+  resources :panoramas, only: [:new, :create, :show, :edit, :update] do
 
     member do
       get 'transition' => 'panoramas#transition'
@@ -40,15 +39,11 @@ Rails.application.routes.draw do
         get 'floor_plan'
         get 'edit_floor_plan'
         get 'resources'
-        get 'panorama'
       end
     end
   end
   resources :artworks
-
   resources :artists
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

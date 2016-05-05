@@ -16,6 +16,7 @@ function initEdit() {
 
   var controls, gui;
   var array = [];
+  var curSphere;
 
   var add = true;
 
@@ -28,11 +29,18 @@ function initEdit() {
     return $.extend({}, none, artworks);
   }
 
+  function buildAdjacencyList() {
+    none = {'NONE': -1};
+    adjacencies = JSON.parse(gon.panoramas);
+    return $.extend({}, none, adjacencies);
+  }
+
   function loadControls() {
     controls = new function () {
         // we need the first child, since it's a multimaterial
         this.radius = 5;
         this.artwork = -1;
+        this.adjacency = -1;
 
         this.save = function () {
           var art = {
@@ -42,18 +50,37 @@ function initEdit() {
             r: controls.radius
           };
 
-          selected_id = $('#artworks').val();
-          add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_art/" + selected_id;
-          console.log("add_url: " + add_url);
 
-          console.log(art);
-          $.ajax({
-    	        url: add_url,
-    	        type: "POST",
-              dataType: "JSON",
-              data: art
-    	    });
 
+          if (this.artwork != -1){
+            add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_art/" + this.artwork;
+            console.log("add_url: " + add_url);
+
+            console.log(art);
+            $.ajax({
+      	        url: add_url,
+      	        type: "POST",
+                dataType: "JSON",
+                data: art
+      	    });
+          } else if (this.adjacency != -1) {
+            add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_pan/" + this.adjacency;
+            console.log("add_url: " + add_url);
+
+            console.log(art);
+            $.ajax({
+      	        url: add_url,
+      	        type: "POST",
+                dataType: "JSON",
+                data: art
+      	    });
+          }
+          add = true;
+          $('.dg.main').remove();
+        };
+        this.cancel = function(){
+          $('.dg.main').remove();
+          scene.remove(curSphere);
           add = true;
         };
         this.redraw = function () {
@@ -72,11 +99,6 @@ function initEdit() {
         };
     };
 
-    gui = new dat.GUI();
-    gui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
-    gui.add(controls, 'save');
-    var artworkSelectControl = gui.add(controls, 'artwork', buildArtworkList());
-    artworkSelectControl.name('Artwork');
 
   }
 
@@ -163,8 +185,8 @@ function initEdit() {
   }
 
   function loadListeners() {
-      document.addEventListener('mousemove', onDocumentMouseMove, false);
-      document.addEventListener('mousedown', onDocumentMouseDown, false);
+      $('canvas').on('mousemove', onDocumentMouseMove);
+      $('canvas').on('mousedown', onDocumentMouseDown);
       window.addEventListener('resize', onWindowResize, false);
       document.addEventListener('keydown', turnRight, false);
       document.addEventListener('keydown', turnLeft, false);
@@ -179,14 +201,21 @@ function initEdit() {
       function onDocumentMouseMove(event) {
           event.preventDefault();
           mouse.x = (event.clientX / CANVAS_WIDTH) * 2 - 1;
-          mouse.y = -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1;
+          mouse.y = -((event.clientY-120) / CANVAS_HEIGHT) * 2 + 1;
       }
 
       function onDocumentMouseDown(event) {
         if (add) {
             add = false;
-
-          var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1, 0.5);
+            gui = new dat.GUI();
+            gui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
+            gui.add(controls, 'save');
+            artworkSelectControl = gui.add(controls, 'artwork', buildArtworkList());
+            artworkSelectControl.name('Artwork');
+            panoramaSelectControl = gui.add(controls, 'adjacency', buildAdjacencyList());
+            panoramaSelectControl.name('Panoramas');
+            gui.add(controls, 'cancel');
+          var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY -120) / CANVAS_HEIGHT) * 2 + 1, 0.5);
             var raycaster = new THREE.Raycaster();
             raycaster.setFromCamera( vector, camera );
             var intersects = raycaster.intersectObjects(scene.children);
@@ -195,6 +224,7 @@ function initEdit() {
             sphere.position.x = intersects[0].point.x;
             sphere.position.y = intersects[0].point.y;
             scene.add( sphere );
+            curSphere = sphere;
             console.log(scene.children);
         }
       }
