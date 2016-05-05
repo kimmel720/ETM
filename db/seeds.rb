@@ -18,7 +18,6 @@ user = User.create(
   admin: false
 )
 
-
 id_counter = 0
 
 farber = Museum.create(
@@ -51,7 +50,6 @@ e1.save
 
 p = Panorama.create(
   exhibition: e1,
-  artwork_coordinates: {}
 )
 p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p.save
@@ -119,12 +117,19 @@ e2.image = File.open("app/assets/images/Harvard/exhibition.png")
 e2.floor_plan = File.open("app/assets/images/Harvard/harvard_euro_floor.jpg")
 e2.save
 
-p = Panorama.create(
+p1 = Panorama.create(
   exhibition: e2,
-  artwork_coordinates: {}
+  adjacent_panoramas: [p],
 )
-p.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
-p.save
+p1.image = File.open("app/assets/images/Harvard_Panorama_I.jpg")
+p1.save
+
+p2 = Panorama.create(
+  exhibition: e2,
+  adjacent_panoramas: [p1],
+)
+p2.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
+p2.save
 
 a3 = Artwork.create(
   name: "Allegorical Portrait of a Young Man in the Guise of Mercury Slaying Argus",

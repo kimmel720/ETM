@@ -29,9 +29,11 @@ var mouse = {
   startY: 0,
   drawing: 0
 };
-var saveURL = window.location.href;
-saveURL = saveURL.substring(21, saveURL.length - 15);
-saveURL = saveURL + "artworks/"
+// var saveURL = window.location.href;
+// saveURL = saveURL.substring(21, saveURL.length - 15);
+// saveURL = saveURL + "artworks/"
+var saveURL = "/artworks/"
+
 var originalContent = $('#floor').clone().html();
 function storeCoordinates() {
   mouse.startX = mouse.x;

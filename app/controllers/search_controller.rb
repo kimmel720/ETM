@@ -11,7 +11,7 @@ class SearchController < ApplicationController
       "Artworks" =>
         Artwork.search(@search_term).each.map{ |artwork| {
           name: artwork.name,
-          path: museum_exhibition_artwork_path(artwork.exhibition.museum, artwork.exhibition, artwork)
+          path: artwork_path(artwork.exhibition.museum, artwork.exhibition, artwork)
         }},
       "Exhibitions" =>
         Exhibition.search(@search_term).each.map{ |exhibition| {

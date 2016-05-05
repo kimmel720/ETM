@@ -1,9 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  image_id: MyString
-  artwork_coordinates: 1
+  show: MyString
 
 two:
-  image_id: MyString
-  artwork_coordinates: 1
+  show: MyString

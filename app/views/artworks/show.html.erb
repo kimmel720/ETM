@@ -19,7 +19,7 @@
     </div>
     <div class="col-xs-1">
       <% if !session[:user_id].blank? %>
-        <%= link_to edit_museum_exhibition_artwork_path(@museum, @exhibition, @artwork), :class => "button-link horizontal-center-wrapper responsive-color-btn" do %>
+        <%= link_to edit_artwork_path(@artwork), :class => "button-link horizontal-center-wrapper responsive-color-btn" do %>
           <div class="btn btn-primary grid-button horizontal-center responsive-color-btn">
             <span class="glyphicon glyphicon-pencil"></span>
           </div>

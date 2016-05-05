@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<div id="panoramaContainer">
+
+<% content_for :head do %>
+  <title>Panorama</title>
+<% end %>
+
+<%= select_tag "artworks", options_from_collection_for_select(@artworks, "id", "name") %>

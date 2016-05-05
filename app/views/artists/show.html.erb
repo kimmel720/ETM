@@ -58,7 +58,7 @@
           <% exhibition = artwork.exhibition %>
           <% museum = exhibition.museum %>
           <tr>
-            <td><%= link_to artwork.name, museum_exhibition_artwork_path(museum,exhibition,artwork) %></td>
+            <td><%= link_to artwork.name, artwork_path(museum,exhibition,artwork) %></td>
             <td><%= link_to exhibition.name, museum_exhibition_path(museum,exhibition) %></td>
             <td><%= link_to museum.name, museum_path(museum) %></td>
             <td><span class="wrap-together"><%= exhibition.start_date.strftime('%B %Y') %></span> to <span class="wrap-together"><%= exhibition.end_date.strftime('%B %Y') %></span></td>

@@ -13,8 +13,11 @@
 //= require gmaps/google
 //= require jquery
 //= require jquery_ujs
+//= require jquery-readyselector
+//= require autocomplete-rails
 //= require underscore
 //= require bootstrap-sprockets
 //= require vis
 //= require jquery.imagemapster.js
+//= require three.min
 //= require_tree .

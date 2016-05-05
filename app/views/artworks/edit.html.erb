@@ -25,7 +25,7 @@
         <%= image_tag attachment_url(@artwork, :image, format: "png"), :class => "image full-image horizontal-center" %>
       </div>
       <div class="horizontal-center">
-        <%= form_for @artwork, url: museum_exhibition_artwork_path do |form| %>
+        <%= form_for @artwork, url: artwork_path do |form| %>
           <%= form.attachment_field :image %>
           <%= submit_tag %>
         <% end %>

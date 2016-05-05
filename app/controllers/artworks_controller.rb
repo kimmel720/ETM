@@ -14,7 +14,7 @@ class ArtworksController < FrontEndController
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
-      [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)]
+      [@artwork.name, artwork_path(@museum,@exhibition,@artwork)]
     ]
     gon.colorcode = @museum.color
     respond_to do |format|
@@ -33,8 +33,8 @@ class ArtworksController < FrontEndController
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
-      [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)],
-      ["Edit Artwork", edit_museum_exhibition_artwork_path(@museum, @exhibition, @artwork)]
+      [@artwork.name, artwork_path(@artwork)],
+      ["Edit Artwork", edit_artwork_path(@artwork)]
     ]
     gon.colorcode = @museum.color
   end
@@ -60,7 +60,7 @@ class ArtworksController < FrontEndController
   def update
     respond_to do |format|
       if @artwork.update(artwork_params)
-        format.html { redirect_to museum_exhibition_artwork_path(@museum, @exhibition, @artwork), notice: 'Artwork was successfully updated.' }
+        format.html { redirect_to artwork_path(@artwork), notice: 'Artwork was successfully updated.' }
         format.json { render :nothing => true }
       else
         format.html { render :edit }

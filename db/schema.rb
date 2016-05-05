@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302023508) do
+ActiveRecord::Schema.define(version: 20160407202945) do
+
+  create_table "adjacency", id: false, force: :cascade do |t|
+    t.integer "panorama_id"
+    t.integer "adjacent_panorama_id"
+  end
+
+  add_index "adjacency", ["adjacent_panorama_id", "panorama_id"], name: "index_adjacency_on_adjacent_panorama_id_and_panorama_id", unique: true
+  add_index "adjacency", ["panorama_id", "adjacent_panorama_id"], name: "index_adjacency_on_panorama_id_and_adjacent_panorama_id", unique: true
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
@@ -90,9 +98,9 @@ ActiveRecord::Schema.define(version: 20160302023508) do
   create_table "panoramas", force: :cascade do |t|
     t.integer  "exhibition_id"
     t.string   "image_id"
-    t.integer  "artwork_coordinates"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.text     "coordinates"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "panoramas", ["exhibition_id"], name: "index_panoramas_on_exhibition_id"

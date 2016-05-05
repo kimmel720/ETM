@@ -37,16 +37,17 @@
     <hr />
     <div class="col-xs-6">
       <div class="horizontal-center-wrapper">
-        <%=link_to panorama_museum_exhibition_path, :class=> "button-link responsive-color-btn" do %>
-        <div class="entrance btn btn-primary btn-block grid-button responsive-color-btn">
-          <div class="center-block-outer">
-            <div class="center-block-middle">
-              <div class="center-block-inner">
-                <h4 class="button-link-name">Enter Exhibition</h4>
+
+        <%= link_to @panoramas.first, :class=> "button-link responsive-color-btn" do %>
+          <div class="entrance btn btn-primary btn-block grid-button responsive-color-btn">
+            <div class="center-block-outer">
+              <div class="center-block-middle">
+                <div class="center-block-inner">
+                  <h4 class="button-link-name">Enter Exhibition</h4>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         <% end %>
       </div>
     </div>
@@ -68,7 +69,6 @@
   </div>
   <div class="row">
     <br />
-    <link href="../../dist/vis.css" rel="stylesheet" type="text/css" />
     <div id="visualization"></div>
   </div>
   <div class="row">
@@ -89,7 +89,16 @@
  // Create a Timeline
  var timeline = new vis.Timeline(container, items, options);
  timeline.on('select', function(properties){
-   $.ajax({url: window.location.href + "/artworks/" + properties.items}).done(function(html) {});
+   console.log("clickedon!");
+   $.ajax({
+     url: "/artworks/" + properties.items,
+     success: function(){
+       console.log("SHOULD BE SAVED!!!");
+     },
+     error: function(a,b,c) {
+       console.log("ERROR WITH AJAX:" + a + b + c);
+     }
+ }).done(function(html) {});
 
 });
 </script>

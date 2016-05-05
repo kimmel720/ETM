@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'rails4-autocomplete'
 
 gem 'sqlite3', group: :development
 gem 'pg', group: :production
@@ -11,8 +12,7 @@ gem "refile-s3"
 gem 'rails_admin'
 gem 'refile-s3'
 
-gem 'rails_12factor'
-
+gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.2'
@@ -65,6 +65,6 @@ end
 gem 'gon'
 gem 'gmaps4rails'
 gem 'faker'
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 gem 'visjs-rails'
