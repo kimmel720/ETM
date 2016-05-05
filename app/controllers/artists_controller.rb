@@ -13,6 +13,7 @@ class ArtistsController < FrontEndController
   def show
     # TODO: a back button, since breadcrumbs don't work here
     @breadcrumbs = @crumbs = [[@artist.name, artist_path(@artist)]]
+    gon.colorcode = "#292929"
   end
 
   # GET /artists/new
@@ -22,6 +23,10 @@ class ArtistsController < FrontEndController
 
   # GET /artists/1/edit
   def edit
+    @breadcrumbs = @crumbs = [[@artist.name, artist_path(@artist)],
+                              ["Editing Artist", edit_artist_path(@artist)]
+                            ]
+    gon.colorcode = "#292929"
   end
 
   # POST /artists
