@@ -85,6 +85,10 @@ handler.buildMap({
 </script>
 
 <script type="text/javascript">
+$(".museums.index").ready(dostuff);
+
+  function dostuff() {
+
 <% @museums.each do |museum| %>
   var lighterColor = shadeBlendConvert(-0.2,'<%= museum.color %>');
   var css = "#color-id-<%=museum.id%>:hover *{ background-color: " + lighterColor +" }  #color-id-<%=museum.id%>{ background-color: <%=museum.color %>; border-color: <%=museum.color %>; } ";
@@ -97,5 +101,6 @@ handler.buildMap({
   }
   document.getElementsByTagName('head')[0].appendChild(style);
   <% end %>
+}
 
 </script>
