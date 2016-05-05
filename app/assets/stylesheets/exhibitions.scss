@@ -26,3 +26,24 @@
   width: 100%;
   z-index: 1000;
 }
+
+#highlight-paintings {
+  background-color: #EE2731;
+  border-color: #EE2731;
+}
+#highlight-paintings:hover {
+  background-color: #c81f28;
+}
+#highlight-paintings.active{
+  background-color: #C81F28;
+}
+#highlight-sculptures {
+  background-color: #0054A6;
+  border-color: #0054A6;
+}
+#highlight-sculptures:hover {
+  background-color: #023f7c;
+}
+#highlight-sculptures.active{
+  background-color: #023f7c;
+}

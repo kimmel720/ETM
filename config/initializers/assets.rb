@@ -24,3 +24,5 @@ Rails.application.config.assets.precompile += %w( displayfloorplan.js )
 Rails.application.config.assets.precompile += %w( editfloorplan.js )
 
 Rails.application.config.assets.precompile += %w( dat.gui.js )
+
+Rails.application.config.assets.precompile += %w( resizefloorplan.js )

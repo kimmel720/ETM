@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     resources :exhibitions do
       member do
         get 'floor_plan'
+        get 'edit_floor_plan'
         get 'resources'
         get 'panorama'
       end

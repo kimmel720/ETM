@@ -1,5 +1,5 @@
 class ExhibitionsController < FrontEndController
-  before_action :set_exhibition, only: [:show, :edit, :update, :destroy, :floor_plan, :panorama, :resources]
+  before_action :set_exhibition, only: [:show, :edit, :update, :destroy, :floor_plan, :edit_floor_plan, :panorama, :resources]
   skip_before_action :authorize, only: [:show, :index, :floor_plan, :panorama, :resources]
 
   # GET /exhibitions
@@ -82,6 +82,11 @@ class ExhibitionsController < FrontEndController
     #   link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
     #   coord_string: artwork.floor_coordinates
     #   } }
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum, @exhibition)],
+      ["Floor Plan", floor_plan_museum_exhibition_path(@museum, @exhibition)]
+    ]
     @floor_data_local = @artworks.each.map { |artwork| {
       link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
       coord_string: artwork.floor_coordinates,
@@ -93,7 +98,29 @@ class ExhibitionsController < FrontEndController
         hsh[artwork.name] = artwork.id
       end
       gon.artworks = hsh.to_json
+      gon.colorcode = @museum.color
       # TODO: make sure only unbound artworks are sent
+  end
+
+  def edit_floor_plan
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum, @exhibition)],
+      ["Floor Plan", floor_plan_museum_exhibition_path(@museum, @exhibition)],
+      ["Edit Floor Plan", edit_floor_plan_museum_exhibition_path(@museum, @exhibition)]
+    ]
+    @floor_data_local = @artworks.each.map { |artwork| {
+      link: museum_exhibition_artwork_path(@museum, @exhibition, artwork),
+      coord_string: artwork.floor_coordinates,
+      type: artwork.catagory,
+      name: artwork.name
+      } }
+      hsh = {}
+      @artworks.each do |artwork|
+        hsh[artwork.name] = artwork.id
+      end
+      gon.artworks = hsh.to_json
+      gon.colorcode = @museum.color
   end
 
   def resources

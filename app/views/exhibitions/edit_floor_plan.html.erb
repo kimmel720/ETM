@@ -8,18 +8,9 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-11">
+    <div class="col-xs-12">
       <h1><%= @exhibition.name %></h1>
       <br />
-    </div>
-    <div class="col-xs-1">
-      <% if !session[:user_id].blank? %>
-        <%= link_to edit_floor_plan_museum_exhibition_path(@museum, @exhibition), :class => "button-link horizontal-center-wrapper responsive-color-btn" do %>
-          <div class="btn btn-primary grid-button horizontal-center responsive-color-btn">
-            <span class="glyphicon glyphicon-pencil"></span>
-          </div>
-        <% end %>
-      <% end %>
     </div>
   </div>
   <div class="row">
@@ -43,6 +34,8 @@
         <input type="submit" value="Show Sculptures" id="highlight-sculptures" class="btn btn-primary btn-selector btn-lg" />
         <input type="submit" value="Show Paintings" id="highlight-paintings" class="btn btn-primary btn-selector btn-lg"/>
         <input type="submit" value="Clear Selection" id="clear" class="btn btn-secondary btn-lg"/>
+        <br />
+        <input type="submit" value="New Artwork" id="new-artwork" class="btn btn-primary btn-lg"/>
       </div>
     </div>
   </div>
@@ -55,12 +48,10 @@
   </div>
 </div>
 <%= javascript_include_tag "displayfloorplan" %>
-<%= javascript_include_tag "resizefloorplan" %>
+<%= javascript_include_tag "editfloorplan" %>
+<%= javascript_include_tag "dat.gui" %>
 <script type="text/javascript">
 var myImg = document.getElementById("floormap-img");
-$(document).ready(onWindowResize);
-$(window).bind('resize',onWindowResize);
-
 
 $(myImg).addClass( 'unselectable' ); // All these attributes are inheritable
 $(myImg).attr( 'unselectable', 'on' ); // For IE9 - This property is not inherited, needs to be placed onto everything
@@ -75,4 +66,38 @@ $(".btn-group-vertical > .btn-selector").click(function(){
 $(".btn-group-vertical > #clear").click(function(){
     $(this).siblings().removeClass("active");
 });
+
+var coord1;
+var coord2;
+var drawing = 0;
+  $("#new-artwork").click(function(){
+    $('area').mapster('deselect');
+    $(this).siblings().removeClass("active");
+    $("#floormap-img").css("cursor", "crosshair");
+    mouse.drawing = 2;
+  });
+  $(myImg).on( "mousedown", function(e) {
+    setMousePosition(e);
+    storeCoordinates();
+    if (mouse.drawing == 2){
+      mouse.drawing = 1;
+    }
+  });
+
+  $(document).on("mousemove", function(e){
+    setMousePosition(e);
+    if (mouse.drawing == 1){
+      drawTemp();
+      $("#scaffold").css("cursor", "crosshair");
+    }
+  });
+  $(document).on("mouseup", function(e){
+    if (mouse.drawing == 1){
+      setMousePosition(e);
+      t = drawTemp();
+      drawGui(t);
+      mouse.drawing = 0;
+      $("#floormap-img").css("cursor", "default");
+    }
+  });
 </script>
