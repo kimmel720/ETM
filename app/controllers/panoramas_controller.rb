@@ -48,7 +48,7 @@ class PanoramasController < ApplicationController
     # gon.pan_array = [
     #     [12, 17, 4, -70, 2, 5, 0, 'http://localhost:3000/panoramas/1/transition']
     # ]
-    
+
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
@@ -92,7 +92,22 @@ class PanoramasController < ApplicationController
     @adjacent = Panorama.find(params[:adj_id])
     @panorama.adjacent_panoramas << @adjacent
     @panorama.save
+    
     render :nothing => true
+  end
+
+  # PATCH/PUT /panoramas/1
+  # PATCH/PUT /museums/1.json
+  def update
+    respond_to do |format|
+      if @panorama.update(panorama_params)
+        format.html { redirect_to @panorama, notice: 'Panorama was successfully updated.' }
+        format.json { render :show, status: :ok, location: @panorama }
+      else
+        format.html { render :edit }
+        format.json { render json: @panorama.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -106,6 +121,6 @@ class PanoramasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def panorama_params
-      params.require(:panorama).permit(:show)
+      params.require(:panorama).permit(:show, :image)
     end
 end

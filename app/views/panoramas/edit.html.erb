@@ -1,8 +1,32 @@
-<p id="notice"><%= notice %></p>
-<div id="panoramaContainer">
-
 <% content_for :head do %>
   <title>Panorama</title>
 <% end %>
+<%= javascript_include_tag "colorcoding" %>
 
-<%= select_tag "artworks", options_from_collection_for_select(@artworks, "id", "name") %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1><%= @exhibition.name %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div id="panoramaContainer"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 horizontal-center-wrapper">
+      <div class="horizontal-center">
+        <%= form_for @panorama, url: panorama_path do |form| %>
+          <%= form.attachment_field :image %>
+          <%= submit_tag %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

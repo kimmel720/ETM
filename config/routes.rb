@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :panoramas, only: [:new, :create, :show, :edit] do
-    get :autocomplete_artwork_name, :on => :collection
+  resources :panoramas, only: [:new, :create, :show, :edit, :update] do
 
     member do
       get 'transition' => 'panoramas#transition'
