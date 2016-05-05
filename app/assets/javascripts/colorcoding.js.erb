@@ -1,4 +1,5 @@
-if (gon.colorcode) {
+
+if (typeof gon != 'undefined') {
   var darkerColor = shadeBlendConvert(-0.2, gon.colorcode);
   var lighterColor = shadeBlendConvert(0.7, gon.colorcode);
   $('.breadcrumb').css('background-color', gon.colorcode);
