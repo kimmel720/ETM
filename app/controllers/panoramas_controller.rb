@@ -13,6 +13,8 @@ class PanoramasController < ApplicationController
 
   # GET /panoramas/1/edit
   def edit
+    @panoramas = @exhibition.panoramas
+
     @crumbs = [
       [@museum.name, museum_path(@museum)],
       [@exhibition.name, museum_exhibition_path(@museum, @exhibition)],
@@ -26,7 +28,13 @@ class PanoramasController < ApplicationController
       hsh[artwork.name] = artwork.id
     end
     gon.artworks = hsh.to_json
-    gon.colorcode = @museum.color
+
+
+    hsh = {}
+    @exhibition.panoramas.each do |panorama|
+      hsh["panorama#{panorama.id}"] = panorama.id
+    end
+    gon.panoramas = hsh.to_json
   end
 
   # GET /panoramas/1
@@ -37,8 +45,8 @@ class PanoramasController < ApplicationController
       ["Panorama", panorama_path(@panorama)]
     ]
     gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
-    gon.art_array = @panorama.coordinates
-    gon.pan_array = @panorama.adjacent_panoramas.map { |adj| transition_panorama_path(adj) }
+    gon.art_array = @panorama.art_coordinates
+    gon.pan_array = @panorama.pan_coordinates
     gon.colorcode = @museum.color
 
     # gon.art_array = [
@@ -81,7 +89,7 @@ class PanoramasController < ApplicationController
 
   # POST /panoramas/:id/add_art/:art_id
   def add_artwork
-    @panorama.coordinates[params[:art_id]] = [params[:x], params[:y], params[:z], params[:r], artwork_path(params[:art_id])]
+    @panorama.art_coordinates[params[:art_id]] = [params[:x], params[:y], params[:z], params[:r], artwork_path(params[:art_id])]
     @panorama.save
 
     render :nothing => true
@@ -89,10 +97,10 @@ class PanoramasController < ApplicationController
 
   # POST /panoramas/:id/add_adj/:pan_id
   def add_adjacent_panorama
-    @adjacent = Panorama.find(params[:adj_id])
-    @panorama.adjacent_panoramas << @adjacent
+
+    @panorama.pan_coordinates[params[:adj_id]] = [params[:x], params[:y], params[:z], params[:r], panorama_path(params[:adj_id])]
     @panorama.save
-    
+
     render :nothing => true
   end
 

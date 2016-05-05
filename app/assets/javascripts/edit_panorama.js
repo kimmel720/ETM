@@ -29,11 +29,18 @@ function initEdit() {
     return $.extend({}, none, artworks);
   }
 
+  function buildAdjacencyList() {
+    none = {'NONE': -1};
+    adjacencies = JSON.parse(gon.panoramas);
+    return $.extend({}, none, adjacencies);
+  }
+
   function loadControls() {
     controls = new function () {
         // we need the first child, since it's a multimaterial
         this.radius = 5;
         this.artwork = -1;
+        this.adjacency = -1;
 
         this.save = function () {
           var art = {
@@ -43,9 +50,21 @@ function initEdit() {
             r: controls.radius
           };
 
-          selected_id = this.artwork;
-          if (selected_id != -1){
-            add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_art/" + selected_id;
+
+
+          if (this.artwork != -1){
+            add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_art/" + this.artwork;
+            console.log("add_url: " + add_url);
+
+            console.log(art);
+            $.ajax({
+      	        url: add_url,
+      	        type: "POST",
+                dataType: "JSON",
+                data: art
+      	    });
+          } else if (this.adjacency != -1) {
+            add_url = "http://localhost:3000/panoramas/" + gon.id + "/add_pan/" + this.adjacency;
             console.log("add_url: " + add_url);
 
             console.log(art);
@@ -182,7 +201,7 @@ function initEdit() {
       function onDocumentMouseMove(event) {
           event.preventDefault();
           mouse.x = (event.clientX / CANVAS_WIDTH) * 2 - 1;
-          mouse.y = -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1;
+          mouse.y = -((event.clientY-120) / CANVAS_HEIGHT) * 2 + 1;
       }
 
       function onDocumentMouseDown(event) {
@@ -193,8 +212,10 @@ function initEdit() {
             gui.add(controls, 'save');
             artworkSelectControl = gui.add(controls, 'artwork', buildArtworkList());
             artworkSelectControl.name('Artwork');
+            panoramaSelectControl = gui.add(controls, 'adjacency', buildAdjacencyList());
+            panoramaSelectControl.name('Panoramas');
             gui.add(controls, 'cancel');
-          var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY-container.offset().top) / CANVAS_HEIGHT) * 2 + 1, 0.5);
+          var vector = new THREE.Vector3((event.clientX / CANVAS_WIDTH) * 2 - 1, -((event.clientY -120) / CANVAS_HEIGHT) * 2 + 1, 0.5);
             var raycaster = new THREE.Raycaster();
             raycaster.setFromCamera( vector, camera );
             var intersects = raycaster.intersectObjects(scene.children);
