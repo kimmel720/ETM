@@ -52,7 +52,7 @@ class ArtworksController < FrontEndController
   def update
     respond_to do |format|
       if @artwork.update(artwork_params)
-        format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
+        format.html { redirect_to museum_exhibition_artwork_path(@museum, @exhibition, @artwork), notice: 'Artwork was successfully updated.' }
         format.json { render :nothing => true }
       else
         format.html { render :edit }
@@ -82,6 +82,6 @@ class ArtworksController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:img, :description, :date_created, :left, :right, :top, :bottom)
+      params.require(:artwork).permit(:img, :image, :description, :date_created, :left, :right, :top, :bottom)
     end
 end

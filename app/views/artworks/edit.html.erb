@@ -1,6 +1,35 @@
-<h1>Editing Artwork</h1>
+<p id="notice"><%= notice %></p>
+<% content_for :title, @artwork.name %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @artwork %> |
-<%= link_to 'Back', artworks_path %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="title"><%= @artwork.name %> EDITING</h1>
+      <h2 class="title in-line">
+        By:
+        <% @artists.each do |artist| %>
+        <%= link_to artist.name, artist_path(artist) %>
+        <% end %>
+      </h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 horizontal-center-wrapper">
+      <br />
+      <div class="picture-frame">
+        <%= form_for @artwork, url: museum_exhibition_artwork_path do |form| %>
+          <%= form.attachment_field :image %>
+          <%= submit_tag %>
+        <% end %>
+        <%= image_tag attachment_url(@artwork, :image, format: "png"), :class => "image full-image horizontal-center" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+      <p><%= @artwork.description %></p>
+    </div>
+  </div>
+<%# TODO: Maybe add a way to see where a piece of artwork has been? %>
+</div>

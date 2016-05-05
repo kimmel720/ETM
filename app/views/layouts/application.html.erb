@@ -71,12 +71,12 @@
 
 <% if @crumbs %>
   <ol class="breadcrumb">
-    <li class="active"><%= link_to "Home", "/", 'data-no-turbolink' => true %></li>
+    <li><%= link_to "Home", "/", 'data-no-turbolink' => true, :class => "breadcrumb-item" %></li>
     <% @crumbs.each do |crumb|%>
       <% if crumb != @crumbs.last %>
-        <li><%= link_to crumb[0], crumb[1], 'data-no-turbolink' => true %></li>
+        <li class="breadcrumb-item"><%= link_to crumb[0], crumb[1], 'data-no-turbolink' => true %></li>
       <% else %>
-        <li class="active"><%=crumb[0].to_s %></li>
+        <li class="active breadcrumb-item"><%=crumb[0].to_s %></li>
       <% end %>
     <% end %>
   </ol>
