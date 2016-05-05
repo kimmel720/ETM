@@ -71,6 +71,8 @@ $(".btn-group-vertical > #clear").click(function(){
     $(this).siblings().removeClass("active");
 });
 
+initializeEditMapster();
+
 var coord1;
 var coord2;
 var drawing = 0;
@@ -87,7 +89,6 @@ var drawing = 0;
       mouse.drawing = 1;
     }
   });
-
   $(document).on("mousemove", function(e){
     setMousePosition(e);
     if (mouse.drawing == 1){

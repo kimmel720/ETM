@@ -1,3 +1,28 @@
+function initializeEditMapster() {
+  $('img').mapster({
+    singleSelect : true,
+    clickNavigate : false,
+    onClick: function(e){
+      // ImgPos = FindPosition(myImg);
+      var position = $(this).attr('coords').split(',');
+      // position[0] += ImgPos[0];
+      // position[1] += ImgPos[1];
+      // position[2] += ImgPos[0];
+      // position[3] += ImgPos[1];
+      var temp = new TempDiv(position);
+      temp.draw();
+      drawGui(temp);
+    }
+  });
+  $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
+
+}
+
+function handleEditClicks(e){
+
+}
+
+
 var mouse = {
   x: 0,
   y: 0,
@@ -6,7 +31,7 @@ var mouse = {
   drawing: 0
 };
 var saveURL = window.location.href;
-saveURL = saveURL.substring(0, saveURL.length - 10);
+saveURL = saveURL.substring(0, saveURL.length - 15);
 saveURL = saveURL + "artworks/"
 
 function storeCoordinates() {
@@ -146,24 +171,27 @@ var TempDiv = function(coords){
     $('#floor').html(originalContent);
     $('#floor-map').append(newArea);
     originalContent = $('#floor').clone().html();
-    initializeMapster();
+    initializeEditMapster();
     $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
     // $(document).ready(onWindowResize);
     $('.dg.main.a').remove();
+    dataToSend = JSON.stringify({
+      "left": this.leftCoordinate,
+      "right": this.rightCoordinate,
+      "top": this.topCoordinate,
+      "bottom": this.bottomCoordinate
+    });
+    console.log(dataToSend);
     console.log(saveURL + this.artwork);
     $.ajax({
-      data: JSON.stringify({
-        "left": this.leftCoordinate,
-        "right": this.rightCoordinate,
-        "top": this.topCoordinate,
-        "bottom": this.bottomCoordinate
-      }),
+      data: dataToSend,
       type: "PUT",
       url: (saveURL + this.artwork),
       dataType: "json",
       contentType: "application/json",
       success: function(){
         console.log("SHOULD BE SAVED!!!");
+        this.cancel();
       },
       error: function(a,b,c) {
         console.log("ERROR WITH AJAX:" + a + b + c);
