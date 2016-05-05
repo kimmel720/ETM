@@ -119,14 +119,12 @@ e2.save
 
 p1 = Panorama.create(
   exhibition: e2,
-  adjacent_panoramas: [p],
 )
 p1.image = File.open("app/assets/images/DreitzerV.jpg")
 p1.save
 
 p2 = Panorama.create(
   exhibition: e2,
-  adjacent_panoramas: [p1],
 )
 p2.image = File.open("app/assets/images/Harvard_Panorama_II.jpg")
 p2.save
