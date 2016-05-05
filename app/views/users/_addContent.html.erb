@@ -13,7 +13,7 @@
 
   <%= hidden_field_tag :id, @user.id %>
   <div class="field">
-    <label for="file">Content Upload</label><%= file_field_tag 'file' %>
+    <label for="file">Content Upload</label><%= file_field_tag 'file', class: "btn btn-primary" %>
   </div>
   <%= submit_tag %>
 <% end %>

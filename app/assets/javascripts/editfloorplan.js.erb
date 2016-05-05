@@ -196,16 +196,19 @@ var TempDiv = function(coords){
         contentType: "application/json",
         success: function(){
           console.log("SHOULD BE SAVED!!!");
-          this.cancel;
         },
         error: function(a,b,c) {
           console.log("ERROR WITH AJAX:" + a + b + c);
-          this.cancel;
         }
       });
     }
+    console.log("NOTcanceling");
+    $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
+    $('.dg.main').remove();
+    $('area').mapster('deselect');
   }
   this.cancel = function(){
+    console.log("canceling");
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
     $('.dg.main').remove();
     $('area').mapster('deselect');
