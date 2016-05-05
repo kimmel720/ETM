@@ -44,6 +44,16 @@
     </div>
   </div>
   <div class="row">
+    <div class="col-xs-12 horizontal-center-wrapper">
+      <div class="horizontal-center">
+        <%= form_for @exhibition, url: museum_exhibition_path do |form| %>
+          <%= form.attachment_field :floor_plan %>
+          <%= submit_tag %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xs-12">
       <br />
       <h4>Click on a red or blue box to visit the coresponding artwork. Click on a camera icon

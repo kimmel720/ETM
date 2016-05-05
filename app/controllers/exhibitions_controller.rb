@@ -152,6 +152,6 @@ class ExhibitionsController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exhibition_params
-      params.require(:exhibition).permit(:img_path, :image, :description, :date_created, :museum_id)
+      params.require(:exhibition).permit(:img_path, :image, :floor_plan, :description, :date_created, :museum_id)
     end
 end
