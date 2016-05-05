@@ -1,10 +1,26 @@
-<p id="notice"><%= notice %></p>
 <% content_for :title, @museum.name %>
 <%= javascript_include_tag "application" %>
+
 <div id="main-container" class="container">
   <div class="row">
-    <h1 class="title"><%= @museum.name %></h1>
-    <br />
+    <div class="col-xs-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-11">
+      <h1 class="title"><%= @museum.name %></h1>
+      <br />
+    </div>
+    <div class="col-xs-1">
+      <% if !session[:user_id].blank? %>
+        <%= link_to edit_museum_path(@museum), :class => "button-link horizontal-center-wrapper" do %>
+          <div class="btn btn-primary grid-button horizontal-center">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   <div class="row museum-info">
     <div class="col-xs-4">

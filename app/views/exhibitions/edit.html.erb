@@ -1,6 +1,111 @@
-<h1>Editing Exhibition</h1>
+<% content_for :title, @exhibition.name %>
 
-<%= render 'form' %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="title"><%= @exhibition.name %>EDITING</h1>
+      <br />
+    </div>
+  </div>
+  <div class="row exhibition-info">
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="picture-frame horizontal-center-wrapper">
+          <%= image_tag attachment_url(@exhibition, :image, format: "png"), :class => "image side-image horizontal-center" %>
+        </div>
+      </div>
+      <div class="row">
+        <%= form_for @exhibition, url: museum_exhibition_path do |form| %>
+          <%= form.attachment_field :image %>
+          <%= submit_tag %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-8">
+      <p><%= "Start Date: #{@exhibition.start_date} End Date: #{@exhibition.end_date}" %></p>
+      <p><%= @exhibition.description %></p>
+    </div>
+  </div>
+  <div class="row">
+    <hr />
+    <div class="col-xs-6">
+      <div class="horizontal-center-wrapper">
+        <%=link_to panorama_museum_exhibition_path, :class=> "button-link" do %>
+        <div class="entrance btn btn-primary btn-block grid-button">
+          <div class="center-block-outer">
+            <div class="center-block-middle">
+              <div class="center-block-inner">
+                <h4 class="button-link-name">Enter Exhibition</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="horizontal-center-wrapper">
+        <%=link_to floor_plan_museum_exhibition_path, :class=> "button-link" do %>
+          <div class="entrance btn btn-primary btn-block grid-button">
+            <div class="center-block-outer">
+              <div class="center-block-middle">
+                <div class="center-block-inner">
+                  <h4 class="button-link-name">Exhibition Floor Plan</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <br />
+    <link href="../../dist/vis.css" rel="stylesheet" type="text/css" />
+    <div id="visualization"></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 white" id="slidebox-container">
+      <h4>Click on a piece of artwork in the timeline above to see details and visit it</h4>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Show', @exhibition %> |
-<%= link_to 'Back', museum_exhibitions_path(@musem) %>
+<script type="text/javascript">
+ // DOM element where the Timeline will be attached
+ var container = document.getElementById('visualization');
+ // Create a DataSet (allows two way data-binding)
+ var items = new vis.DataSet(gon.datasetartwork);
+ // Configuration for the Timeline
+ var options = {};
+
+ // Create a Timeline
+ var timeline = new vis.Timeline(container, items, options);
+ timeline.on('select', function(properties){
+   $.ajax({url: window.location.href + "/artworks/" + properties.items}).done(function(html) {});
+
+});
+</script>
+<style>
+.vis-item {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}
+.vis-item:hover {
+  cursor: pointer;
+}
+
+.vis.timeline .item.range .content {
+    text-overflow: ellipsis;
+}
+</style>

@@ -57,7 +57,7 @@ class ExhibitionsController < FrontEndController
   def update
     respond_to do |format|
       if @exhibition.update(exhibition_params)
-        format.html { redirect_to @exhibition, notice: 'Exhibition was successfully updated.' }
+        format.html { redirect_to museum_exhibition_path(@museum, @exhibition), notice: 'Exhibition was successfully updated.' }
         format.json { render :show, status: :ok, location: @exhibition }
       else
         format.html { render :edit }
@@ -124,6 +124,6 @@ class ExhibitionsController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exhibition_params
-      params.require(:exhibition).permit(:img_path, :description, :date_created, :museum_id)
+      params.require(:exhibition).permit(:img_path, :image, :description, :date_created, :museum_id)
     end
 end

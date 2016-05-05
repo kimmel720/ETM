@@ -98,6 +98,6 @@ class MuseumsController < FrontEndController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def museum_params
-      params.require(:museum).permit(:img_path, :description, :date_created, :name, :longitude, :latitude, :address)
+      params.require(:museum).permit(:img_path, :image, :description, :date_created, :name, :longitude, :latitude, :address)
     end
 end

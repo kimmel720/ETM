@@ -1,6 +1,81 @@
-<h1>Editing Museum</h1>
+<% content_for :title, @museum.name %>
+<%= javascript_include_tag "application" %>
+<div id="main-container" class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <p id="notice"><%= notice %></p>
+    </div>
+  </div>
+  <div class="row">
+    <h1 class="title"><%= @museum.name %></h1>
+    <br />
+  </div>
+  <div class="row museum-info">
+    <div class="col-xs-4">
+      <div class="row">
+        <div class="picture-frame">
+          <%= image_tag attachment_url(@museum, :image, format: "png"), :class => "image side-image horizontal-center" %>
+        </div>
+      </div>
+      <div class="row">
+        <%= form_for @museum do |form| %>
+          <%= form.attachment_field :image %>
+          <%= submit_tag %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-xs-8">
+      <p><%= @museum.description %></p>
+      <p><%= @museum.street_address %></p>
+      <p><%= link_to "Official Website", @museum.website %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <hr />
+    </div>
+  </div>
 
-<%= render 'form' %>
+  <div class="row">
+    <link href="../../dist/vis.css" rel="stylesheet" type="text/css" />
+    <div id="visualization"></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 white" id="slidebox-container">
+      <h4>Click on an exhibition in the timeline above to see details and visit it</h4>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'Show', @museum %> |
-<%= link_to 'Back', museums_path %>
+<script type="text/javascript">
+ // DOM element where the Timeline will be attached
+ var container = document.getElementById('visualization');
+ // Create a DataSet (allows two way data-binding)
+ var items = new vis.DataSet(gon.dataset);
+ // Configuration for the Timeline
+ var options = {};
+
+ // Create a Timeline
+ var timeline = new vis.Timeline(container, items, options);
+ timeline.on('select', function(properties){
+   $.ajax({url: window.location.href + "/exhibitions/" + properties.items}).done(function(html) {});
+
+});
+</script>
+
+<script type="text/javascript">
+  var lighterColor = shadeBlendConvert(0.3,'<%= @museum.color %>');
+  $('.breadcrumb').css('background-color', '<%= @museum.color %>');
+  $('.vis-item').css('background-color', '<%= @museum.color %>');
+  // $('.vis-item').hover(function(){
+  //   $(this).css('background-color', lighterColor);
+  // });
+  var css = ".vis-item:hover *{ background-color: " + lighterColor +"}";
+  style = document.createElement('style');
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  document.getElementsByTagName('head')[0].appendChild(style);
+</script>
