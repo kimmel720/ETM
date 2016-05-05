@@ -166,6 +166,26 @@ The throne of the Virgin seems to be carved out of the living rock, from which s
 a4.image = File.open("app/assets/images/Harvard/virgin_peter_paul.png")
 a4.save
 
+e3 = Exhibition.create(
+  user: admin,
+  museum: harvard,
+  name: "Japanese 19th Century Art",
+  start_date: Date.new(2010, 10, 16),
+  end_date: Date.new(2013, 12, 22),
+  description: "Various Japanese Works of Art",
+  curator: "Team of Busch-Reisinger curators headed by Miriam Stewart"
+)
+
+e3 = Exhibition.create(
+  user: admin,
+  museum: harvard,
+  name: "Egyptian Artifacts",
+  start_date: Date.new(2009, 10, 16),
+  end_date: Date.new(2013, 11, 22),
+  description: "Egyptian artifacts recovered from the latest dig",
+  curator: "Team of Busch-Reisinger curators headed by Miriam Stewart"
+)
+
 
 
 
