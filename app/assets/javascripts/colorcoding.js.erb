@@ -13,7 +13,12 @@ if (gon.colorcode) {
             .vis-item.vis-range.vis-selected { border-color: " + gon.colorcode + ";}\
             .vis-item.vis-box.vis-selected { background-color: " + gon.colorcode +"; border-color: " + gon.colorcode + ";}\
             .responsive-color-btn { background-color: " + gon.colorcode + "; border-color: " + gon.colorcode + ";}\
-            .responsive-color-btn:hover { background-color: " + darkerColor + "; border-color: " + gon.colorcode + ";}\
+            .responsive-color-btn:hover { background-color: " + darkerColor+ "; border-color: " + gon.colorcode + "; border-color: " + gon.colorcode + ";}\
+            .responsive-color-btn:focus { background-color: " + darkerColor + "; border-color: " + gon.colorcode + "}\
+            .responsive-color-btn:active { background-color: " + darkerColor + "; border-color: " + gon.colorcode + "}\
+            .responsive-color-btn:active:focus { background-color: " + darkerColor + "; border-color: " + gon.colorcode + "}\
+            .responsive-color-btn:active:hover { background-color: " + darkerColor + "; border-color: " + gon.colorcode + "}\
+            .responsive-color-btn:focus:hover { background-color: " + darkerColor + "; border-color: " + gon.colorcode + "}\
             .responsive-color-background { background-color: " + lighterColor + ";}";
   style = document.createElement('style');
   if (style.styleSheet){
