@@ -23,16 +23,34 @@ class PanoramasController < ApplicationController
 
   # GET /panoramas/1/edit
   def edit
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum, @exhibition)],
+      ["Panorama", panorama_path(@panorama)],
+      ["Edit Panorama", edit_panorama_path(@panorama)]
+    ]
     gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
     gon.id = @panorama.id
+    hsh = {}
+    @artworks.each do |artwork|
+      hsh[artwork.name] = artwork.id
+    end
+    gon.artworks = hsh.to_json
+    gon.colorcode = @museum.color
   end
 
   # GET /panoramas/1
   def show
+    @crumbs = [
+      [@museum.name, museum_path(@museum)],
+      [@exhibition.name, museum_exhibition_path(@museum, @exhibition)],
+      ["Panorama", panorama_path(@panorama)]
+    ]
     gon.image = Refile.attachment_url(@panorama, :image, :fill, 2048, 512, format: "png")
     gon.art_array = @panorama.coordinates
     gon.pan_array = @panorama.adjacent_panoramas.map { |adj| transition_panorama_path(adj) }
-
+    gon.colorcode = @museum.color
+    
     # gon.art_array = [
     #     [20, 20, 5, 70, 15, 5, 0.26, 'http://localhost:3000/museums/33/exhibitions/78/artworks/64/']
     # ]
@@ -40,12 +58,6 @@ class PanoramasController < ApplicationController
     # gon.pan_array = [
     #     [12, 17, 4, -70, 2, 5, 0, 'http://localhost:3000/panoramas/1/transition']
     # ]
-
-    @crumbs = [
-      [@museum.name, museum_path(@museum)],
-      [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
-      ["Panorama", panorama_museum_exhibition_path(@museum,@exhibition,@panorama)]
-    ]
   end
 
   # TODO: merge transition with show -- just need to add format.json option and
@@ -75,7 +87,7 @@ class PanoramasController < ApplicationController
   def add_artwork
     @panorama.coordinates[params[:art_id]] = [params[:x], params[:y], params[:z], params[:r], artwork_path(params[:art_id])]
     @panorama.save
-    
+
     render :nothing => true
   end
 

@@ -22,10 +22,17 @@ function initEdit() {
   CANVAS_WIDTH = 1400,
   CANVAS_HEIGHT = 600;
 
+  function buildArtworkList(){
+    none = {'NONE': -1};
+    artworks = JSON.parse(gon.artworks);
+    return $.extend({}, none, artworks);
+  }
+
   function loadControls() {
     controls = new function () {
         // we need the first child, since it's a multimaterial
         this.radius = 5;
+        this.artwork = -1;
 
         this.save = function () {
           var art = {
@@ -68,6 +75,8 @@ function initEdit() {
     gui = new dat.GUI();
     gui.add(controls, 'radius', 0, 40).onChange(controls.redraw);
     gui.add(controls, 'save');
+    var artworkSelectControl = gui.add(controls, 'artwork', buildArtworkList());
+    artworkSelectControl.name('Artwork');
 
   }
 
