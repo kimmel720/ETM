@@ -105,6 +105,11 @@ hr{
   min-height: 150px;
 }
 
+.picture-frame-btn{
+  height: 100px;
+  width: 100px;
+}
+
 .image {
   border-style: solid;
   border-width: medium;
@@ -113,6 +118,11 @@ hr{
 .side-image {
   max-width: 100%;
   max-height: 100%;
+}
+
+.btn-image {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 .full-image {
@@ -189,4 +199,12 @@ li.breadcrumb-item a {
 
 li.active.breadcrumb-item {
   color: rgb(233, 233, 233);
+}
+
+.flexy-parent {
+  display: flex;
+}
+.flexy-wide {
+  flex: 1;
+  padding-left: 5px;
 }
