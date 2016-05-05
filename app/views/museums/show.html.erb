@@ -14,8 +14,8 @@
     </div>
     <div class="col-xs-1">
       <% if !session[:user_id].blank? %>
-        <%= link_to edit_museum_path(@museum), :class => "button-link horizontal-center-wrapper" do %>
-          <div class="btn btn-primary grid-button horizontal-center">
+        <%= link_to edit_museum_path(@museum), :class => "button-link horizontal-center-wrapper responsive-color" do %>
+          <div class="btn btn-primary grid-button horizontal-center responsive-color-btn">
             <span class="glyphicon glyphicon-pencil"></span>
           </div>
         <% end %>
@@ -65,21 +65,4 @@
    $.ajax({url: window.location.href + "/exhibitions/" + properties.items}).done(function(html) {});
 
 });
-</script>
-
-<script type="text/javascript">
-  var lighterColor = shadeBlendConvert(0.3,'<%= @museum.color %>');
-  $('.breadcrumb').css('background-color', '<%= @museum.color %>');
-  $('.vis-item').css('background-color', '<%= @museum.color %>');
-  // $('.vis-item').hover(function(){
-  //   $(this).css('background-color', lighterColor);
-  // });
-  var css = ".vis-item:hover *{ background-color: " + lighterColor +"}";
-  style = document.createElement('style');
-  if (style.styleSheet){
-    style.styleSheet.cssText = css;
-  } else {
-    style.appendChild(document.createTextNode(css));
-  }
-  document.getElementsByTagName('head')[0].appendChild(style);
 </script>

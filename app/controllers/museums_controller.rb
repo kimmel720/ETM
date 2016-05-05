@@ -37,7 +37,7 @@ class MuseumsController < FrontEndController
       start: e.start_date.strftime('%Y-%m-%d'),
       end: e.end_date.strftime('%Y-%m-%d')
       }}
-
+    gon.colorcode = @museum.color
   end
 
   # GET /museums/new

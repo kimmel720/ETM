@@ -120,7 +120,6 @@ hr{
   max-height: 100%;
 }
 #slidebox-container{
-  background-color: rgb(177, 241, 239);
   border-radius: 10px;
 }
 div.white#slidebox-container{
@@ -178,7 +177,16 @@ a:hover {
     text-overflow: ellipsis;
 }
 
-.breadcrumb-item {
+a.breadcrumb-item {
   color: white;
-  text-decoration: none;
+}
+li.breadcrumb-item a {
+  color: white;
+}
+.breadcrumb > li.breadcrumb-item::before {
+  color: white;
+}
+
+li.active.breadcrumb-item {
+  color: grey;
 }

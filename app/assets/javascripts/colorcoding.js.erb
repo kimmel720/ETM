@@ -1,0 +1,25 @@
+if (gon.colorcode) {
+  var darkerColor = shadeBlendConvert(-0.2, gon.colorcode);
+  var lighterColor = shadeBlendConvert(0.7, gon.colorcode);
+  $('.breadcrumb').css('background-color', gon.colorcode);
+  $('.vis-item-overflow').css('background-color', gon.colorcode);
+  $('.vis-item').css('background-color', gon.colorcode);
+  // $('.vis-item').hover(function(){
+  //   $(this).css('background-color', darkerColor);
+  // });
+  var css = ".vis-item:hover *{ background-color: " + darkerColor +";}\
+            .vis-item { background-color: " + gon.colorcode + "; color: white;}\
+            .vis-item-overflow { background-color: " + gon.colorcode +"; color: white;}\
+            .vis-item.vis-range.vis-selected { border-color: " + gon.colorcode + ";}\
+            .vis-item.vis-box.vis-selected { background-color: " + gon.colorcode +"; border-color: " + gon.colorcode + ";}\
+            .responsive-color-btn { background-color: " + gon.colorcode + "; border-color: " + gon.colorcode + ";}\
+            .responsive-color-btn:hover { background-color: " + darkerColor + "; border-color: " + gon.colorcode + ";}\
+            .responsive-color-background { background-color: " + lighterColor + ";}";
+  style = document.createElement('style');
+  if (style.styleSheet){
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+  document.getElementsByTagName('head')[0].appendChild(style);
+}

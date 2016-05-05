@@ -16,6 +16,7 @@ class ArtworksController < FrontEndController
       [@exhibition.name, museum_exhibition_path(@museum,@exhibition)],
       [@artwork.name, museum_exhibition_artwork_path(@museum,@exhibition,@artwork)]
     ]
+    gon.colorcode = @museum.color
     respond_to do |format|
       format.js
       format.html { render :show }

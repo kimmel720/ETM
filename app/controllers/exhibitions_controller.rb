@@ -21,6 +21,7 @@ class ExhibitionsController < FrontEndController
       content: a.name,
       start: a.date_created.strftime('%Y-%m-%d')
       }}
+    gon.colorcode = @museum.color
     respond_to do |format|
       format.js
       format.html { render :show }

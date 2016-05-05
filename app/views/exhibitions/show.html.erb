@@ -1,4 +1,5 @@
 <% content_for :title, @exhibition.name %>
+<%= javascript_include_tag "application" %>
 
 <div id="main-container" class="container">
   <div class="row">
@@ -13,8 +14,8 @@
     </div>
     <div class="col-xs-1">
       <% if !session[:user_id].blank? %>
-        <%= link_to edit_museum_exhibition_path(@museum, @exhibition), :class => "button-link horizontal-center-wrapper" do %>
-          <div class="btn btn-primary grid-button horizontal-center">
+        <%= link_to edit_museum_exhibition_path(@museum, @exhibition), :class => "button-link horizontal-center-wrapper responsive-color-btn" do %>
+          <div class="btn btn-primary grid-button horizontal-center responsive-color-btn">
             <span class="glyphicon glyphicon-pencil"></span>
           </div>
         <% end %>
@@ -36,8 +37,8 @@
     <hr />
     <div class="col-xs-6">
       <div class="horizontal-center-wrapper">
-        <%=link_to panorama_museum_exhibition_path, :class=> "button-link" do %>
-        <div class="entrance btn btn-primary btn-block grid-button">
+        <%=link_to panorama_museum_exhibition_path, :class=> "button-link responsive-color-btn" do %>
+        <div class="entrance btn btn-primary btn-block grid-button responsive-color-btn">
           <div class="center-block-outer">
             <div class="center-block-middle">
               <div class="center-block-inner">
@@ -51,8 +52,8 @@
     </div>
     <div class="col-xs-6">
       <div class="horizontal-center-wrapper">
-        <%=link_to floor_plan_museum_exhibition_path, :class=> "button-link" do %>
-          <div class="entrance btn btn-primary btn-block grid-button">
+        <%=link_to floor_plan_museum_exhibition_path, :class=> "button-link responsive-color-btn" do %>
+          <div class="entrance btn btn-primary btn-block grid-button responsive-color-btn">
             <div class="center-block-outer">
               <div class="center-block-middle">
                 <div class="center-block-inner">

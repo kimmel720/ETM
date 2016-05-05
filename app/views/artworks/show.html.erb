@@ -1,4 +1,5 @@
 <% content_for :title, @artwork.name %>
+<%= javascript_include_tag "application" %>
 
 <div id="main-container" class="container">
   <div class="row">
@@ -18,8 +19,8 @@
     </div>
     <div class="col-xs-1">
       <% if !session[:user_id].blank? %>
-        <%= link_to edit_museum_exhibition_artwork_path(@museum, @exhibition, @artwork), :class => "button-link horizontal-center-wrapper" do %>
-          <div class="btn btn-primary grid-button horizontal-center">
+        <%= link_to edit_museum_exhibition_artwork_path(@museum, @exhibition, @artwork), :class => "button-link horizontal-center-wrapper responsive-color-btn" do %>
+          <div class="btn btn-primary grid-button horizontal-center responsive-color-btn">
             <span class="glyphicon glyphicon-pencil"></span>
           </div>
         <% end %>
