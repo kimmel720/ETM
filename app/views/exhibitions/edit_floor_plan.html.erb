@@ -14,11 +14,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-sm-3 col-xs-12">
       <div id="gui-container"></div>
     </div>
-    <div class="col-xs-6">
-      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#floor-map", id: "floormap-img", class: "unselectable" %>
+    <div class="col-sm-6 col-xs-12 horizontal-center-wrapper">
+      <%= image_tag attachment_url(@exhibition, :floor_plan, format: "png"), :usemap => "#floor-map", id: "floormap-img", class: "unselectable horizontal-center" %>
       <div id="floor">
         <div id="sub-floor">
           <map name="floor-map" id="floor-map">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-3">
+    <div class="col-sm-3 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">Legend</h3>
