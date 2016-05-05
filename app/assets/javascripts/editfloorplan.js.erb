@@ -4,12 +4,16 @@ function initializeEditMapster() {
     clickNavigate : false,
     onClick: function(e){
       // ImgPos = FindPosition(myImg);
-      var position = $(this).attr('coords').split(',');
+      position = $(this).attr('coords').split(',');
       // position[0] += ImgPos[0];
       // position[1] += ImgPos[1];
       // position[2] += ImgPos[0];
       // position[3] += ImgPos[1];
       var temp = new TempDiv(position);
+      oldLink = $(this).attr('href');
+      oldLink = oldLink.substring((oldLink.lastIndexOf('/')+1));
+      console.log(oldLink);
+      temp.artwork = oldLink;
       temp.draw();
       drawGui(temp);
     }
@@ -204,6 +208,7 @@ var TempDiv = function(coords){
   this.cancel = function(){
     $('#scaffold').replaceWith("<div id='scaffold' style='display: none;'</div>");
     $('.dg.main').remove();
+    $('area').mapster('deselect');
 
   }
   this.checkForBounds = function(){
