@@ -26,7 +26,7 @@ var mouse = {
   drawing: 0
 };
 var saveURL = window.location.href;
-saveURL = saveURL.substring(0, saveURL.length - 15);
+saveURL = saveURL.substring(21, saveURL.length - 15);
 saveURL = saveURL + "artworks/"
 var originalContent = $('#floor').clone().html();
 function storeCoordinates() {
@@ -166,9 +166,10 @@ var TempDiv = function(coords){
       var newArea = BuildArea([this.leftCoordinate,this.topCoordinate,this.rightCoordinate,this.bottomCoordinate], saveTo);
       $('img').mapster('unbind');
       $('#floor').html(originalContent);
-      $("area[href$=saveTo]").remove();
+      $("[href$='" + saveTo + "']").remove();
       $('#floor-map').append(newArea);
       originalContent = $('#floor').clone().html();
+      console.log(originalContent);
       initializeEditMapster();
       $('#mapster_wrap_0').append("<div id='scaffold' style='display: none;'</div>");
       // $(document).ready(onWindowResize);
@@ -181,7 +182,8 @@ var TempDiv = function(coords){
       });
       console.log(dataToSend);
       console.log(saveURL + this.artwork);
-
+// TODO: Floor plan tiles aren't replacing old ones,
+// TODO: Also make sure you read in the current link when clicking on an existing area
       $.ajax({
         data: dataToSend,
         type: "PUT",
@@ -190,11 +192,11 @@ var TempDiv = function(coords){
         contentType: "application/json",
         success: function(){
           console.log("SHOULD BE SAVED!!!");
-          this.cancel();
+          this.cancel;
         },
         error: function(a,b,c) {
           console.log("ERROR WITH AJAX:" + a + b + c);
-          this.cancel();
+          this.cancel;
         }
       });
     }
